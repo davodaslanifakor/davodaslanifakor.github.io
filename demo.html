@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>vue-modal-tor</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="app">
+    <section class="section-bg">
+        <section class="card">
+          <div class="subject">
+            <h2>basic</h2>
+          </div>
+          <div class="code"></div>
+          <div class="demo"></div>
+        </section>
+       <!-- :resizeWidth='{1200:"70%",992:"100%"}' -->
+      <vue-modaltor  :visibel="open" @hide="hideModal" :defaultWidth="'40%'" >
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </vue-modaltor>
+
+      <button @click="open = true">{{open}} modal-basic</button>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="./dist/vue-modaltor.min.js"></script>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      open:false
+
+    },
+    methods:{
+      hideModal(){
+        this.open = false
+      }
+    }
+  })
+  </script>
+</body>
+</html>
