@@ -34,17 +34,14 @@
               </div>
               <div class="col-sm-9">
                 <div class="code">
-                  <pre>
-                    <code class="language-markup">
+                  <pre><code class="language-markup">
   &lt;vue-modaltor  
     :visible="open" 
     @hide="open = false"&gt;
         &lt;p&gt; 
         Lorem ipsum dolor sit amet, 
         ....
-  &lt;/vue-modaltor&gt;
-                    </code>
-                  </pre>
+  &lt;/vue-modaltor&gt;</code></pre>
                 </div>
               </div>
               <div class="col-sm-3">
@@ -73,8 +70,7 @@
               </div>
               <div class="col-sm-9">
                 <div class="code">
-                  <pre>
-                    <code class="language-markup">
+                  <pre><code class="language-markup">
   &lt;vue-modaltor  
     :visibel="open" 
     @hide="open = false"
@@ -82,10 +78,8 @@
         &lt;p&gt; 
         Lorem ipsum dolor sit amet, 
         ....
-  &lt;/vue-modaltor&gt;</code>
-  </pre>
-  <pre><code class="language-clike">
- /* or  
+  &lt;/vue-modaltor&gt;</code></pre>
+  <pre><code class="language-clike">/* or  
  modal-slide-left
  modal-slide-top
  modal-slide-bottom
@@ -132,6 +126,60 @@
             </vue-modaltor>
 
             </section>
+
+
+              <section class="card">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="subject">
+                  <h2>responsive</h2>
+                </div>
+              </div>
+              <div class="col-sm-9">
+                <div class="code">
+                  <pre>
+                    <code class="language-markup">
+  &lt;vue-modaltor  
+    :visible="open" 
+    @hide="open = false"
+    :default-width="'30%'"
+    :resize-width='{1400:"40%",1200:"50%",992:"70%",768:"90%"}'
+    &gt;
+        &lt;p&gt; 
+        Lorem ipsum dolor sit amet, 
+        ....
+  &lt;/vue-modaltor&gt;
+                    </code>
+                  </pre>
+<pre><code class="language-clike">/* or  
+ you can edit any width any size 
+{992:"70%",768:"90%"} 
+*/</code></pre>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="demo">
+                  <button  @click="isResize = true">responsive</button>
+                </div>
+              </div>
+            <vue-modaltor  :visible="isResize" @hide="isResize = false" :default-width="'30%'"
+    :resize-width='{1200:"50%",992:"70%",768:"90%"}'>
+              <div class="panel">
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+              <p>“What is honor compared to a woman's love? What is duty against the feel of a newborn son in your arms . . . or the memory of a brother's smile? Wind and words. Wind and words. We are only human, and the gods have fashioned us for love. That is our great glory, and our great tragedy.” 
+― George R.R. Martin, A Game of Thrones</p>
+              </div>
+            </vue-modaltor>
+            </section>
+
+
+
+
+
+
           </div>
         </div>
 
@@ -153,7 +201,8 @@
       isRight:false,
       isLeft:false,
       isTop:false,
-      isBottom:false
+      isBottom:false,
+      isResize:false
     },
     methods:{
     }
