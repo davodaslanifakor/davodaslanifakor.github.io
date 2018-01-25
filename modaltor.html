@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;">
+  <meta name="viewport" content="width=600,initial-scale = 2.3,user-scalable=no">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>vue-modal-tor</title>
   <link rel="stylesheet" href="./prism.css">
   <link rel="stylesheet" href="./grid.min.css">
@@ -34,7 +38,7 @@
                     <code class="language-markup">
   &lt;vue-modaltor  
     :visible="open" 
-    @hide="hideModal"&gt;
+    @hide="open = false"&gt;
         &lt;p&gt; 
         Lorem ipsum dolor sit amet, 
         ....
@@ -45,62 +49,89 @@
               </div>
               <div class="col-sm-3">
                 <div class="demo">
-                  <button  @click="open = true">basic</button>
+                  <button  @click="isBasic = true">basic</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="open" @hide="hideModal" :default-width="'50%'" >
+            <vue-modaltor  :visible="isBasic" @hide="isBasic = false">
               <div class="panel">
-                
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+              <p>“Never forget what you are, for surely the world will not. Make it your strength. Then it can never be your weakness. Armour yourself in it, and it will never be used to hurt you.” 
+              ― George R.R. Martin, A Game of Thrones.</p>
               </div>
             </vue-modaltor>
             </section>
 
-                    <section class="card">
+          <section class="card">
           <div class="container-fluid">
             <div class="row">
               <div class="col-sm-12">
                 <div class="subject">
-                  <h2>coming soon more example</h2>
+                  <h2>animation panel</h2>
                 </div>
               </div>
               <div class="col-sm-9">
                 <div class="code">
-     <!--              <pre>
+                  <pre>
                     <code class="language-markup">
   &lt;vue-modaltor  
     :visibel="open" 
-    @hide="hideModal"&gt;
+    @hide="open = false"
+    :animation-panel="'modal-slide-right'"&gt;
         &lt;p&gt; 
         Lorem ipsum dolor sit amet, 
         ....
-  &lt;/vue-modaltor&gt;
-                    </code>
-                  </pre> -->
+  &lt;/vue-modaltor&gt;</code>
+  </pre>
+  <pre><code class="language-clike">
+ /* or  
+ modal-slide-left
+ modal-slide-top
+ modal-slide-bottom
+*/</code></pre>
                 </div>
               </div>
               <div class="col-sm-3">
-          <!--       <div class="demo">
-                  <button  @click="open = true">{{open}} modal-basic</button>
-                </div> -->
+                <div class="demo">
+                  <button  @click="isRight = true">slide right</button>
+                  <button  @click="isLeft = true">slide left</button>
+                  <button  @click="isTop = true">slide top</button>
+                  <button  @click="isBottom = true">slide bottom</button>
+                </div>
               </div>
-            <vue-modaltor  :visibel="open" @hide="hideModal" :default-width="'50%'" >
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <vue-modaltor  :visible="isRight" @hide="isRight = false" :animation-panel="'modal-slide-right'">
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+              <p>“Bran thought about it. 'Can a man still be brave if he's afraid?'
+                  'That is the only time a man can be brave,' his father told him.” 
+                  ― George R.R. Martin, A Game of Thrones</p>
             </vue-modaltor>
+            <vue-modaltor  :visible="isLeft" @hide="isLeft = false" :animation-panel="'modal-slide-left'">
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+              <p>“Bran thought about it. 'Can a man still be brave if he's afraid?'
+                'That is the only time a man can be brave,' his father told him.” 
+                ― George R.R. Martin, A Game of Thrones</p>
+            </vue-modaltor>
+              <vue-modaltor  :visible="isTop" @hide="isTop = false" :animation-panel="'modal-slide-top'">
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+              <p>“Fear cuts deeper than swords.” 
+              ― George R.R. Martin, A Game of Thrones</p>
+            </vue-modaltor>
+             <vue-modaltor  :visible="isBottom" @hide="isBottom = false" :animation-panel="'modal-slide-bottom'">
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+              <p>“Some old wounds never truly heal, and bleed again at the slightest word.” 
+              ― George R.R. Martin, A Game of Thrones</p>
+            </vue-modaltor>
+
             </section>
-
-
-
           </div>
         </div>
 
@@ -118,12 +149,13 @@
   var app = new Vue({
     el: '#app',
     data: {
-      open:false
+      isBasic:false,
+      isRight:false,
+      isLeft:false,
+      isTop:false,
+      isBottom:false
     },
     methods:{
-      hideModal(){
-        this.open = false
-      }
     }
   })
 </script>
