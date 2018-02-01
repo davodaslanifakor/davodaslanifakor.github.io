@@ -63,7 +63,7 @@
                   <button  @click="isBasic = true">basic</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isBasic" @hide="isBasic = false">
+            <vue-modaltor  :visible="isBasic" @hide="isBasic = false"   :default-width="'70%'" >
               <div class="panel">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
@@ -169,7 +169,7 @@
                   <button  @click="isParentScale = true">parent scale</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isParentScale" @hide="isParentScale = false" :animation-parent="'modal-scale'">
+            <vue-modaltor  :visible="isParentScale" @hide="isParentScale = false" :animation-parent="'modal-scale'"   :default-width="'90%'">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
@@ -179,6 +179,92 @@
 
             </section>
 
+
+         <section class="card" id="close-scroll">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="subject">
+                  <h2> <a href="#close-scroll"> close scroll </a></h2>
+                </div>
+              </div>
+              <div class="col-sm-9">
+                <div class="code">
+                  <pre>
+                    <code class="language-markup">
+  &lt;vue-modaltor  
+    :visible="open" 
+    @hide="open = false"
+    :default-width="'30%'"
+    :close-scroll="false"&gt;
+        &lt;p&gt; 
+        Lorem ipsum dolor sit amet, 
+        ....
+  &lt;/vue-modaltor&gt;
+                    </code>
+                  </pre>
+<pre><code class="language-clike">/* additional options 
+ if close-scroll = true body scroll is close 
+ default: true*/</code></pre>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="demo">
+                  <button  @click="isScroll = true">close scroll body</button>
+                  <button  @click="isntScroll = true">open scroll body</button>
+                </div>
+              </div>
+            <vue-modaltor  :visible="isScroll" @hide="isScroll = false" :close-scroll="true"  :default-width="'90%'">
+              <div class="panel scroll-modal">
+                 <div class="subject">
+                    <h3>In the Seven Kingdoms</h3>
+                 </div>
+                  <p>
+                    At the beginning of the story, Lord Eddard "Ned" Stark executes a deserter from the Night's Watch, who has betrayed his vows and fled from the Wall. On the way back, his children adopt six direwolf pups, the animal of his sigil. There are three male and two female direwolf pups, as well as an albino runt, which aligns with his three trueborn sons, two trueborn daughters, and one bastard son. That night, Ned receives word of the death of his mentor, Lord Jon Arryn, the principal advisor to Ned's childhood friend, King Robert Baratheon. During his own visit to Ned's castle of Winterfell, Robert recruits Ned to replace Arryn as the King's Hand. Ned is reluctant, but agrees to go when he learns that Arryn's widow Lysa believes Queen Cersei Lannister and her family poisoned Arryn. Shortly thereafter, Ned's son Bran inadvertently discovers Cersei having sex with her twin brother Jaime Lannister, who throws Bran from the tower to conceal their affair.
+
+Ned and his daughters Sansa and Arya depart for the royal capital of King's Landing, while his wife Catelyn, a comatose Bran, and their other sons Robb and Rickon remain at Winterfell. During the journey south, a physical altercation between Arya and Robert's son, Prince Joffrey, to whom Sansa has been betrothed, increases both the tension between the Starks and the Lannisters and the sibling rivalry between Arya and Sansa. Arya's direwolf Nymeria attacks Joffrey to protect her, and Arya chases Nymeria away to protect her from the Lannisters' wrath, therefore Sansa's direwolf Lady is executed in Nymeria's place. Upon arriving in King's Landing to take his post as Hand, Ned finds that Robert is an ineffective king whose only interests are hunting, drinking and womanizing with the realm being governed by his Small Council. Robert tells Ned of his wish to abdicate as he is bored by his kingly duties, but does not as he fears what his heir Joffery might do as king.
+
+At Winterfell, an assassin attempts to kill Bran, thwarted only by his direwolf. Catelyn departs for King's Landing to bring word of this to Ned. Shortly after that, Bran awakens as a paraplegic, with no memory of the cause of his fall. Upon Catelyn's arrival in King's Landing, she is brought to her childhood friend, Petyr "Littlefinger" Baelish, who identifies Tyrion Lannister, the dwarf brother of Cersei and Jaime, as the owner of the dagger used against Bran, and agrees to help Ned investigate the possibility of Lannister treason. During her return to Winterfell, Catelyn meets Tyrion by chance on the Kingsroad, arrests him, and takes him to her sister Lysa Arryn's stronghold in the Vale, where Tyrion demands trial by combat and regains his freedom when his champion, a mercenary named Bronn, is victorious. Tyrion recruits a force of tribesmen from the Vale as his private army with the aim of seeking revenge on Arryn for her mistreatment of him. In retaliation for Tyrion's abduction, his father Lord Tywin Lannister sends soldiers led by his brutish bannerman Gregor "The Mountain" Clegane to raid Catelyn's homeland, the Riverlands.
+
+In King's Landing, Ned finds Robert's eldest brother Stannis Baratheon left the city after Jon Arryn's death for his island of Dragonstone. Ned begins to investigate into Jon Arryn's affairs, which leads him to visiting locations where Jon Arryn visited with Stannis - including places where Robert's bastard children are found. On the way back from one such place, Ned and his soldiers are waylaid by Jaime Lannister, who demands Tyrion's return, and when he does not get what he wants he orders Ned's men be killed - in the ensuing skirmish, Ned is crippled in one leg when his horse collapses on top of him. Even afterwards, Ned continues to investigate and eventually discovers that Robert's legal heirs, including Joffrey, are in fact Cersei's children by Jaime and that Jon Arryn was killed to conceal his discovery of their incest. Ned offers Cersei a chance to flee before he informs Robert, but she uses this chance to arrange Robert's death in a hunting accident.
+
+Ned, made lord-regent by Robert's will, enlists Littlefinger's help to secure the loyalty and assistance of the city guards to challenge Joffrey's claim on the throne and place Stannis on the throne; but Littlefinger betrays him, resulting in Ned's arrest, and the death of his men. The spymaster on the Small Council, the eunuch Varys, accuses Ned of "madness" in revealing to Cersei his knowledge of her incestuous relationship. Whilst Joffrey is crowned King of the Seven Kingdoms, Ned eventually agrees to falsely confess to high treason and join the Night's Watch in exchange for Sansa and Arya's safety, but Joffrey has him beheaded anyway. Whilst Sansa is retained into custody, Arya escapes with the help of her fencing instructor, Syrio Forel, and Yoren, a recruiting agent for the Night's Watch.
+
+Robb Stark has gathered an army and marched south in response to his father's arrest; and upon learning of Ned's death, attempts to raise further support from and to aid his maternal grandfather, Lord Hoster Tully. To reach the Tully lands, he agrees to a marital alliance with the notoriously unreliable House Frey, who control the intervening territory but declined to assist the Tullys despite being sworn to Riverrun. Tywin confronts a Northern-Riverlands force commanded by Roose Bolton and assigns Tyrion and his tribesmen to his van out of the hope he will be killed in the coming battle. Tyrion begins a relationship with the prostitute Shae and survives the battle, which ends in a Lannister victory.
+
+However, the force commanded by Bolton was a merely a feint and Robb commands his main force to the relief of Riverrun. Robb proves victorious against Jaime Lannister at the Battle of the Whistling Wood, who is captured and taken prisoner, while his father Tywin decides to withdraw to the southern border of the Tully lands, sending Tyrion to King's Landing to keep Joffrey under control. When Robb elects not to ally himself with Robert's brothers Renly and Stannis, who have both made claims to the throne, the Riverlands and Northern lords hail him as "King in the North": his family's ancestral title.
+                  </p>
+              </div>
+            </vue-modaltor>
+
+           <vue-modaltor  :visible="isntScroll" 
+           @hide="isntScroll = false" 
+           :close-scroll="false" 
+           :resize-width='{1200:"50%",992:"70%",768:"90%"}'
+            :default-width="'90%'" >
+              <div class="panel scroll-modal">
+                 <div class="subject">
+                    <h3>In the Seven Kingdoms</h3>
+                 </div>
+                  <p>
+                    At the beginning of the story, Lord Eddard "Ned" Stark executes a deserter from the Night's Watch, who has betrayed his vows and fled from the Wall. On the way back, his children adopt six direwolf pups, the animal of his sigil. There are three male and two female direwolf pups, as well as an albino runt, which aligns with his three trueborn sons, two trueborn daughters, and one bastard son. That night, Ned receives word of the death of his mentor, Lord Jon Arryn, the principal advisor to Ned's childhood friend, King Robert Baratheon. During his own visit to Ned's castle of Winterfell, Robert recruits Ned to replace Arryn as the King's Hand. Ned is reluctant, but agrees to go when he learns that Arryn's widow Lysa believes Queen Cersei Lannister and her family poisoned Arryn. Shortly thereafter, Ned's son Bran inadvertently discovers Cersei having sex with her twin brother Jaime Lannister, who throws Bran from the tower to conceal their affair.
+
+Ned and his daughters Sansa and Arya depart for the royal capital of King's Landing, while his wife Catelyn, a comatose Bran, and their other sons Robb and Rickon remain at Winterfell. During the journey south, a physical altercation between Arya and Robert's son, Prince Joffrey, to whom Sansa has been betrothed, increases both the tension between the Starks and the Lannisters and the sibling rivalry between Arya and Sansa. Arya's direwolf Nymeria attacks Joffrey to protect her, and Arya chases Nymeria away to protect her from the Lannisters' wrath, therefore Sansa's direwolf Lady is executed in Nymeria's place. Upon arriving in King's Landing to take his post as Hand, Ned finds that Robert is an ineffective king whose only interests are hunting, drinking and womanizing with the realm being governed by his Small Council. Robert tells Ned of his wish to abdicate as he is bored by his kingly duties, but does not as he fears what his heir Joffery might do as king.
+
+At Winterfell, an assassin attempts to kill Bran, thwarted only by his direwolf. Catelyn departs for King's Landing to bring word of this to Ned. Shortly after that, Bran awakens as a paraplegic, with no memory of the cause of his fall. Upon Catelyn's arrival in King's Landing, she is brought to her childhood friend, Petyr "Littlefinger" Baelish, who identifies Tyrion Lannister, the dwarf brother of Cersei and Jaime, as the owner of the dagger used against Bran, and agrees to help Ned investigate the possibility of Lannister treason. During her return to Winterfell, Catelyn meets Tyrion by chance on the Kingsroad, arrests him, and takes him to her sister Lysa Arryn's stronghold in the Vale, where Tyrion demands trial by combat and regains his freedom when his champion, a mercenary named Bronn, is victorious. Tyrion recruits a force of tribesmen from the Vale as his private army with the aim of seeking revenge on Arryn for her mistreatment of him. In retaliation for Tyrion's abduction, his father Lord Tywin Lannister sends soldiers led by his brutish bannerman Gregor "The Mountain" Clegane to raid Catelyn's homeland, the Riverlands.
+
+In King's Landing, Ned finds Robert's eldest brother Stannis Baratheon left the city after Jon Arryn's death for his island of Dragonstone. Ned begins to investigate into Jon Arryn's affairs, which leads him to visiting locations where Jon Arryn visited with Stannis - including places where Robert's bastard children are found. On the way back from one such place, Ned and his soldiers are waylaid by Jaime Lannister, who demands Tyrion's return, and when he does not get what he wants he orders Ned's men be killed - in the ensuing skirmish, Ned is crippled in one leg when his horse collapses on top of him. Even afterwards, Ned continues to investigate and eventually discovers that Robert's legal heirs, including Joffrey, are in fact Cersei's children by Jaime and that Jon Arryn was killed to conceal his discovery of their incest. Ned offers Cersei a chance to flee before he informs Robert, but she uses this chance to arrange Robert's death in a hunting accident.
+
+Ned, made lord-regent by Robert's will, enlists Littlefinger's help to secure the loyalty and assistance of the city guards to challenge Joffrey's claim on the throne and place Stannis on the throne; but Littlefinger betrays him, resulting in Ned's arrest, and the death of his men. The spymaster on the Small Council, the eunuch Varys, accuses Ned of "madness" in revealing to Cersei his knowledge of her incestuous relationship. Whilst Joffrey is crowned King of the Seven Kingdoms, Ned eventually agrees to falsely confess to high treason and join the Night's Watch in exchange for Sansa and Arya's safety, but Joffrey has him beheaded anyway. Whilst Sansa is retained into custody, Arya escapes with the help of her fencing instructor, Syrio Forel, and Yoren, a recruiting agent for the Night's Watch.
+
+Robb Stark has gathered an army and marched south in response to his father's arrest; and upon learning of Ned's death, attempts to raise further support from and to aid his maternal grandfather, Lord Hoster Tully. To reach the Tully lands, he agrees to a marital alliance with the notoriously unreliable House Frey, who control the intervening territory but declined to assist the Tullys despite being sworn to Riverrun. Tywin confronts a Northern-Riverlands force commanded by Roose Bolton and assigns Tyrion and his tribesmen to his van out of the hope he will be killed in the coming battle. Tyrion begins a relationship with the prostitute Shae and survives the battle, which ends in a Lannister victory.
+
+However, the force commanded by Bolton was a merely a feint and Robb commands his main force to the relief of Riverrun. Robb proves victorious against Jaime Lannister at the Battle of the Whistling Wood, who is captured and taken prisoner, while his father Tywin decides to withdraw to the southern border of the Tully lands, sending Tyrion to King's Landing to keep Joffrey under control. When Robb elects not to ally himself with Robert's brothers Renly and Stannis, who have both made claims to the throne, the Riverlands and Northern lords hail him as "King in the North": his family's ancestral title.
+                  </p>
+              </div>
+            </vue-modaltor>
+
+            </section>
 
 
 
@@ -230,88 +316,6 @@ you can set default width by 'default-width' props (default is set to '50%')
             </section>
 
 
-         <section class="card" id="close-scroll">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="subject">
-                  <h2> <a href="#close-scroll"> close scroll </a></h2>
-                </div>
-              </div>
-              <div class="col-sm-9">
-                <div class="code">
-                  <pre>
-                    <code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
-    @hide="open = false"
-    :default-width="'30%'"
-    :close-scroll="false"&gt;
-        &lt;p&gt; 
-        Lorem ipsum dolor sit amet, 
-        ....
-  &lt;/vue-modaltor&gt;
-                    </code>
-                  </pre>
-<pre><code class="language-clike">/* additional options 
- if close-scroll = true body scroll is close 
- default: true*/</code></pre>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="demo">
-                  <button  @click="isScroll = true">close scroll body</button>
-                  <button  @click="isntScroll = true">open scroll body</button>
-                </div>
-              </div>
-            <vue-modaltor  :visible="isScroll" @hide="isScroll = false" :close-scroll="true"  :default-width="'30%'">
-              <div class="panel scroll-modal">
-                 <div class="subject">
-                    <h3>In the Seven Kingdoms</h3>
-                 </div>
-                  <p>
-                    At the beginning of the story, Lord Eddard "Ned" Stark executes a deserter from the Night's Watch, who has betrayed his vows and fled from the Wall. On the way back, his children adopt six direwolf pups, the animal of his sigil. There are three male and two female direwolf pups, as well as an albino runt, which aligns with his three trueborn sons, two trueborn daughters, and one bastard son. That night, Ned receives word of the death of his mentor, Lord Jon Arryn, the principal advisor to Ned's childhood friend, King Robert Baratheon. During his own visit to Ned's castle of Winterfell, Robert recruits Ned to replace Arryn as the King's Hand. Ned is reluctant, but agrees to go when he learns that Arryn's widow Lysa believes Queen Cersei Lannister and her family poisoned Arryn. Shortly thereafter, Ned's son Bran inadvertently discovers Cersei having sex with her twin brother Jaime Lannister, who throws Bran from the tower to conceal their affair.
-
-Ned and his daughters Sansa and Arya depart for the royal capital of King's Landing, while his wife Catelyn, a comatose Bran, and their other sons Robb and Rickon remain at Winterfell. During the journey south, a physical altercation between Arya and Robert's son, Prince Joffrey, to whom Sansa has been betrothed, increases both the tension between the Starks and the Lannisters and the sibling rivalry between Arya and Sansa. Arya's direwolf Nymeria attacks Joffrey to protect her, and Arya chases Nymeria away to protect her from the Lannisters' wrath, therefore Sansa's direwolf Lady is executed in Nymeria's place. Upon arriving in King's Landing to take his post as Hand, Ned finds that Robert is an ineffective king whose only interests are hunting, drinking and womanizing with the realm being governed by his Small Council. Robert tells Ned of his wish to abdicate as he is bored by his kingly duties, but does not as he fears what his heir Joffery might do as king.
-
-At Winterfell, an assassin attempts to kill Bran, thwarted only by his direwolf. Catelyn departs for King's Landing to bring word of this to Ned. Shortly after that, Bran awakens as a paraplegic, with no memory of the cause of his fall. Upon Catelyn's arrival in King's Landing, she is brought to her childhood friend, Petyr "Littlefinger" Baelish, who identifies Tyrion Lannister, the dwarf brother of Cersei and Jaime, as the owner of the dagger used against Bran, and agrees to help Ned investigate the possibility of Lannister treason. During her return to Winterfell, Catelyn meets Tyrion by chance on the Kingsroad, arrests him, and takes him to her sister Lysa Arryn's stronghold in the Vale, where Tyrion demands trial by combat and regains his freedom when his champion, a mercenary named Bronn, is victorious. Tyrion recruits a force of tribesmen from the Vale as his private army with the aim of seeking revenge on Arryn for her mistreatment of him. In retaliation for Tyrion's abduction, his father Lord Tywin Lannister sends soldiers led by his brutish bannerman Gregor "The Mountain" Clegane to raid Catelyn's homeland, the Riverlands.
-
-In King's Landing, Ned finds Robert's eldest brother Stannis Baratheon left the city after Jon Arryn's death for his island of Dragonstone. Ned begins to investigate into Jon Arryn's affairs, which leads him to visiting locations where Jon Arryn visited with Stannis - including places where Robert's bastard children are found. On the way back from one such place, Ned and his soldiers are waylaid by Jaime Lannister, who demands Tyrion's return, and when he does not get what he wants he orders Ned's men be killed - in the ensuing skirmish, Ned is crippled in one leg when his horse collapses on top of him. Even afterwards, Ned continues to investigate and eventually discovers that Robert's legal heirs, including Joffrey, are in fact Cersei's children by Jaime and that Jon Arryn was killed to conceal his discovery of their incest. Ned offers Cersei a chance to flee before he informs Robert, but she uses this chance to arrange Robert's death in a hunting accident.
-
-Ned, made lord-regent by Robert's will, enlists Littlefinger's help to secure the loyalty and assistance of the city guards to challenge Joffrey's claim on the throne and place Stannis on the throne; but Littlefinger betrays him, resulting in Ned's arrest, and the death of his men. The spymaster on the Small Council, the eunuch Varys, accuses Ned of "madness" in revealing to Cersei his knowledge of her incestuous relationship. Whilst Joffrey is crowned King of the Seven Kingdoms, Ned eventually agrees to falsely confess to high treason and join the Night's Watch in exchange for Sansa and Arya's safety, but Joffrey has him beheaded anyway. Whilst Sansa is retained into custody, Arya escapes with the help of her fencing instructor, Syrio Forel, and Yoren, a recruiting agent for the Night's Watch.
-
-Robb Stark has gathered an army and marched south in response to his father's arrest; and upon learning of Ned's death, attempts to raise further support from and to aid his maternal grandfather, Lord Hoster Tully. To reach the Tully lands, he agrees to a marital alliance with the notoriously unreliable House Frey, who control the intervening territory but declined to assist the Tullys despite being sworn to Riverrun. Tywin confronts a Northern-Riverlands force commanded by Roose Bolton and assigns Tyrion and his tribesmen to his van out of the hope he will be killed in the coming battle. Tyrion begins a relationship with the prostitute Shae and survives the battle, which ends in a Lannister victory.
-
-However, the force commanded by Bolton was a merely a feint and Robb commands his main force to the relief of Riverrun. Robb proves victorious against Jaime Lannister at the Battle of the Whistling Wood, who is captured and taken prisoner, while his father Tywin decides to withdraw to the southern border of the Tully lands, sending Tyrion to King's Landing to keep Joffrey under control. When Robb elects not to ally himself with Robert's brothers Renly and Stannis, who have both made claims to the throne, the Riverlands and Northern lords hail him as "King in the North": his family's ancestral title.
-                  </p>
-              </div>
-            </vue-modaltor>
-
-             <vue-modaltor  :visible="isntScroll" @hide="isntScroll = false" :close-scroll="false"  :default-width="'30%'">
-              <div class="panel scroll-modal">
-                 <div class="subject">
-                    <h3>In the Seven Kingdoms</h3>
-                 </div>
-                  <p>
-                    At the beginning of the story, Lord Eddard "Ned" Stark executes a deserter from the Night's Watch, who has betrayed his vows and fled from the Wall. On the way back, his children adopt six direwolf pups, the animal of his sigil. There are three male and two female direwolf pups, as well as an albino runt, which aligns with his three trueborn sons, two trueborn daughters, and one bastard son. That night, Ned receives word of the death of his mentor, Lord Jon Arryn, the principal advisor to Ned's childhood friend, King Robert Baratheon. During his own visit to Ned's castle of Winterfell, Robert recruits Ned to replace Arryn as the King's Hand. Ned is reluctant, but agrees to go when he learns that Arryn's widow Lysa believes Queen Cersei Lannister and her family poisoned Arryn. Shortly thereafter, Ned's son Bran inadvertently discovers Cersei having sex with her twin brother Jaime Lannister, who throws Bran from the tower to conceal their affair.
-
-Ned and his daughters Sansa and Arya depart for the royal capital of King's Landing, while his wife Catelyn, a comatose Bran, and their other sons Robb and Rickon remain at Winterfell. During the journey south, a physical altercation between Arya and Robert's son, Prince Joffrey, to whom Sansa has been betrothed, increases both the tension between the Starks and the Lannisters and the sibling rivalry between Arya and Sansa. Arya's direwolf Nymeria attacks Joffrey to protect her, and Arya chases Nymeria away to protect her from the Lannisters' wrath, therefore Sansa's direwolf Lady is executed in Nymeria's place. Upon arriving in King's Landing to take his post as Hand, Ned finds that Robert is an ineffective king whose only interests are hunting, drinking and womanizing with the realm being governed by his Small Council. Robert tells Ned of his wish to abdicate as he is bored by his kingly duties, but does not as he fears what his heir Joffery might do as king.
-
-At Winterfell, an assassin attempts to kill Bran, thwarted only by his direwolf. Catelyn departs for King's Landing to bring word of this to Ned. Shortly after that, Bran awakens as a paraplegic, with no memory of the cause of his fall. Upon Catelyn's arrival in King's Landing, she is brought to her childhood friend, Petyr "Littlefinger" Baelish, who identifies Tyrion Lannister, the dwarf brother of Cersei and Jaime, as the owner of the dagger used against Bran, and agrees to help Ned investigate the possibility of Lannister treason. During her return to Winterfell, Catelyn meets Tyrion by chance on the Kingsroad, arrests him, and takes him to her sister Lysa Arryn's stronghold in the Vale, where Tyrion demands trial by combat and regains his freedom when his champion, a mercenary named Bronn, is victorious. Tyrion recruits a force of tribesmen from the Vale as his private army with the aim of seeking revenge on Arryn for her mistreatment of him. In retaliation for Tyrion's abduction, his father Lord Tywin Lannister sends soldiers led by his brutish bannerman Gregor "The Mountain" Clegane to raid Catelyn's homeland, the Riverlands.
-
-In King's Landing, Ned finds Robert's eldest brother Stannis Baratheon left the city after Jon Arryn's death for his island of Dragonstone. Ned begins to investigate into Jon Arryn's affairs, which leads him to visiting locations where Jon Arryn visited with Stannis - including places where Robert's bastard children are found. On the way back from one such place, Ned and his soldiers are waylaid by Jaime Lannister, who demands Tyrion's return, and when he does not get what he wants he orders Ned's men be killed - in the ensuing skirmish, Ned is crippled in one leg when his horse collapses on top of him. Even afterwards, Ned continues to investigate and eventually discovers that Robert's legal heirs, including Joffrey, are in fact Cersei's children by Jaime and that Jon Arryn was killed to conceal his discovery of their incest. Ned offers Cersei a chance to flee before he informs Robert, but she uses this chance to arrange Robert's death in a hunting accident.
-
-Ned, made lord-regent by Robert's will, enlists Littlefinger's help to secure the loyalty and assistance of the city guards to challenge Joffrey's claim on the throne and place Stannis on the throne; but Littlefinger betrays him, resulting in Ned's arrest, and the death of his men. The spymaster on the Small Council, the eunuch Varys, accuses Ned of "madness" in revealing to Cersei his knowledge of her incestuous relationship. Whilst Joffrey is crowned King of the Seven Kingdoms, Ned eventually agrees to falsely confess to high treason and join the Night's Watch in exchange for Sansa and Arya's safety, but Joffrey has him beheaded anyway. Whilst Sansa is retained into custody, Arya escapes with the help of her fencing instructor, Syrio Forel, and Yoren, a recruiting agent for the Night's Watch.
-
-Robb Stark has gathered an army and marched south in response to his father's arrest; and upon learning of Ned's death, attempts to raise further support from and to aid his maternal grandfather, Lord Hoster Tully. To reach the Tully lands, he agrees to a marital alliance with the notoriously unreliable House Frey, who control the intervening territory but declined to assist the Tullys despite being sworn to Riverrun. Tywin confronts a Northern-Riverlands force commanded by Roose Bolton and assigns Tyrion and his tribesmen to his van out of the hope he will be killed in the coming battle. Tyrion begins a relationship with the prostitute Shae and survives the battle, which ends in a Lannister victory.
-
-However, the force commanded by Bolton was a merely a feint and Robb commands his main force to the relief of Riverrun. Robb proves victorious against Jaime Lannister at the Battle of the Whistling Wood, who is captured and taken prisoner, while his father Tywin decides to withdraw to the southern border of the Tully lands, sending Tyrion to King's Landing to keep Joffrey under control. When Robb elects not to ally himself with Robert's brothers Renly and Stannis, who have both made claims to the throne, the Riverlands and Northern lords hail him as "King in the North": his family's ancestral title.
-                  </p>
-              </div>
-            </vue-modaltor>
-
-            </section>
-
 
           </div>
         </div>
@@ -326,7 +330,7 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
 <script src="./prism.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<script src="./dist/vue-modaltor.js"></script>
+<script src="../modaltor/dist/vue-modaltor.js"></script>
 <script>
   var app = new Vue({
     el: '#app',
