@@ -63,7 +63,7 @@
                   <button  @click="isBasic = true">basic</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isBasic" @hide="isBasic = false">
+            <vue-modaltor  :visible="isBasic" @hide="isBasic = false"   :default-width="'70%'" >
               <div class="panel">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
@@ -169,7 +169,7 @@
                   <button  @click="isParentScale = true">parent scale</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isParentScale" @hide="isParentScale = false" :animation-parent="'modal-scale'">
+            <vue-modaltor  :visible="isParentScale" @hide="isParentScale = false" :animation-parent="'modal-scale'"   :default-width="'90%'">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
@@ -177,56 +177,6 @@
 ― George R.R. Martin, A Game of Thrones</p>
             </vue-modaltor>
 
-            </section>
-
-
-
-
-              <section class="card" id="responsive">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="subject">
-                  <h2> <a href="#responsive"> responsive </a></h2>
-                </div>
-              </div>
-              <div class="col-sm-9">
-                <div class="code">
-                  <pre>
-                    <code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
-    @hide="open = false"
-    :default-width="'30%'"
-    :resize-width='{1400:"40%",1200:"50%",992:"70%",768:"90%"}'&gt;
-        &lt;p&gt; 
-        Lorem ipsum dolor sit amet, 
-        ....
-  &lt;/vue-modaltor&gt;
-                    </code>
-                  </pre>
-<pre><code class="language-clike">/* additional options 
- you can handle modal size on diffrent screen sizes by editing  'resize-width' props
-{992:"70%",768:"90%"} 
-you can set default width by 'default-width' props (default is set to '50%')
-*/</code></pre>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="demo">
-                  <button  @click="isResize = true">responsive</button>
-                </div>
-              </div>
-            <vue-modaltor  :visible="isResize" @hide="isResize = false" :default-width="'30%'"
-    :resize-width='{1200:"50%",992:"70%",768:"90%"}'>
-              <div class="panel">
-                 <div class="subject">
-                    <h3>game of thrones quotes</h3>
-                 </div>
-              <p>“What is honor compared to a woman's love? What is duty against the feel of a newborn son in your arms . . . or the memory of a brother's smile? Wind and words. Wind and words. We are only human, and the gods have fashioned us for love. That is our great glory, and our great tragedy.” 
-― George R.R. Martin, A Game of Thrones</p>
-              </div>
-            </vue-modaltor>
             </section>
 
 
@@ -264,7 +214,7 @@ you can set default width by 'default-width' props (default is set to '50%')
                   <button  @click="isntScroll = true">open scroll body</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isScroll" @hide="isScroll = false" :close-scroll="true"  :default-width="'30%'">
+            <vue-modaltor  :visible="isScroll" @hide="isScroll = false" :close-scroll="true"  :default-width="'90%'">
               <div class="panel scroll-modal">
                  <div class="subject">
                     <h3>In the Seven Kingdoms</h3>
@@ -287,7 +237,11 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
               </div>
             </vue-modaltor>
 
-             <vue-modaltor  :visible="isntScroll" @hide="isntScroll = false" :close-scroll="false"  :default-width="'30%'">
+           <vue-modaltor  :visible="isntScroll" 
+           @hide="isntScroll = false" 
+           :close-scroll="false" 
+           :resize-width='{1200:"50%",992:"70%",768:"90%"}'
+            :default-width="'90%'" >
               <div class="panel scroll-modal">
                  <div class="subject">
                     <h3>In the Seven Kingdoms</h3>
@@ -343,7 +297,7 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
                   <button  @click="isBgParent = true">parent scale</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isBgParent" @hide="isBgParent = false" :bg-overlay="'#a70000'">
+            <vue-modaltor  :visible="isBgParent" @hide="isBgParent = false" :bg-overlay="'#47ab6f'">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
