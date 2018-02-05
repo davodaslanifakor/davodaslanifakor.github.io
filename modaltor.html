@@ -312,7 +312,46 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
 
             </section>
 
+            <section class="card" id="background-color">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="subject">
+                  <h2><a href="#background-color">background-color parent</a></h2>
+                </div>
+              </div>
+              <div class="col-sm-9">
+                <div class="code">
+                  <pre><code class="language-markup">
+  &lt;vue-modaltor  
+    :visible="open" 
+    @hide="open = false"
+    :bg-overlay="'red'"&gt;
+        &lt;p&gt; 
+        Lorem ipsum dolor sit amet, 
+        ....
+  &lt;/vue-modaltor&gt;</code></pre>
+  <pre><code class="language-clike">/* additional options 
+ "bg-overlay = "'red'"
+ and 
+ "bg-panel = "'green'" 
+ default: '#fff'*/</code></pre>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="demo">
+                  <button  @click="isBgParent = true">parent scale</button>
+                </div>
+              </div>
+            <vue-modaltor  :visible="isBgParent" @hide="isBgParent = false" :bg-overlay="'#a70000'">
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+              <p>“When the sun rises in the west and sets in the east," she said sadly. "When the seas go dry and mountains blow in the wind like leaves. When my womb quickens again, and I bear a living child. Then you will return, my sun-and-stars, and not before." -Daenerys Targaryen” 
+― George R.R. Martin, A Game of Thrones</p>
+            </vue-modaltor>
 
+            </section>
           </div>
         </div>
 
@@ -339,7 +378,8 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
       isResize:false,
       isScroll:false,
       isntScroll:false,
-      isParentScale:false
+      isParentScale:false,
+      isBgParent:false
     },
     methods:{
     }
