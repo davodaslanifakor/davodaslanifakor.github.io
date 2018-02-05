@@ -214,7 +214,7 @@
                   <button  @click="isntScroll = true">open scroll body</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isScroll" @hide="isScroll = false" :close-scroll="true"  :default-width="'90%'">
+            <vue-modaltor  :visible="isScroll" @hide="isScroll = false" :close-scroll="true"  :default-width="'30%'">
               <div class="panel scroll-modal">
                  <div class="subject">
                     <h3>In the Seven Kingdoms</h3>
@@ -241,7 +241,7 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
            @hide="isntScroll = false" 
            :close-scroll="false" 
            :resize-width='{1200:"50%",992:"70%",768:"90%"}'
-            :default-width="'90%'" >
+            :default-width="'30%'" >
               <div class="panel scroll-modal">
                  <div class="subject">
                     <h3>In the Seven Kingdoms</h3>
@@ -294,16 +294,34 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
               </div>
               <div class="col-sm-3">
                 <div class="demo">
-                  <button  @click="isBgParent = true">parent scale</button>
+                  <button  @click="isBgParent = true">color overlay</button>
+                  <button  @click="isBgPanel = true">color panel</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isBgParent" @hide="isBgParent = false" :bg-overlay="'#47ab6f'">
+            <vue-modaltor  :visible="isBgParent" @hide="isBgParent = false" :bg-overlay="'#47ab6f'"  :default-width="'40%'">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
-              <p>“When the sun rises in the west and sets in the east," she said sadly. "When the seas go dry and mountains blow in the wind like leaves. When my womb quickens again, and I bear a living child. Then you will return, my sun-and-stars, and not before." -Daenerys Targaryen” 
-― George R.R. Martin, A Game of Thrones</p>
+          <p>“Give me honorable enemies rather than ambitious ones, and I'll sleep more easily by night.” 
+            ― George R.R. Martin, A Game of Thrones</p>
             </vue-modaltor>
+            <vue-modaltor  :visible="isBgPanel" @hide="isBgPanel = false" :bg-panel="'#47ab6f'"  :default-width="'40%'">
+              <div class="subject">
+                 <h3 style="color:#f3f3f3">game of thrones quotes</h3>
+              </div>
+<p style="color:#f3f3f3">“You are your mother's trueborn son of Lannister."
+
+  "Am I?" the dwarf replied, sardonic. "Do tell my lord father. My mother died birthing me, and he's never been sure."
+  
+  "I don't even know who my mother was," Jon said. 
+  
+  "Some woman, no doubt. Most of them are." He favored Jon with a rueful grin. "Remember this, boy. All dwarfs may be bastards, yet not all bastards need be dwarfs."
+  
+  And with that he turned and sauntered back into the feast, whistling a tune. 
+  
+  When he opened the door, the light from within threw his shadow clear across the yard, and for just a moment Tyrion Lannister stood tall as a king.” 
+  ― George R.R. Martin, A Game of Thrones</p>
+         </vue-modaltor>
 
             </section>
           </div>
@@ -333,7 +351,8 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
       isScroll:false,
       isntScroll:false,
       isParentScale:false,
-      isBgParent:false
+      isBgParent:false,
+      isBgPanel:false
     },
     methods:{
     }
