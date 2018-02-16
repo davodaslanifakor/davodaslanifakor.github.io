@@ -73,6 +73,47 @@
               </div>
             </vue-modaltor>
             </section>
+      <section class="card" id="responsive">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="subject">
+                  <h2><a href="#responsive" >responsive</a></h2>
+                </div>
+              </div>
+              <div class="col-sm-9">
+                <div class="code">
+                  <pre><code class="language-markup">
+  &lt;vue-modaltor  
+    :visible="open" 
+    @hide="open = false"
+    :resize-width='{1200:"60%",992:"80%",768:"90%"}'
+    &gt;
+        &lt;p&gt; 
+        Lorem ipsum dolor sit amet, 
+        ....
+  &lt;/vue-modaltor&gt;</code></pre>
+  <pre><code class="language-clike">/* additional options  
+  manage modal's size on diffrent dimenstions with one single attribute
+  :resize-width='{1200:"60%",992:"80%",768:"90%"}'
+*/</code></pre>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="demo">
+                  <button  @click="isResize = true">responsive</button>
+                </div>
+              </div>
+            <vue-modaltor  :visible="isResize" @hide="isResize = false"   :resize-width='{1200:"50%",992:"70%",768:"90%"}'  :default-width="'70%'" >
+              <div class="panel">
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+            <p>“Nor was he Aemon Targaryen. Three times the old man had chosen, and three times he had chosen honor, but that was him. Even now, Jon could not decide whether the maester had stayed because he was weak and craven, or because he was strong and true.” 
+― George R.R. Martin, A Game of Thrones</p>
+              </div>
+            </vue-modaltor>
+            </section>
 
           <section class="card" id="animation-panel">
           <div class="container-fluid">
@@ -337,6 +378,7 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
 <script src="./prism.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- <script src="E:/project/modaltor/dist/vue-modaltor.js"></script> -->
 <script src="./dist/vue-modaltor.js"></script>
 <script>
   var app = new Vue({
