@@ -2,6 +2,32 @@
 <html>
 <head>
 	<title>test</title>
+	<style>
+		.modal-vue-panel{
+				position: relative;
+				width: 100%;
+				height: 100vh;
+		}
+		.modal-vue-panel:after,
+		.modal-vue-panel:before{
+				position: absolute;
+				content:'';
+				top:0;
+				bottom: 0;
+				display: block;
+				z-index: -1;
+		}
+		.modal-vue-panel:after{
+				left: 50%;
+				right: 0;
+			background: red;
+		}
+		.modal-vue-panel:before{
+				right: 50%;
+				left: 0;
+			background:green;
+		}
+	</style>
 </head>
 <body>
 
@@ -11,16 +37,6 @@
               <div class="subject">
                  <h3 style="color:#f3f3f3">game of thrones quotes</h3>
               </div>
-			<section class="container3d">
-  <div id="cube">
-    <figure class="front">1</figure>
-    <figure class="back">2</figure>
-    <figure class="right">3</figure>
-    <figure class="left">4</figure>
-    <figure class="top">5</figure>
-    <figure class="bottom">6</figure>
-  </div>
-</section>
          </vue-modaltor>
 
 	</div>
