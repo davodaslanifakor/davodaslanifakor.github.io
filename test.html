@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+
+	<div id="app">
+		<button @click="is3D = true">3d</button>
+		     <vue-modaltor  :visible="is3D" @hide="is3D = false"   :default-width="'40%'">
+              <div class="subject">
+                 <h3 style="color:#f3f3f3">game of thrones quotes</h3>
+              </div>
+			<section class="container3d">
+  <div id="cube">
+    <figure class="front">1</figure>
+    <figure class="back">2</figure>
+    <figure class="right">3</figure>
+    <figure class="left">4</figure>
+    <figure class="top">5</figure>
+    <figure class="bottom">6</figure>
+  </div>
+</section>
+         </vue-modaltor>
+
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="E:/project/modaltor/dist/vue-modaltor.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app',
+			data: {
+				is3D:false,
+			},
+			methods:{
+			}
+		})
+	</script>
+</body>
+</html>
