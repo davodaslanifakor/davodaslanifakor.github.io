@@ -18,10 +18,9 @@
       <img alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" style="position:absolute;top:0;right:0;border:0;">
       </a>
 
-
     
       <div class="container">
-        <main >
+        <main>
           <div class="row">
             <div class="col-sm-12">
              <div class="subject">
@@ -33,7 +32,6 @@
         
           <a class=" github-button" href="https://github.com/davodaslanifakor/modaltor" data-size="large" data-show-count="true" aria-label="Star davodaslanifakor/modaltor on GitHub">Star</a>
 
-          <!-- Place this tag where you want the button to render. -->
     <a class="github-button " href="https://github.com/davodaslanifakor/modaltor/fork" data-size="large" data-show-count="true" aria-label="Fork davodaslanifakor/modaltor on GitHub">Fork</a>
 
   </div>
@@ -46,7 +44,7 @@
                   <h2><a href="#basic" >basic example</a></h2>
                 </div>
               </div>
-              <div class="col-sm-9">
+              <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
   &lt;vue-modaltor  
@@ -58,7 +56,7 @@
   &lt;/vue-modaltor&gt;</code></pre>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <div class="demo">
                   <button  @click="isBasic = true">basic</button>
                 </div>
@@ -81,7 +79,7 @@
                   <h2><a href="#responsive" >responsive</a></h2>
                 </div>
               </div>
-              <div class="col-sm-9">
+              <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
   &lt;vue-modaltor  
@@ -99,7 +97,7 @@
 */</code></pre>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <div class="demo">
                   <button  @click="isResize = true">responsive</button>
                 </div>
@@ -123,7 +121,7 @@
                   <h2><a href="#animation-panel">animation panel</a></h2>
                 </div>
               </div>
-              <div class="col-sm-9">
+              <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
   &lt;vue-modaltor  
@@ -143,7 +141,7 @@
 */</code></pre>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <div class="demo">
                   <button  @click="isRight = true">slide right</button>
                   <button  @click="isLeft = true">slide left</button>
@@ -192,7 +190,7 @@
                   <h2><a href="#animation-parent">animation parent</a></h2>
                 </div>
               </div>
-              <div class="col-sm-9">
+              <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
   &lt;vue-modaltor  
@@ -205,7 +203,7 @@
   &lt;/vue-modaltor&gt;</code></pre>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <div class="demo">
                   <button  @click="isParentScale = true">parent scale</button>
                 </div>
@@ -229,7 +227,7 @@
                   <h2> <a href="#close-scroll"> close scroll </a></h2>
                 </div>
               </div>
-              <div class="col-sm-9">
+              <div class="col-lg-9">
                 <div class="code">
                   <pre>
                     <code class="language-markup">
@@ -249,7 +247,7 @@
  default: true*/</code></pre>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <div class="demo">
                   <button  @click="isScroll = true">close scroll body</button>
                   <button  @click="isntScroll = true">open scroll body</button>
@@ -315,7 +313,7 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
                   <h2><a href="#background-color">background-color parent</a></h2>
                 </div>
               </div>
-              <div class="col-sm-9">
+              <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
   &lt;vue-modaltor  
@@ -333,7 +331,7 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
  default: '#fff'*/</code></pre>
                 </div>
               </div>
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <div class="demo">
                   <button  @click="isBgParent = true">color overlay</button>
                   <button  @click="isBgPanel = true">color panel</button>
@@ -365,6 +363,44 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
          </vue-modaltor>
 
             </section>
+
+              <section class="card" id="imageMode">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="subject">
+                  <h2><a href="#imageMode" >image mode</a></h2>
+                </div>
+              </div>
+              <div class="col-lg-9">
+                <div class="code">
+                  <pre><code class="language-markup">
+  &lt;vue-modaltor  
+    :visible="open" 
+    :img-mode="true"
+    @hide="open = false"&gt;
+        &lt;p&gt; 
+        Lorem ipsum dolor sit amet, 
+        ....
+  &lt;/vue-modaltor&gt;</code></pre></code></pre>
+  <pre><code class="language-clike">/* additional options for show image
+ "img-mode = "true"
+ default: 'false'*/</code></pre>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="demo">
+                  <button  @click="isImgMode = true">image mode</button>
+                </div>
+              </div>
+            <vue-modaltor  :visible="isImgMode" @hide="isImgMode = false"   :default-width="'70%'" :img-mode="true">
+              <div class="panel">
+                  <img src="./img/william-rouse-593381-unsplash.jpg" alt="">
+              </div>
+            </vue-modaltor>
+            </section>
+
+
           </div>
         </div>
 
@@ -378,8 +414,8 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
 <script src="./prism.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- <script src="E:/project/modaltor/dist/vue-modaltor.js"></script> -->
-<script src="./dist/vue-modaltor.js"></script>
+<script src="E:/fakor/modaltor/dist/vue-modaltor.js"></script>
+<!-- <script src="./dist/vue-modaltor.js"></script> -->
 <script>
   var app = new Vue({
     el: '#app',
@@ -394,7 +430,8 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
       isntScroll:false,
       isParentScale:false,
       isBgParent:false,
-      isBgPanel:false
+      isBgPanel:false,
+      isImgMode:false
     },
     methods:{
     }
