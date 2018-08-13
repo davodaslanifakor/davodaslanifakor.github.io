@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo App</title>
+    <!-- style app -->
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../font/flaticon.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form id="addItem">
+                    <input name="item" id="itemValue" type="text" placeholder="Enter an activity">
+                    <button type="submit" class="btn-icon button flaticon-add pointer"></button>
+                </form>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="fliter-list d-flex flex-row">
+                            <p class="mr-auto align-self-center pointer w-100">
+                                fliter list
+                            </p>
+                            <button class="action-filter all btn-icon align-self-center pointer">ALL</button>
+                            <button class="action-filter doing btn-icon align-self-center pointer flaticon-verified"></button>
+                            <button class="action-filter done btn-icon align-self-center pointer flaticon-success"></button>
+                        </div>
+                        <ul class="todos d-flex flex-column">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
