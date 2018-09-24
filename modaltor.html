@@ -24,7 +24,7 @@
           <div class="row">
             <div class="col-sm-12">
              <div class="subject">
-              <h1>this is demo vue-modaltor</h1>
+              <h1>This Is Demo vue-modaltor</h1>
             </div>
           </div>
         </div>
@@ -363,43 +363,6 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
          </vue-modaltor>
 
             </section>
-
-              <section class="card" id="imageMode">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="subject">
-                  <h2><a href="#imageMode" >image mode</a></h2>
-                </div>
-              </div>
-              <div class="col-lg-9">
-                <div class="code">
-                  <pre><code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
-    :img-mode="true"
-    @hide="open = false"&gt;
-        &lt;img src="img.png"/&gt; 
-        ....
-  &lt;/vue-modaltor&gt;</code></pre></code></pre>
-  <pre><code class="language-clike">/* additional options for show image
- "img-mode = "true"
- default: 'false'*/</code></pre>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="demo">
-                  <button  @click="isImgMode = true">image mode</button>
-                </div>
-              </div>
-            <vue-modaltor  :visible="isImgMode" @hide="isImgMode = false"   :default-width="'70%'" :img-mode="true">
-              <div class="panel">
-                  <img src="./img/william-rouse-593381-unsplash.jpg" alt="">
-              </div>
-            </vue-modaltor>
-            </section>
-
-
           </div>
         </div>
 
@@ -430,7 +393,6 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
       isParentScale:false,
       isBgParent:false,
       isBgPanel:false,
-      isImgMode:false
     },
     methods:{
     }
