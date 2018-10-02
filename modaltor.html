@@ -18,7 +18,7 @@
       <img alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" style="position:absolute;top:0;right:0;border:0;">
       </a>
 
-    
+
       <div class="container">
         <main>
           <div class="row">
@@ -29,7 +29,7 @@
           </div>
         </div>
   <div class="action-github ">
-        
+
           <a class=" github-button" href="https://github.com/davodaslanifakor/modaltor" data-size="large" data-show-count="true" aria-label="Star davodaslanifakor/modaltor on GitHub">Star</a>
 
     <a class="github-button " href="https://github.com/davodaslanifakor/modaltor/fork" data-size="large" data-show-count="true" aria-label="Fork davodaslanifakor/modaltor on GitHub">Fork</a>
@@ -47,11 +47,11 @@
               <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
+  &lt;vue-modaltor
+    :visible="open"
     @hide="open = false"&gt;
-        &lt;p&gt; 
-        Lorem ipsum dolor sit amet, 
+        &lt;p&gt;
+        Lorem ipsum dolor sit amet
         ....
   &lt;/vue-modaltor&gt;</code></pre>
                 </div>
@@ -66,11 +66,61 @@
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
-              <p>“Never forget what you are, for surely the world will not. Make it your strength. Then it can never be your weakness. Armour yourself in it, and it will never be used to hurt you.” 
+              <p>“Never forget what you are, for surely the world will not. Make it your strength. Then it can never be your weakness. Armour yourself in it, and it will never be used to hurt you.”
               ― George R.R. Martin, A Game of Thrones.</p>
               </div>
             </vue-modaltor>
             </section>
+            <section class="card" id="basic">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="subject">
+                      <h2><a href="#basic" >Edit icon</a></h2>
+                    </div>
+                  </div>
+                  <div class="col-lg-9">
+                    <div class="code">
+                      <pre><code class="language-markup">
+      &lt;vue-modaltor
+        :visible="open"
+        @hide="open = false"&gt;
+            &lt;p&gt;
+            &lt;template slot="close-icon"&gt;
+                       You Cand Add Any Icon Svg
+            &lt;/template&gt;
+            Lorem ipsum dolor sit amet
+            ....
+      &lt;/vue-modaltor&gt;</code></pre>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="demo">
+                      <button  @click="someIcon = true">constum icon</button>
+                    </div>
+                  </div>
+                <vue-modaltor  :visible="someIcon" @hide="someIcon = false"   :default-width="'70%'" >
+                    <template slot="close-icon">
+                        <?xml version="1.0" encoding="iso-8859-1"?>
+                        <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 294.843 294.843" style="enable-background:new 0 0 294.843 294.843;" xml:space="preserve" width="25px" height="25px">
+                        <g>
+                          <path d="M147.421,0C66.133,0,0,66.133,0,147.421s66.133,147.421,147.421,147.421c38.287,0,74.567-14.609,102.159-41.136   c2.389-2.296,2.464-6.095,0.167-8.483c-2.295-2.388-6.093-2.464-8.483-0.167c-25.345,24.367-58.672,37.786-93.842,37.786   C72.75,282.843,12,222.093,12,147.421S72.75,12,147.421,12s135.421,60.75,135.421,135.421c0,16.842-3.052,33.273-9.071,48.835   c-1.195,3.091,0.341,6.565,3.432,7.761c3.092,1.193,6.565-0.341,7.761-3.432c6.555-16.949,9.879-34.836,9.879-53.165   C294.843,66.133,228.71,0,147.421,0z" fill="#91DC5A"/>
+                          <path d="M167.619,160.134c-2.37-2.319-6.168-2.277-8.485,0.09c-2.318,2.368-2.277,6.167,0.09,8.485l47.236,46.236   c1.168,1.143,2.683,1.712,4.197,1.712c1.557,0,3.113-0.603,4.288-1.803c2.318-2.368,2.277-6.167-0.09-8.485L167.619,160.134z" fill="#91DC5A"/>
+                          <path d="M125.178,133.663c1.171,1.171,2.707,1.757,4.243,1.757s3.071-0.586,4.243-1.757c2.343-2.343,2.343-6.142,0-8.485   L88.428,79.942c-2.343-2.343-6.143-2.343-8.485,0c-2.343,2.343-2.343,6.142,0,8.485L125.178,133.663z" fill="#91DC5A"/>
+                          <path d="M214.9,79.942c-2.343-2.343-6.143-2.343-8.485,0L79.942,206.415c-2.343,2.343-2.343,6.142,0,8.485   c1.171,1.171,2.707,1.757,4.243,1.757s3.071-0.586,4.243-1.757L214.9,88.428C217.243,86.084,217.243,82.286,214.9,79.942z" fill="#91DC5A"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
+                    </template>
+                  <div class="panel">
+                     <div class="subject">
+                        <h3>game of thrones quotes</h3>
+                     </div>
+                  <p>
+                      “Never forget what you are, for surely the world will not. Make it your strength. Then it can never be your weakness. Armour yourself in it, and it will never be used to hurt you.” 
+                      ― George R.R. Martin, A Game of Thrones
+                  </p>
+                  </div>
+                </vue-modaltor>
+                </section>
       <section class="card" id="responsive">
           <div class="container-fluid">
             <div class="row">
@@ -82,16 +132,16 @@
               <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
+  &lt;vue-modaltor
+    :visible="open"
     @hide="open = false"
     :resize-width='{1200:"60%",992:"80%",768:"90%"}'
     &gt;
-        &lt;p&gt; 
-        Lorem ipsum dolor sit amet, 
+        &lt;p&gt;
+        Lorem ipsum dolor sit amet,
         ....
   &lt;/vue-modaltor&gt;</code></pre>
-  <pre><code class="language-clike">/* additional options  
+  <pre><code class="language-clike">/* additional options
   manage modal's size on diffrent dimenstions with one single attribute
   :resize-width='{1200:"60%",992:"80%",768:"90%"}'
 */</code></pre>
@@ -102,17 +152,16 @@
                   <button  @click="isResize = true">responsive</button>
                 </div>
               </div>
-            <vue-modaltor  :visible="isResize" @hide="isResize = false"   :resize-width='{1200:"50%",992:"70%",768:"90%"}'  :default-width="'70%'" >
+            <vue-modaltor   :visible="isResize" @hide="isResize = false"   :resize-width='{1200:"50%",992:"70%",768:"90%"}'  :default-width="'70%'" >
               <div class="panel">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
-            <p>“Nor was he Aemon Targaryen. Three times the old man had chosen, and three times he had chosen honor, but that was him. Even now, Jon could not decide whether the maester had stayed because he was weak and craven, or because he was strong and true.” 
+            <p>“Nor was he Aemon Targaryen. Three times the old man had chosen, and three times he had chosen honor, but that was him. Even now, Jon could not decide whether the maester had stayed because he was weak and craven, or because he was strong and true.”
 ― George R.R. Martin, A Game of Thrones</p>
               </div>
             </vue-modaltor>
             </section>
-
           <section class="card" id="animation-panel">
           <div class="container-fluid">
             <div class="row">
@@ -124,15 +173,15 @@
               <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
+  &lt;vue-modaltor
+    :visible="open"
     @hide="open = false"
     :animation-panel="'modal-slide-right'"&gt;
-        &lt;p&gt; 
-        Lorem ipsum dolor sit amet, 
+        &lt;p&gt;
+        Lorem ipsum dolor sit amet,
         ....
   &lt;/vue-modaltor&gt;</code></pre>
-  <pre><code class="language-clike">/* additional options  
+  <pre><code class="language-clike">/* additional options
  modal-slide-left
  modal-slide-top
  modal-slide-bottom
@@ -154,7 +203,7 @@
                     <h3>game of thrones quotes</h3>
                  </div>
               <p>“Bran thought about it. 'Can a man still be brave if he's afraid?'
-                  'That is the only time a man can be brave,' his father told him.” 
+                  'That is the only time a man can be brave,' his father told him.”
                   ― George R.R. Martin, A Game of Thrones</p>
             </vue-modaltor>
             <vue-modaltor  :visible="isLeft" @hide="isLeft = false" :animation-panel="'modal-slide-left'">
@@ -162,21 +211,21 @@
                     <h3>game of thrones quotes</h3>
                  </div>
               <p>“Bran thought about it. 'Can a man still be brave if he's afraid?'
-                'That is the only time a man can be brave,' his father told him.” 
+                'That is the only time a man can be brave,' his father told him.”
                 ― George R.R. Martin, A Game of Thrones</p>
             </vue-modaltor>
               <vue-modaltor  :visible="isTop" @hide="isTop = false" :animation-panel="'modal-slide-top'">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
-              <p>“Fear cuts deeper than swords.” 
+              <p>“Fear cuts deeper than swords.”
               ― George R.R. Martin, A Game of Thrones</p>
             </vue-modaltor>
              <vue-modaltor  :visible="isBottom" @hide="isBottom = false" :animation-panel="'modal-slide-bottom'">
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
-              <p>“Some old wounds never truly heal, and bleed again at the slightest word.” 
+              <p>“Some old wounds never truly heal, and bleed again at the slightest word.”
               ― George R.R. Martin, A Game of Thrones</p>
             </vue-modaltor>
 
@@ -193,12 +242,12 @@
               <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
+  &lt;vue-modaltor
+    :visible="open"
     @hide="open = false"
     :animation-parent="'modal-scale'"&gt;
-        &lt;p&gt; 
-        Lorem ipsum dolor sit amet, 
+        &lt;p&gt;
+        Lorem ipsum dolor sit amet,
         ....
   &lt;/vue-modaltor&gt;</code></pre>
                 </div>
@@ -212,8 +261,46 @@
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
-              <p>“When the sun rises in the west and sets in the east," she said sadly. "When the seas go dry and mountains blow in the wind like leaves. When my womb quickens again, and I bear a living child. Then you will return, my sun-and-stars, and not before." -Daenerys Targaryen” 
+              <p>“When the sun rises in the west and sets in the east," she said sadly. "When the seas go dry and mountains blow in the wind like leaves. When my womb quickens again, and I bear a living child. Then you will return, my sun-and-stars, and not before." -Daenerys Targaryen”
 ― George R.R. Martin, A Game of Thrones</p>
+            </vue-modaltor>
+
+            </section>
+            <section class="card" id="animation-parent">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="subject">
+                  <h2><a href="#show-close-button ">Hide Close Icon</a></h2>
+                </div>
+              </div>
+              <div class="col-lg-9">
+                <div class="code">
+                  <pre><code class="language-markup">
+  &lt;vue-modaltor
+    :visible="open"
+    @hide="open = false"
+    :show-close-button="false"&gt;
+        &lt;p&gt;
+        Lorem ipsum dolor sit amet,
+        ....
+  &lt;/vue-modaltor&gt;</code></pre>
+                </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="demo">
+                  <button  @click="isCloseIcon = true">Hide Close Icon</button>
+                </div>
+              </div>
+            <vue-modaltor    :show-close-button="false" :visible="isCloseIcon" @hide="isCloseIcon = false"   :default-width="'90%'">
+                 <div class="subject">
+                    <h3>game of thrones quotes</h3>
+                 </div>
+              <p>
+                  “Bran thought about it. 'Can a man still be brave if he's afraid?'
+                  'That is the only time a man can be brave,' his father told him.” 
+                  ― George R.R. Martin, A Game of Thrones
+              </p>
             </vue-modaltor>
 
             </section>
@@ -231,19 +318,19 @@
                 <div class="code">
                   <pre>
                     <code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
+  &lt;vue-modaltor
+    :visible="open"
     @hide="open = false"
     :default-width="'30%'"
     :close-scroll="false"&gt;
-        &lt;p&gt; 
-        Lorem ipsum dolor sit amet, 
+        &lt;p&gt;
+        Lorem ipsum dolor sit amet,
         ....
   &lt;/vue-modaltor&gt;
                     </code>
                   </pre>
-<pre><code class="language-clike">/* additional options 
- if close-scroll = true body scroll is close 
+<pre><code class="language-clike">/* additional options
+ if close-scroll = true body scroll is close
  default: true*/</code></pre>
                 </div>
               </div>
@@ -276,9 +363,9 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
               </div>
             </vue-modaltor>
 
-           <vue-modaltor  :visible="isntScroll" 
-           @hide="isntScroll = false" 
-           :close-scroll="false" 
+           <vue-modaltor  :visible="isntScroll"
+           @hide="isntScroll = false"
+           :close-scroll="false"
            :resize-width='{1200:"50%",992:"70%",768:"90%"}'
             :default-width="'30%'" >
               <div class="panel scroll-modal">
@@ -316,18 +403,18 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
               <div class="col-lg-9">
                 <div class="code">
                   <pre><code class="language-markup">
-  &lt;vue-modaltor  
-    :visible="open" 
+  &lt;vue-modaltor
+    :visible="open"
     @hide="open = false"
     :bg-overlay="'red'"&gt;
-        &lt;p&gt; 
-        Lorem ipsum dolor sit amet, 
+        &lt;p&gt;
+        Lorem ipsum dolor sit amet,
         ....
   &lt;/vue-modaltor&gt;</code></pre>
-  <pre><code class="language-clike">/* additional options 
+  <pre><code class="language-clike">/* additional options
  "bg-overlay = "'red'"
- and 
- "bg-panel = "'green'" 
+ and
+ "bg-panel = "'green'"
  default: '#fff'*/</code></pre>
                 </div>
               </div>
@@ -341,7 +428,7 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
                  <div class="subject">
                     <h3>game of thrones quotes</h3>
                  </div>
-          <p>“Give me honorable enemies rather than ambitious ones, and I'll sleep more easily by night.” 
+          <p>“Give me honorable enemies rather than ambitious ones, and I'll sleep more easily by night.”
             ― George R.R. Martin, A Game of Thrones</p>
             </vue-modaltor>
             <vue-modaltor  :visible="isBgPanel" @hide="isBgPanel = false" :bg-panel="'#47ab6f'"  :default-width="'40%'">
@@ -351,14 +438,14 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
 <p style="color:#f3f3f3">“You are your mother's trueborn son of Lannister."
 
   "Am I?" the dwarf replied, sardonic. "Do tell my lord father. My mother died birthing me, and he's never been sure."
-  
-  "I don't even know who my mother was," Jon said. 
-  
+
+  "I don't even know who my mother was," Jon said.
+
   "Some woman, no doubt. Most of them are." He favored Jon with a rueful grin. "Remember this, boy. All dwarfs may be bastards, yet not all bastards need be dwarfs."
-  
-  And with that he turned and sauntered back into the feast, whistling a tune. 
-  
-  When he opened the door, the light from within threw his shadow clear across the yard, and for just a moment Tyrion Lannister stood tall as a king.” 
+
+  And with that he turned and sauntered back into the feast, whistling a tune.
+
+  When he opened the door, the light from within threw his shadow clear across the yard, and for just a moment Tyrion Lannister stood tall as a king.”
   ― George R.R. Martin, A Game of Thrones</p>
          </vue-modaltor>
 
@@ -393,6 +480,8 @@ However, the force commanded by Bolton was a merely a feint and Robb commands hi
       isParentScale:false,
       isBgParent:false,
       isBgPanel:false,
+      isCloseIcon:false,
+      someIcon:false
     },
     methods:{
     }
