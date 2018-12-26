@@ -187,6 +187,18 @@
  modal-slide-bottom
 
  default: modal-fade
+ you can add any custom animation 
+ eg:
+ animation-panel="some-animation-panel"
+ 
+.some-animation-panel{
+  opacity: 0.1;
+  visibility: hidden;
+  transform: rotate(45deg)
+}
+.modal-vue-panel.modal-vue-show.some-animation-panel{
+  visibility: visible;
+}
 */</code></pre>
                 </div>
               </div>
