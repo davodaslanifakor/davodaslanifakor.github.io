@@ -612,7 +612,6 @@ export const deskMischiefCopy = {
   powerOnPrompt: both('Wake MacBook', 'روشن کردن مک‌بوک'),
   playKeyboard: both('Play the keyboard', 'بازی با صفحه‌کلید'),
   typeHere: both('Type to hop', 'تایپ کن تا بپرم'),
-  typePlaceholder: both('Try Hello!', 'مثلاً سلام!'),
   typingHelp: both('Letters: hop to a key · Backspace: delete · Esc: walk again · Arrows: move away', 'حروف: پرش به کلید · بک‌اسپیس: حذف · Esc: بازگشت · جهت‌ها: حرکت'),
   keyboardShort: both('Keyboard', 'صفحه‌کلید'),
   mouseShort: both('Mouse ride', 'سواری ماوس'),
