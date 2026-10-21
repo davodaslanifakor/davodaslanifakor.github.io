@@ -3,6 +3,8 @@ node_modules/
 .output/
 .vitest/
 /dist
+/docs/
+*_PLAN.md
 .env
 .env.*
 !.env.example

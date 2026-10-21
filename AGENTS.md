@@ -1,6 +1,6 @@
 # Portfolio workspace guide
 
-Read `PORTFOLIO_PLAN.md` before changing the project. The contracts in section 4 are stable; flag any required change before making it.
+Read `README.md` before changing the project. Existing Blender mesh names, authored cameras, content types and scene state are stable contracts; flag any required change before making it.
 
 ## Commands
 
@@ -19,7 +19,7 @@ Read `PORTFOLIO_PLAN.md` before changing the project. The contracts in section 4
 - All portfolio copy comes from `content/portfolio.ts`. Missing facts use `TODO(David)` and are never invented.
 - Components use typed props and emits. Interactive controls must be keyboard accessible and respect reduced motion.
 - Keep the 2D `/cv` route SSR-first and independent from the 3D bundle.
-- Preserve Blender mesh, camera, content, and Pinia contracts from section 4 of the plan.
+- Preserve existing Blender mesh, camera, content, and Pinia contracts.
 
 ## Component map
 

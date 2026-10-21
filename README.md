@@ -22,7 +22,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Portfolio copy lives in `content/portfolio.ts`. Shared room state lives in `stores/scene.ts`. Read [the project plan](PORTFOLIO_PLAN.md) before changing Blender mesh names, camera contracts, or scene state.
+Portfolio copy lives in `content/portfolio.ts`. Shared room state lives in `stores/scene.ts`. Preserve existing Blender mesh names, authored cameras, content types and scene state when making changes.
 
 ## Check and build
 
@@ -43,6 +43,8 @@ PORTFOLIO_E2E_STATIC=1 PORTFOLIO_E2E_PORT=3102 pnpm test:e2e --workers=1
 
 The **Publish portfolio to GitHub Pages** workflow runs manually from GitHub Actions on the default branch of `davodaslanifakor/davodaslanifakor.github.io`. It checks the project, tests the static site in Chromium and WebKit, and deploys only `.output/public`.
 
-For the initial migration, repository history, legacy URLs, and rollback steps, see [the launch guide](docs/GITHUB_PAGES_LAUNCH.md). The setup targets the account site at `/`; hosting under a project subdirectory requires an asset-path review.
+In the repository's **Settings → Pages**, select **GitHub Actions** as the publishing source. Run the publishing workflow from the **Actions** tab after merging a verified update. The setup targets the account site at `/`; hosting under a project subdirectory requires an asset-path review.
+
+The original demo history is retained. Commit `660c2e1fb229ddd82fdd5f5ea3b63873c919a99a` records the legacy site before migration. A rollback can redeploy an earlier verified artifact or restore that source on a recovery branch.
 
 Legacy demo assets in `public/` are preserved byte-for-byte. Their source revision and checksums are recorded in `tools/pages/legacy-manifest.json`; `pnpm verify:pages` checks them before publishing.
