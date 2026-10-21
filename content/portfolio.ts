@@ -421,6 +421,26 @@ export const favouriteMusic: MusicTrack[] = [
   { id: 'light-playlist', title: 'Light', artist: 'Spotify', spotifyUrl: 'https://open.spotify.com/playlist/6RgbkiGSEMtH5lYyGfrggE', note: both('My listening shelf.', 'قفسهٔ شنیدنی‌های من.') },
 ]
 
+/** Artwork and credential details from David's original certificate PDF. */
+export const vueCertificate = {
+  title: both('Vue.js certification', 'گواهی Vue.js'),
+  qualification: both('Vue.js Developer Level I', 'توسعه‌دهندهٔ Vue.js — سطح یک'),
+  awardedTo: 'Davoud Aslani Fakour',
+  date: both('11 January 2024', '۱۱ ژانویهٔ ۲۰۲۴'),
+  number: 'CMVD-000351',
+  image: '/images/vue-certificate.jpg',
+  width: 2048,
+  height: 1449,
+  pdf: '/certificates/vue-developer-level-1.pdf',
+  verifyUrl: 'https://certificates.dev/c/9b113c4b-9c21-4e60-a1cc-56ba5fb54122',
+  verifyLabel: both('Verify certificate', 'بررسی اعتبار گواهی'),
+  downloadLabel: both('Download certificate', 'دریافت گواهی'),
+  imageAlt: both(
+    'Vue.js Developer Level I certificate awarded to Davoud Aslani Fakour on 11 January 2024. Certificate number CMVD-000351.',
+    'گواهی توسعه‌دهندهٔ Vue.js سطح یک، اعطاشده به داوود اصلانی فکور در ۱۱ ژانویهٔ ۲۰۲۴. شمارهٔ گواهی CMVD-000351.',
+  ),
+}
+
 export const sceneObjects: SceneObject[] = [
   { id: 'library_about', mesh: 'int_library_about', camera: 'cam_library_about', label: text('About me'), action: 'modal', contentRef: 'about' },
   { id: 'library_story', mesh: 'int_library_story', camera: 'cam_library_story', label: both('Life story', 'داستان زندگی'), action: 'modal', contentRef: 'story' },
@@ -438,6 +458,7 @@ export const sceneObjects: SceneObject[] = [
   { id: 'speakers', mesh: 'int_speakers', camera: 'cam_speakers', label: both('Music shelf', 'قفسهٔ موسیقی'), action: 'modal', contentRef: 'music' },
   { id: 'world_clocks', mesh: 'int_world_clocks', camera: 'cam_world_clocks', label: text('World clocks'), action: 'modal', contentRef: 'world-clocks' },
   { id: 'phone', mesh: 'int_phone', camera: 'cam_phone', label: text('Mobile preview'), action: 'modal', contentRef: 'mobile-preview' },
+  { id: 'certificate', mesh: 'int_certificate', camera: 'cam_certificate', label: vueCertificate.title, action: 'modal', contentRef: 'certificate' },
 ]
 
 export interface ScreenCity {
