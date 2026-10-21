@@ -18,19 +18,21 @@ function keyboard(event: KeyboardEvent) {
     if (!props.disabled && !event.repeat) emit('type', event.key, event.code)
   }
 }
-onMounted(() => input.value?.focus({ preventScroll: true }))
+function focus() { input.value?.focus({ preventScroll: true }) }
+onMounted(focus)
 </script>
 
 <template>
-  <label class="desk-typing">
-    <span>{{ localize(copy.typeHere, props.locale) }}</span>
-    <input ref="input" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" :spellcheck="false" :disabled="props.disabled" :aria-label="localize(copy.typeHere, props.locale)" :placeholder="localize(copy.typePlaceholder, props.locale)" @keydown="keyboard" @input="!composing && consume()" @compositionstart="composing = true" @compositionend="composing = false; consume()">
-  </label>
+  <div class="desk-typing">
+    <button type="button" :disabled="props.disabled" @click="focus">{{ localize(copy.typeHere, props.locale) }}</button>
+    <input ref="input" class="sr-only" tabindex="-1" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" :spellcheck="false" :disabled="props.disabled" :aria-label="localize(copy.typeHere, props.locale)" @keydown="keyboard" @input="!composing && consume()" @compositionstart="composing = true" @compositionend="composing = false; consume()">
+  </div>
 </template>
 
 <style scoped>
-.desk-typing { display: flex; align-items: center; gap: .6rem; flex: 1; min-width: 12rem; font: .72rem/1.4 var(--font-display); color: #f2d77d; }
-.desk-typing input { min-width: 0; width: 100%; max-width: 19rem; min-height: 2.75rem; box-sizing: border-box; border: 1px solid #f2d77d80; border-radius: .5rem; background: #0d1915; color: #fff4cf; padding: .45rem .7rem; font: .9rem var(--font-display); }
-.desk-typing input:focus-visible { outline: 2px solid #f2d77d; outline-offset: 2px; }
-@media (max-width: 700px) { .desk-typing { flex-basis: 100%; } .desk-typing input { max-width: none; } }
+.desk-typing { position: relative; }
+.desk-typing button { min-height: 2.75rem; border: 1px solid #ffffff24; border-radius: .5rem; background: #ffffff08; color: #eeeedd; padding: .35rem .65rem; font: .72rem/1.2 var(--font-display); cursor: pointer; }
+.desk-typing button:hover:not(:disabled) { background: #ffffff15; }
+.desk-typing button:disabled { opacity: .42; cursor: default; }
+.desk-typing:focus-within button { outline: 2px solid #f2d77d; outline-offset: 3px; }
 </style>
