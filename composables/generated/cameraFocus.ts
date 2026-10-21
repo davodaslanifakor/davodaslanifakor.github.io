@@ -7,6 +7,7 @@ export const ROOM_BOUNDS = [[-2.0, 0.0, -0.9], [2.0, 2.7, 2.0999999]] as const
 export const CAMERA_FOCUS_POINTS: readonly CameraFocusPoint[] = [
   { name: 'cam_bugjar', position: new Vector3(0.53, 0.96, 0.32), target: new Vector3(0.53, 0.88758, -0.1145195) },
   { name: 'cam_cards', position: new Vector3(-0.47, 0.823, 0.18), target: new Vector3(-0.47, 0.7970276, 0.0252946) },
+  { name: 'cam_certificate', position: new Vector3(1.66, 0.6436422, 0.6629288), target: new Vector3(1.65, 0.5636423, -0.1170712) },
   { name: 'cam_clock', position: new Vector3(0.907, 1.0, 0.24), target: new Vector3(0.907, 0.8820608, -0.0548483) },
   { name: 'cam_elephant', position: new Vector3(0.41, 0.88, 0.23), target: new Vector3(0.5273349, 0.7822208, -0.0095588) },
   { name: 'cam_monitor', position: new Vector3(0.02, 1.11, 0.48), target: new Vector3(0.02, 0.9934444, 0.0994801) },

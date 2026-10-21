@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { caseStudies, localize, profile, roles, skillGroups, skills, ui, writing } from '~/content/portfolio'
+import { caseStudies, localize, profile, roles, skillGroups, skills, ui, vueCertificate, writing } from '~/content/portfolio'
 import type { Locale } from '~/content/portfolio'
 import WorldClocksPanel from './WorldClocksPanel.vue'
 import MobilePreview from '~/components/phone/MobilePreview.vue'
 import LifeStoryContent from '~/components/story/LifeStoryContent.vue'
 import ArticleList from '~/components/story/ArticleList.vue'
+import CertificateContent from './CertificateContent.vue'
 
 const props = defineProps<{
   contentRef: string
@@ -27,6 +28,7 @@ const title = computed(() => {
   if (props.contentRef === 'contact') return localize(ui.contact, props.locale)
   if (props.contentRef === 'world-clocks') return localize(ui.worldClocksTitle, props.locale)
   if (props.contentRef === 'mobile-preview') return localize(ui.mobilePreviewTitle, props.locale)
+  if (props.contentRef === 'certificate') return localize(vueCertificate.title, props.locale)
   return activeCase.value ? localize(activeCase.value.title, props.locale) : props.contentRef
 })
 
@@ -46,7 +48,7 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
 
 <template>
   <div class="backdrop" role="presentation" @mousedown.self="emit('close')">
-    <div ref="dialog" class="modal" role="dialog" aria-modal="true" :aria-label="title" @keydown="onKeydown">
+    <div ref="dialog" class="modal" :class="{ 'modal--certificate': props.contentRef === 'certificate' }" role="dialog" aria-modal="true" :aria-label="title" @keydown="onKeydown">
       <header class="modal-header">
         <p class="modal-kicker">{{ localize(ui.roomContext, props.locale) }} / {{ props.contentRef }}</p>
         <button class="close" type="button" @click="emit('close')">{{ localize(ui.close, props.locale) }} <span aria-hidden="true">×</span></button>
@@ -80,6 +82,8 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
         </div>
 
         <LifeStoryContent v-else-if="props.contentRef === 'story'" :locale="props.locale" />
+
+        <CertificateContent v-else-if="props.contentRef === 'certificate'" :locale="props.locale" />
 
         <ol v-else-if="props.contentRef === 'timeline'" class="modal-list">
           <li v-for="role in roles" :key="role.id">
@@ -148,6 +152,8 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
 .close { border: 0; background: transparent; color: var(--ink); font: 0.76rem/1 var(--font-mono); }
 .modal-body { padding: clamp(1.5rem, 5vw, 4.5rem); }
 .modal-title { max-width: 52rem; margin: 0 0 3.5rem; font: clamp(2.8rem, 7vw, 6rem)/0.9 var(--font-display); letter-spacing: -0.055em; }
+.modal--certificate .modal-body { padding: clamp(1rem, 3vw, 2rem); }
+.modal--certificate .modal-title { margin-bottom: 1.5rem; font-size: clamp(1.8rem, 4vw, 2.75rem); }
 .modal-list { margin: 0; padding: 0; list-style: none; }
 .modal-list li { display: grid; grid-template-columns: minmax(8rem,.55fr) 1fr 1.5fr; gap: 1rem; border-top: 1px solid var(--line); padding: 1.1rem 0; }
 .modal-list strong { color: var(--acid); font-size: 0.8rem; }

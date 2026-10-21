@@ -1,15 +1,16 @@
 {
   "checkpoint": "tools/blender/review/reference-restyle/room-light-dark.blend",
-  "checkpointSha256": "6a403198ccd61e889c29c78d25767a6743d0a96012ff6ed75029ab697745e40d",
+  "checkpointSha256": "28d5f1ecb301facdaf263e983e72becfe4b8fb108f06136c7222be9024135d58",
   "scene": "Room Light",
-  "bytes": 1332664,
-  "embeddedImageBytes": 121820,
+  "bytes": 1661996,
+  "embeddedImageBytes": 439545,
   "externalImageBytes": 0,
   "compressed": true,
   "keycaps": 78,
   "sourceObjects": [
     "cam_bugjar",
     "cam_cards",
+    "cam_certificate",
     "cam_clock",
     "cam_elephant",
     "cam_monitor",
@@ -25,6 +26,13 @@
     "int_bugjar",
     "int_cards",
     "int_cards__2",
+    "int_certificate",
+    "int_certificate__1",
+    "int_certificate__2",
+    "int_certificate__3",
+    "int_certificate__4",
+    "int_certificate__5",
+    "int_certificate__6",
     "int_clock",
     "int_elephant",
     "int_elephant__2",
@@ -46,6 +54,7 @@
     "int_world_clocks__4",
     "root_bugjar",
     "root_cards",
+    "root_certificate",
     "root_clock",
     "root_elephant",
     "root_laptop",
@@ -801,7 +810,21 @@
     "static_world_clock_stockholm_minute_pivot",
     "static_world_clock_stockholm_plaque",
     "static_world_clock_stockholm_second",
-    "static_world_clock_stockholm_second_pivot"
+    "static_world_clock_stockholm_second_pivot",
+    "target_bugjar",
+    "target_cards",
+    "target_certificate",
+    "target_clock",
+    "target_elephant",
+    "target_monitor",
+    "target_paratrooper",
+    "target_phone",
+    "target_robot",
+    "target_screen_left",
+    "target_screen_right",
+    "target_speakers",
+    "target_start",
+    "target_world_clocks"
   ],
   "omittedObjects": [
     "Room Review Camera",
@@ -1031,7 +1054,8 @@
     "static_style_light_shelf_5",
     "static_style_light_wall_top",
     "static_style_light_wall_wash_-1.565",
-    "static_style_light_wall_wash_1.225"
+    "static_style_light_wall_wash_1.225",
+    "target_plush"
   ],
   "cameraFocus": [
     {
@@ -1058,6 +1082,19 @@
         -0.47,
         0.7970276,
         0.0252946
+      ]
+    },
+    {
+      "name": "cam_certificate",
+      "position": [
+        1.66,
+        0.6436422,
+        0.6629288
+      ],
+      "target": [
+        1.65,
+        0.5636423,
+        -0.1170712
       ]
     },
     {
@@ -1229,6 +1266,6 @@
       2.0999999
     ]
   ],
-  "exportedNodes": 716,
-  "exportedMeshes": 671
+  "exportedNodes": 739,
+  "exportedMeshes": 678
 }
