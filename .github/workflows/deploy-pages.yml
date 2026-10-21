@@ -1,0 +1,57 @@
+name: Publish portfolio to GitHub Pages
+
+# The first cutover is deliberate. Add a push trigger after approving the launch.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.repository == 'davodaslanifakor/davodaslanifakor.github.io' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      NUXT_PUBLIC_SITE_URL: https://davodaslanifakor.github.io
+      NUXT_APP_BASE_URL: /
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test --maxWorkers=4
+      - run: pnpm generate
+      - run: pnpm verify:pages
+      - run: pnpm exec playwright install --with-deps chromium webkit
+      - run: pnpm test:e2e --workers=1
+        env:
+          PORTFOLIO_E2E_STATIC: '1'
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .output/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4

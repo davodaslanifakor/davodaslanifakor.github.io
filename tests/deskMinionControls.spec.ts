@@ -1,0 +1,65 @@
+import { flushPromises, mount } from '@vue/test-utils'
+import { effectScope } from 'vue'
+import { describe, expect, it } from 'vitest'
+import DeskMinionControls from '../components/games/DeskMinionControls.vue'
+import { useDeskMinion } from '../composables/useDeskMinion'
+import { measureDeskWorld } from '../utils/deskPlayground'
+
+describe('desk Minion controls', () => {
+  it('handles held keyboard input, touch release, actions, blur and focus without stealing focus on every frame', async () => {
+    const scope = effectScope(), world = measureDeskWorld(null)
+    const game = scope.run(() => useDeskMinion({ character: () => 'robot', world: () => world, reducedMotion: () => true, ready: () => true }))!
+    const wrapper = mount(DeskMinionControls, { attachTo: document.body, props: { state: game.state.value, locale: 'en', ready: true, soundOn: true, audioUnavailable: false } })
+    try {
+      await flushPromises()
+      expect(document.activeElement).toBe(wrapper.element)
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      await wrapper.trigger('keyup', { key: 'ArrowRight' })
+      expect(wrapper.emitted('move')).toEqual([['right', true], ['right', false]])
+      await wrapper.trigger('keydown', { key: ' ' })
+      expect(wrapper.emitted('jump')).toEqual([[]])
+      await wrapper.trigger('keydown', { key: 'e' })
+      expect(wrapper.emitted('interact')).toEqual([[]])
+      const button = wrapper.get('[aria-label="Move left"]')
+      ;(button.element as HTMLButtonElement).focus()
+      await wrapper.setProps({ state: { ...game.state.value, landing: 0.2 } })
+      await flushPromises()
+      expect(document.activeElement).toBe(button.element)
+      await button.trigger('pointerdown', { pointerId: 1 })
+      await button.trigger('pointercancel', { pointerId: 1 })
+      expect(wrapper.emitted('move')?.slice(-2)).toEqual([['left', true], ['left', false]])
+      expect(wrapper.find('[aria-label="Walk to MacBook and turn it off"]').exists()).toBe(false)
+      await wrapper.trigger('keydown', { key: 'k' })
+      expect(wrapper.emitted('action')).toBeUndefined()
+      await wrapper.setProps({ state: { ...game.state.value, phase: 'acting', action: 'mouse', actionTime: 1.4 } })
+      await wrapper.get('[aria-label="Stop action"]').trigger('click')
+      expect(wrapper.emitted('cancel')).toEqual([[]])
+      await wrapper.trigger('keydown', { key: 'x' })
+      expect(wrapper.emitted('cancel')).toHaveLength(2)
+      await wrapper.setProps({ state: { ...game.state.value, typing: true } })
+      await flushPromises()
+      const input = wrapper.get('input')
+      expect(document.activeElement).toBe(input.element)
+      await input.trigger('keydown', { key: 'w', code: 'KeyW' })
+      await input.trigger('keydown', { key: '!', code: 'Digit1', shiftKey: true })
+      await input.trigger('keydown', { key: 'Backspace', code: 'Backspace' })
+      expect(wrapper.emitted('type')).toEqual([['w', 'KeyW'], ['!', 'Digit1'], ['Backspace', 'Backspace']])
+      expect(wrapper.emitted('move')).toHaveLength(4)
+      await input.trigger('keydown', { key: 'Escape' })
+      expect(wrapper.emitted('cancel')).toHaveLength(3)
+      await wrapper.setProps({ state: game.state.value })
+      await flushPromises()
+      expect(document.activeElement).toBe(wrapper.element)
+      window.dispatchEvent(new Event('blur'))
+      expect(wrapper.emitted('clear')?.length).toBeGreaterThan(0)
+      await wrapper.setProps({ state: { ...game.state.value, phase: 'paused' } })
+      await flushPromises()
+      expect(document.activeElement?.textContent).toBe('Resume')
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('move')).toHaveLength(4)
+      await wrapper.setProps({ locale: 'fa', soundOn: false })
+      expect(wrapper.attributes('dir')).toBe('rtl')
+      expect(wrapper.get('[aria-pressed]').attributes('aria-pressed')).toBe('false')
+    } finally { wrapper.unmount(); scope.stop() }
+  })
+})

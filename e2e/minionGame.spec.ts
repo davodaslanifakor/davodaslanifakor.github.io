@@ -1,0 +1,87 @@
+import { expect, test } from '@playwright/test'
+
+import { PerspectiveCamera, Vector3 } from 'three'
+import type { Page } from '@playwright/test'
+import { deskModel } from '../tests/helpers/deskModel'
+import { deskMinionFocus, measureDeskWorld } from '../utils/deskPlayground'
+import type { Point3 } from '../utils/deskPlayground'
+
+for (const mobile of [false, true]) {
+  test(`Minion discovers nearby actions and types on physical keys (${mobile ? 'mobile' : 'desktop'})`, async ({ page }) => {
+    test.setTimeout(90000)
+    if (mobile) await page.setViewportSize({ width: 390, height: 844 })
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto('/')
+    await expect(page.locator('.room-page')).toHaveAttribute('data-ready', 'true')
+    const trigger = page.locator('[data-object-id="paratrooper"]')
+    await trigger.press('Enter')
+    const controls = page.getByRole('region', { name: 'A little desk mischief' })
+    await expect(controls).toBeVisible()
+    await expect(controls.getByRole('button', { name: 'Move left', exact: true })).toBeEnabled()
+    await expect(controls.getByRole('button', { name: 'Keyboard mischief' })).toHaveCount(0)
+    const asset = deskModel(), world = measureDeskWorld(asset.model)
+    const clickSpot = async (page: Page, point: Point3) => {
+      const bounds = await page.locator('.room-scene canvas').first().boundingBox()
+      if (!bounds) throw new Error('Missing scene canvas')
+      const frame = deskMinionFocus(world, bounds.width / bounds.height, bounds.height, world.front, true)
+      const camera = new PerspectiveCamera(38, bounds.width / bounds.height, 0.05, 50)
+      camera.position.copy(frame.position); camera.lookAt(frame.target); camera.updateMatrixWorld()
+      const screen = new Vector3(point.x, point.y, point.z).project(camera)
+      await page.mouse.click(bounds.x + (screen.x + 1) * bounds.width / 2, bounds.y + (1 - screen.y) * bounds.height / 2)
+    }
+    try {
+      await clickSpot(page, world.keyboard!)
+      const hint = page.locator('.desk-hint')
+      await expect(hint).toBeVisible({ timeout: 20000 })
+      await expect(hint).toContainText('Play the keyboard')
+      await hint.getByRole('button').click()
+      await expect(controls).toHaveAttribute('data-typing', 'true')
+      const input = controls.getByRole('textbox', { name: 'Type to hop' })
+      await expect(input).toBeFocused()
+      await input.pressSequentially('Hello!')
+      await expect(controls).toHaveAttribute('data-text', 'Hello!', { timeout: 10000 })
+      await input.press('Backspace')
+      await expect(controls).toHaveAttribute('data-text', 'Hello')
+      await input.press('Escape')
+      await expect(controls).toHaveAttribute('data-typing', 'false')
+      await expect(controls).toBeVisible()
+      await clickSpot(page, world.mouse!)
+      await expect(hint).toContainText('Push & ride mouse', { timeout: 15000 })
+      await hint.getByRole('button').click()
+      await expect(controls).toHaveAttribute('data-phase', 'acting', { timeout: 10000 })
+      await expect(controls).toHaveAttribute('data-phase', 'roaming', { timeout: 10000 })
+      expect(Number(await controls.getAttribute('data-mouse-offset'))).toBeGreaterThan(0.1)
+      await clickSpot(page, world.speaker!)
+      await expect(hint).toContainText('Test the bass', { timeout: 15000 })
+      await hint.getByRole('button').click()
+      await expect(controls).toHaveAttribute('data-phase', 'acting', { timeout: 10000 })
+      await expect(controls).toContainText('Sound check complete', { timeout: 10000 })
+      await controls.getByRole('button', { name: 'Reset', exact: true }).click()
+      await expect(controls).toHaveAttribute('data-mouse-offset', '0')
+      await expect(controls).toHaveAttribute('data-text', '')
+      await page.keyboard.press('Escape')
+      await expect(controls).toBeHidden()
+      await expect(trigger).toBeFocused()
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(mobile ? 390 : 1280)
+    } finally { asset.dispose() }
+  })
+}
+
+test('Minion live movement, jump and pause', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+  await expect(page.locator('.room-page')).toHaveAttribute('data-ready', 'true')
+  await page.locator('[data-object-id="cards"]').press('Enter')
+  const controls = page.getByRole('region', { name: 'A little desk mischief' })
+  await expect(controls).toHaveAttribute('data-phase', 'roaming', { timeout: 10000 })
+  await controls.focus()
+  await page.keyboard.down('ArrowRight')
+  await page.keyboard.press('Space')
+  await expect(controls).toHaveAttribute('data-grounded', 'false')
+  await page.keyboard.up('ArrowRight')
+  await expect(controls).toHaveAttribute('data-grounded', 'true')
+  await controls.getByRole('button', { name: 'Pause', exact: true }).click()
+  await expect(controls).toHaveAttribute('data-phase', 'paused')
+  await page.keyboard.press('Escape')
+  await expect(controls).toBeHidden()
+})

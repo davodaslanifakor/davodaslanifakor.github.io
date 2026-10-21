@@ -1,0 +1,49 @@
+{
+  "name": "editors-room-portfolio",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "generate": "nuxt build --preset github_pages",
+    "verify:pages": "node tools/pages/verify-output.mjs",
+    "build:model": "node --experimental-strip-types tools/blender/export_room_content.mjs && /Applications/Blender.app/Contents/MacOS/Blender --background --python tools/blender/build_room.py",
+    "dev": "nuxt dev",
+    "lint": "eslint .",
+    "postinstall": "nuxt prepare",
+    "preview": "nuxt preview",
+    "preview:model": "node --experimental-strip-types tools/blender/export_room_content.mjs && /Applications/Blender.app/Contents/MacOS/Blender --background --python tools/blender/build_room.py -- --preview",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "typecheck": "nuxt typecheck",
+    "export:room": "/Applications/Blender.app/Contents/MacOS/Blender --background tools/blender/review/reference-restyle/room-light-dark.blend --python-exit-code 1 --python tools/blender/export_review_room.py"
+  },
+  "dependencies": {
+    "@nuxtjs/i18n": "^10.6.0",
+    "@pinia/nuxt": "^1.0.2",
+    "@tresjs/cientos": "^5.9.0",
+    "@tresjs/nuxt": "^5.7.0",
+    "gsap": "^3.15.0",
+    "howler": "^2.2.4",
+    "nuxt": "^4.5.2",
+    "pinia": "^4.0.3",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.17.0",
+    "@nuxt/test-utils": "^4.3.2",
+    "@playwright/test": "^1.63.0",
+    "@types/howler": "^2.2.13",
+    "@types/three": "^0.186.0",
+    "@vue/test-utils": "^2.5.0",
+    "eslint": "^10.10.0",
+    "happy-dom": "^20.14.5",
+    "prettier": "^3.9.6",
+    "typescript": "^6.0.2",
+    "vitest": "^5.0.0",
+    "vue-tsc": "^3.3.11"
+  }
+}
