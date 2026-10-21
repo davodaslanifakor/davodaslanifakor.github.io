@@ -1,3 +1,4 @@
+import { isMesh } from '~/utils/threeGuards'
 import { BoxGeometry, CatmullRomCurve3, CircleGeometry, Group, Mesh, MeshBasicMaterial, MeshStandardMaterial, PointLight, RingGeometry, TubeGeometry, Vector3 } from 'three'
 import type { BufferGeometry, Material, Object3D } from 'three'
 import { deskHeightAt, worldWithMouse } from './deskPlayground'
@@ -63,10 +64,10 @@ export function createDeskMinion(model: Object3D, character: MinionId, world: De
   const screens = new Map<Mesh, { original: Material | Material[]; laptop: boolean }>()
   for (const name of ['int_monitor_screen', 'int_screen_left', 'int_screen_right']) {
     const screen = model.getObjectByName(name)
-    if (screen instanceof Mesh) screens.set(screen, { original: screen.material, laptop: name === 'int_monitor_screen' })
+    if (isMesh(screen)) screens.set(screen, { original: screen.material, laptop: name === 'int_monitor_screen' })
   }
   const sensor = model.getObjectByName('static_mac_touch_id_sensor.001')
-  const sensorTarget = sensor instanceof Mesh ? sensor : null
+  const sensorTarget = isMesh(sensor) ? sensor : null
   const previousAction = sensorTarget?.userData.deskAction
   if (sensorTarget) sensorTarget.userData.deskAction = 'laptop'
   let pull = 0

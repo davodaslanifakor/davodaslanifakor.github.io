@@ -1,4 +1,5 @@
-import { Box3, Matrix4, Mesh, Vector3 } from 'three'
+import { isMesh } from '~/utils/threeGuards'
+import { Box3, Matrix4, Vector3 } from 'three'
 import type { Object3D, PerspectiveCamera } from 'three'
 
 export interface ScreenPoint { x: number; y: number }
@@ -11,7 +12,7 @@ export function laptopLidCorners(model: Object3D): { root: Object3D; points: Vec
   const inverse = new Matrix4().copy(root.matrixWorld).invert()
   const bounds = new Box3()
   root.traverse(child => {
-    if (!(child instanceof Mesh) || !child.visible) return
+    if (!isMesh(child) || !child.visible) return
     child.geometry.computeBoundingBox()
     if (!child.geometry.boundingBox) return
     const transform = new Matrix4().multiplyMatrices(inverse, child.matrixWorld)

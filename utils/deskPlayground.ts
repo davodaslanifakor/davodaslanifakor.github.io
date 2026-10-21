@@ -1,5 +1,6 @@
-import { Box3, Mesh, Raycaster, Vector3 } from 'three'
-import type { Object3D } from 'three'
+import { isMesh } from '~/utils/threeGuards'
+import { Box3, Raycaster, Vector3 } from 'three'
+import type { Object3D, Mesh } from 'three'
 import { keyboardLayout, keyboardParts } from './deskKeyboard'
 
 export const MINION_IDS = ['paratrooper', 'cards', 'robot'] as const
@@ -51,7 +52,7 @@ export function measureDeskWorld(model: Object3D | null, character: MinionId = '
     const box = new Box3().setFromObject(object)
     if (box.isEmpty()) continue
     surfaces.push({ id: name, bounds: box, mesh: object, walkable: !['static_laptop_bezel', 'static_style_monitor_stem', 'static_subwoofer'].includes(name) })
-    object.traverse(child => { if (child instanceof Mesh) pickTargets.push(child) })
+    object.traverse(child => { if (isMesh(child)) pickTargets.push(child) })
   }
   // Keep the other collectibles and upright objects solid while this toy is roaming.
   for (const name of ['root_phone', 'root_clock', 'root_bugjar', 'root_elephant', ...MINION_IDS.filter(id => id !== character).map(id => `root_${id}`)]) {
@@ -60,7 +61,7 @@ export function measureDeskWorld(model: Object3D | null, character: MinionId = '
     const box = new Box3().setFromObject(object)
     if (!box.isEmpty()) surfaces.push({ id: name, bounds: box, mesh: object, walkable: false })
   }
-  model?.getObjectByName('runtime_subwoofer_detail')?.traverse(child => { if (child instanceof Mesh && child.userData.deskAction === 'speaker' && !child.name.includes('_wave_')) pickTargets.push(child) })
+  model?.getObjectByName('runtime_subwoofer_detail')?.traverse(child => { if (isMesh(child) && child.userData.deskAction === 'speaker' && !child.name.includes('_wave_')) pickTargets.push(child) })
   const source = model?.getObjectByName(`root_${character}`)?.getWorldPosition(new Vector3()) ?? new Vector3(-0.75, desk.max.y + 0.019, 0.03)
   const front = { x: Math.max(desk.min.x + 0.08, Math.min(desk.max.x - 0.08, source.x)), y: desk.max.y, z: desk.max.z - 0.075 }
   const sensor = model?.getObjectByName('static_mac_touch_id_sensor.001')?.getWorldPosition(new Vector3())
@@ -71,7 +72,7 @@ export function measureDeskWorld(model: Object3D | null, character: MinionId = '
   const base = bounds('static_style_monitor_base')
   const monitorAnchor = base ? point(base.getCenter(new Vector3()).setY(desk.max.y + 0.008)) : { x: -0.25, y: desk.max.y + 0.008, z: -0.33 }
   const keyMesh = model?.getObjectByName('static_laptop_keycaps')
-  const keys = keyMesh instanceof Mesh ? keyboardParts(keyMesh).map(part => point(part.center.clone().applyMatrix4(keyMesh.matrixWorld))) : []
+  const keys = isMesh(keyMesh) ? keyboardParts(keyMesh).map(part => point(part.center.clone().applyMatrix4(keyMesh.matrixWorld))) : []
   const keyboardTarget = keyboard ? { x: (keyboard.min.x + keyboard.max.x) / 2, y: keyboard.max.y, z: keyboard.max.z - 0.017 } : null
   const mouseTarget = mouse ? { x: mouse.min.x - 0.028, y: desk.max.y + 0.004, z: (mouse.min.z + mouse.max.z) / 2 } : null
   const speakerKnob = model?.getObjectByName('static_subwoofer_knob')?.getWorldPosition(new Vector3())

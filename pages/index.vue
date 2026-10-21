@@ -4,6 +4,7 @@ import type { SceneObject } from '~/content/portfolio'
 import { localize, profile, sceneObjects, ui } from '~/content/portfolio'
 import MiniEditor from '~/components/editor/MiniEditor.vue'
 import RoomScene from '~/components/scene/RoomScene.vue'
+import RoomRecovery from '~/components/scene/RoomRecovery.vue'
 import AccessibleObjectNav from '~/components/ui/AccessibleObjectNav.vue'
 import ObjectModal from '~/components/ui/ObjectModal.vue'
 import SceneHud from '~/components/ui/SceneHud.vue'
@@ -148,27 +149,30 @@ watch(shouldUseCvFallback, (shouldFallback) => {
     </section>
 
     <ClientOnly>
-      <RoomScene
-        :objects="sceneObjects"
-        :locale="locale"
-        :focused-id="focusedId"
-        :hovered-id="hoveredId"
-        :sound-on="soundOn"
-        :screen-theme="screenTheme"
-        :now-playing="nowPlaying"
-        :music-playback="musicPlayback"
-        :editor-active="mode === 'editor'"
-        :clock-epoch="epochMs"
-        :reduced-motion="reducedMotion"
-        :view-reset-count="viewResetCount"
-        @activate="activate"
-        @hover="setHovered"
-        @close-editor="closeLayer"
-        @close-music="closeLayer"
-        @close-game="closeLayer"
-        @select-music="scene.setNowPlaying($event)"
-        @music-playback="scene.setMusicPlayback($event)"
-      />
+      <RoomRecovery v-slot="{ fail }" :locale="locale" @retry="resetView">
+        <RoomScene
+          :objects="sceneObjects"
+          :locale="locale"
+          :focused-id="focusedId"
+          :hovered-id="hoveredId"
+          :sound-on="soundOn"
+          :screen-theme="screenTheme"
+          :now-playing="nowPlaying"
+          :music-playback="musicPlayback"
+          :editor-active="mode === 'editor'"
+          :clock-epoch="epochMs"
+          :reduced-motion="reducedMotion"
+          :view-reset-count="viewResetCount"
+          @activate="activate"
+          @hover="setHovered"
+          @close-editor="closeLayer"
+          @close-music="closeLayer"
+          @close-game="closeLayer"
+          @select-music="scene.setNowPlaying($event)"
+          @music-playback="scene.setMusicPlayback($event)"
+          @failed="fail"
+        />
+      </RoomRecovery>
       <template #fallback>
         <div class="scene-fallback" aria-hidden="true" />
       </template>

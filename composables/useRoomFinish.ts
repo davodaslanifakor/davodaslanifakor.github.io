@@ -1,6 +1,7 @@
+import { isMesh, isMeshStandardMaterial, isMeshPhysicalMaterial, isWebGLRenderer } from '~/utils/threeGuards'
 import { onScopeDispose } from 'vue'
-import { CanvasTexture, Mesh, MeshStandardMaterial, MeshPhysicalMaterial, PMREMGenerator, RepeatWrapping, WebGLRenderer } from 'three'
-import type { Material, Object3D, Scene, WebGLRenderTarget } from 'three'
+import { CanvasTexture, PMREMGenerator, RepeatWrapping } from 'three'
+import type { Material, Object3D, Scene, WebGLRenderTarget, Mesh, MeshStandardMaterial } from 'three'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import { createWallLightReveal } from '~/utils/wallLightReveal'
 import { createDeskMatBorder } from '~/utils/deskMatBorder'
@@ -57,7 +58,7 @@ export function useRoomFinish() {
     const clones = new Map<Material, Material>()
     const wallStrips: Mesh[] = []
     model.traverse((child) => {
-      if (!(child instanceof Mesh) || originals.has(child)) return
+      if (!isMesh(child) || originals.has(child)) return
       // The border is an independent effect; keep native mat/rim assets intact.
       if (child.name === 'static_desk_mat' || child.name === 'static_desk_mat_rim') {
         child.castShadow = true
@@ -77,7 +78,7 @@ export function useRoomFinish() {
         if (!independent) clones.set(original, material)
         materials.add(material)
         if (wallStrip) wallMaterials.add(material)
-        if (!(material instanceof MeshStandardMaterial)) return material
+        if (!isMeshStandardMaterial(material)) return material
         emissiveIntensity.set(material, material.emissiveIntensity)
         if (wallInset) material.color.set('#252b2f')
         // Keep the existing surface detail while refining the desk, floor and rug.
@@ -101,7 +102,7 @@ export function useRoomFinish() {
           material.bumpMap = fabric
           material.bumpScale = 0.00065
           material.roughness = 0.96
-          if (material instanceof MeshPhysicalMaterial) {
+          if (isMeshPhysicalMaterial(material)) {
             material.sheen = 0.32
             material.sheenColor.set('#b7b9ae')
             material.sheenRoughness = 0.8
@@ -122,7 +123,7 @@ export function useRoomFinish() {
   function applyLighting(environmentIntensity: number, ledIntensity: number, accents = 1, wallProgress = 1) {
     if (activeScene) activeScene.environmentIntensity = environmentIntensity
     for (const material of materials) {
-      if (!(material instanceof MeshStandardMaterial)) continue
+      if (!isMeshStandardMaterial(material)) continue
       const authoredLed = /style_(warm|shelf)_led/.test(material.name)
       material.emissiveIntensity = wallMaterials.has(material)
         ? (wallProgress > 0 ? ledIntensity : 0)
@@ -150,7 +151,7 @@ export function useRoomFinish() {
   }
 
   function lightStudio(context: { scene: { value: Scene }, renderer: { instance: unknown } }) {
-    if (!(context.renderer.instance instanceof WebGLRenderer)) return
+    if (!isWebGLRenderer(context.renderer.instance)) return
     environment?.dispose()
     const studio = new RoomEnvironment()
     const generator = new PMREMGenerator(context.renderer.instance)

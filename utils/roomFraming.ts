@@ -1,4 +1,5 @@
-import { Box3, Mesh, Vector3 } from 'three'
+import { isMesh } from '~/utils/threeGuards'
+import { Box3, Vector3 } from 'three'
 import type { Object3D } from 'three'
 
 const openingSubjects = ['int_', 'static_desk_', 'static_style_library_', 'static_style_shelf_', 'static_style_top_trailing_plant_']
@@ -8,7 +9,7 @@ export function roomFocusBounds(model: Object3D) {
   const bounds = new Box3()
   model.updateMatrixWorld(true)
   model.traverseVisible((object) => {
-    if (!(object instanceof Mesh)) return
+    if (!isMesh(object)) return
     if (openingSubjects.some(prefix => object.name.startsWith(prefix))) {
       bounds.union(new Box3().setFromObject(object))
     }

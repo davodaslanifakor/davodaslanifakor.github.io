@@ -1,6 +1,6 @@
+import { isMesh, isMeshBasicMaterial } from '~/utils/threeGuards'
 import { onScopeDispose, toRaw } from 'vue'
-import { Mesh, MeshBasicMaterial } from 'three'
-import type { Color, Object3D, Vector3 } from 'three'
+import type { Color, Object3D, Vector3, MeshBasicMaterial } from 'three'
 
 export const HOVER_OBJECT_IDS = ['paratrooper', 'robot', 'bugjar', 'cards', 'elephant', 'clock', 'library_about', 'library_story', 'library_career', 'library_contact'] as const
 
@@ -43,7 +43,7 @@ export function useHoverMotion(options: {
         const root = model?.getObjectByName(id.startsWith('library_') ? `root_library_frame_${id.slice(8)}` : `root_${id}`)
         if (!root) continue
         const mesh = root.getObjectByName(`int_${id}`)
-        const face = mesh instanceof Mesh && mesh.material instanceof MeshBasicMaterial ? mesh.material : undefined
+        const face = isMesh(mesh) && isMeshBasicMaterial(mesh.material) ? mesh.material : undefined
         targets.set(id, { root, scale: root.scale.clone(), factor: 1, from: 1, target: 1, started: time, face, faceColor: face?.color.clone() })
       }
     }

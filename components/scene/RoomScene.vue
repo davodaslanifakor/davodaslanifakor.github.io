@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { OrbitControls, useGLTF, useProgress } from '@tresjs/cientos'
+import { isMesh, isMeshStandardMaterial, isWebGLRenderer } from '~/utils/threeGuards'
+import { OrbitControls, useGLTF } from '@tresjs/cientos'
 import { computed, shallowRef, toRaw, useTemplateRef, watch, watchEffect } from 'vue'
-import { Box3, Color, Mesh, MeshStandardMaterial, ACESFilmicToneMapping, PCFShadowMap, SRGBColorSpace, Vector3 } from 'three'
-import type { Material, Object3D, PerspectiveCamera } from 'three'
+import { Box3, Color, ACESFilmicToneMapping, PCFShadowMap, SRGBColorSpace, Vector3 } from 'three'
+import type { Material, Object3D, PerspectiveCamera, Mesh } from 'three'
 import type { MusicPlayback, MusicPlaybackUpdate } from '~/utils/musicPlayback'
 import type { ScreenThemeId } from '~/utils/screenTheme'
 import type { Locale, SceneObject } from '~/content/portfolio'
@@ -25,6 +26,7 @@ import { LIBRARY_FOCUS_POINTS } from '~/utils/libraryFrames'
 import { libraryPortraitFocus } from '~/utils/libraryArtwork'
 import { usePhoneScreenTexture } from '~/composables/usePhoneScreenTexture'
 import { useWorldClocks } from '~/composables/useWorldClocks'
+import { bindRoomScreens } from '~/utils/roomScreens'
 import { getMonitorQuad } from '~/utils/monitorProjection'
 import MonitorMusicSurface from './MonitorMusicSurface.vue'
 import MonitorEditorSurface from './MonitorEditorSurface.vue'
@@ -63,6 +65,7 @@ interface Emits {
   selectMusic: [id: string | null]
   closeEditor: []
   closeGame: []
+  failed: [error: unknown]
 }
 
 const props = defineProps<Props>()
@@ -70,7 +73,19 @@ const emit = defineEmits<Emits>()
 
 const camera = useTemplateRef<PerspectiveCamera>('camera')
 const root = useTemplateRef<HTMLDivElement>('root')
-const surface = computed(() => root.value?.querySelector('canvas') ?? null)
+// The renderer can mount its canvas after the wrapper ref is populated.
+// Querying the DOM in a computed caches that initial null indefinitely.
+const surface = shallowRef<HTMLCanvasElement | null>(null)
+watch(surface, (canvas, _previous, cleanup) => {
+  if (!canvas) return
+  const contextLost = (event: Event) => {
+    event.preventDefault()
+    emit('failed', new Error('WebGL context lost'))
+  }
+  canvas.addEventListener('webglcontextlost', contextLost)
+  // Stop observing before Tres deliberately releases the context on teardown/HMR.
+  cleanup(() => canvas.removeEventListener('webglcontextlost', contextLost))
+}, { flush: 'post' })
 const localHoveredId = shallowRef<string | null>(null)
 const { pixelRatio, shadowsEnabled } = useQuality()
 const aspect = shallowRef(1.5)
@@ -153,6 +168,7 @@ function syncLighting() {
   applyLighting(lighting.value.environment, lighting.value.led, accents.value, lightProgress.value)
 }
 function readyStudio(context: Parameters<typeof lightStudio>[0]) {
+  if (isWebGLRenderer(context.renderer.instance)) surface.value = context.renderer.instance.domElement
   lightStudio(context)
   syncLighting()
   applyHighlight()
@@ -163,7 +179,9 @@ const { focus, isMoving, reducedMotion: motionReduced, reset } = useCameraRig({
 })
 
 const { state: gltf, isLoading } = useGLTF('/models/room.glb', { draco: true, decoderPath: '/draco/' })
-const { progress } = await useProgress()
+watch(isLoading, loading => {
+  if (!loading && !gltf.value) emit('failed', new Error('Room model failed to load'))
+})
 const { textures: screenTextures, build: buildScreens, updateTime: updateScreenTime } = useScreenTextures({
   theme: () => props.screenTheme,
   locale: () => props.locale,
@@ -221,7 +239,7 @@ function collectInteractive(root: Object3D) {
   const byObjectId = new Map<string, Mesh[]>()
 
   root.traverse((child) => {
-    if (!(child instanceof Mesh) || !child.visible || child.name.includes('static_subwoofer_detail_wave_')) return
+    if (!isMesh(child) || !child.visible || child.name.includes('static_subwoofer_detail_wave_')) return
     const meshName = resolveInteractiveMeshName(child)
     if (!meshName) return
 
@@ -232,7 +250,7 @@ function collectInteractive(root: Object3D) {
     // Static clock parts are pickable but retain their shared material finish.
     if (child.name.startsWith('int_')) {
       for (const material of toMaterials(child)) {
-        if (material instanceof MeshStandardMaterial) baseEmissive.set(material, material.emissive.clone())
+        if (isMeshStandardMaterial(material)) baseEmissive.set(material, material.emissive.clone())
       }
     }
 
@@ -264,7 +282,7 @@ function applyHighlight() {
     const active = lightPhase.value !== 'off' && (objectId === localHoveredId.value || objectId === props.hoveredId || objectId === props.focusedId)
     for (const mesh of meshes) {
       for (const material of toMaterials(mesh)) {
-        if (!(material instanceof MeshStandardMaterial)) continue
+        if (!isMeshStandardMaterial(material)) continue
         const base = baseEmissive.get(material)
         if (!base) continue
         // Screens are already emissive; adding to their glow would blow them out,
@@ -278,32 +296,15 @@ function applyHighlight() {
   }
 }
 
-/**
- * Paint the generated pixel art onto the screen meshes.
- *
- * The screens are emissive in the model, so the texture is applied as both map
- * and emissiveMap: without the emissive copy the art would be lit only by the
- * room lights and the screens would stop reading as light sources.
- */
 function applyScreenTextures(root: Object3D) {
-  root.traverse((child) => {
-    if (!(child instanceof Mesh)) return
-    const texture = child.name === 'int_phone__2' ? phoneScreenTexture : screenTextures.value.get(child.name)
-    if (!texture) return
-
-    for (const material of toMaterials(child)) {
-      if (!(material instanceof MeshStandardMaterial)) continue
-      material.map = texture
-      material.emissiveMap = texture
-      material.emissive.setRGB(1, 1, 1)
-      material.emissiveIntensity = accents.value
-      // Emit the artwork once, without adding diffuse lighting on top of it.
-      material.color.setRGB(0, 0, 0)
-      material.toneMapped = false
-      material.needsUpdate = true
-      baseEmissive.set(material, material.emissive.clone())
-    }
-  })
+  const textures = new Map(screenTextures.value)
+  for (const name of ['int_screen_left', 'int_screen_right', 'int_monitor_screen']) {
+    if (!textures.has(name)) throw new Error(`Screen artwork unavailable: ${name}`)
+  }
+  textures.set('int_phone__2', phoneScreenTexture)
+  for (const material of bindRoomScreens(root, textures, accents.value)) {
+    baseEmissive.set(material, material.emissive.clone())
+  }
 }
 
 watch(model, (scene) => {
@@ -311,7 +312,6 @@ watch(model, (scene) => {
   prepare(scene, props.locale)
   roomBounds.value = new Box3().setFromObject(scene)
   openingBounds.value = roomFocusBounds(scene)
-  preparedModel.value = scene
   const corners = ['int_screen_left', 'int_screen_right'].flatMap(name => getMonitorQuad(scene, name) ?? [])
   musicBounds.value = new Box3().setFromPoints(corners)
   collectInteractive(scene)
@@ -319,6 +319,8 @@ watch(model, (scene) => {
   applyScreenTextures(scene)
   syncLighting()
   applyHighlight()
+  // Never reveal the bare GLB before its surfaces and interactions are initialized.
+  preparedModel.value = scene
 }, { immediate: true })
 
 watch(() => props.locale, locale => updateLocale(locale))
@@ -403,6 +405,12 @@ let cameraTime = 0
 let minionActionAnchor: Point3 | null = null
 const minionLookAt = new Vector3()
 function animateInteractiveToy(time: number) {
+  try {
+    updateInteractiveToy(time)
+    animationFrame = requestAnimationFrame(animateInteractiveToy)
+  } catch (error) { emit('failed', error) }
+}
+function updateInteractiveToy(time: number) {
   joker.updateFrame(time, jokerLoaded.value && !isMoving.value, jokerObstacles.value)
   minion.updateFrame(time, !document.hidden)
   updateColors(colorMode.value, updateColorFrame(time), musicPulse.value, musicDrive.value, 0)
@@ -433,7 +441,6 @@ function animateInteractiveToy(time: number) {
   musicSurface.value?.updateFrame()
   updateHoverFrame(time)
   updateFrameHover(activeHover.value, time, props.reducedMotion)
-  animationFrame = requestAnimationFrame(animateInteractiveToy)
 }
 
 watch([aspect, viewportHeight, openingBounds, musicBounds, preparedModel], () => {
@@ -474,6 +481,7 @@ onBeforeUnmount(() => {
     :data-color-mode="colorMode"
     :data-color-motion="colorMotion"
     :data-music-playing="Boolean(props.musicPlayback?.playing)"
+    :data-render-ready="Boolean(preparedModel && surface)"
     :data-light-backdrop="illumination < 0.4 ? 'dark' : 'light'"
     :style="{ backgroundColor: lighting.background }"
   >
@@ -487,6 +495,7 @@ onBeforeUnmount(() => {
       :tone-mapping="toneMapping"
       :output-color-space="outputColorSpace"
       @ready="readyStudio"
+      @error="emit('failed', $event)"
     >
       <TresPerspectiveCamera
         ref="camera"
@@ -526,7 +535,7 @@ onBeforeUnmount(() => {
 
       <TresPointLight :position="wallLight" color="#ffc982" :intensity="lighting.wall" :distance="3" :decay="2" />
       <TresPointLight v-if="shadowsEnabled" :position="shelfLight" color="#ffd49b" :intensity="lighting.shelf" :distance="1.6" />
-      <primitive v-if="model" :object="model" />
+      <primitive v-if="preparedModel" :object="preparedModel" />
       <JokerAdventure
         v-if="jokerActive && model"
         :key="jokerGeneration"
@@ -608,7 +617,7 @@ onBeforeUnmount(() => {
       @close="emit('closeGame')"
     />
     <RoomLightControl
-      v-if="!props.focusedId && !props.editorActive"
+      v-if="preparedModel && !props.focusedId && !props.editorActive"
       :phase="lightPhase"
       :locale="props.locale"
       @activate="activateLights"
@@ -620,7 +629,7 @@ onBeforeUnmount(() => {
       <button type="button" :aria-label="localize(ui.roomZoomOut, props.locale)" @click="zoomRoom('out')">−</button>
     </div>
 
-    <p v-if="isLoading" class="room-scene__status" role="status">{{ localize(ui.loadingRoom, props.locale) }} {{ Math.round(progress) }}%</p>
+    <p v-if="isLoading || !preparedModel" class="room-scene__status" role="status">{{ localize(ui.loadingRoom, props.locale) }}</p>
     <p v-else-if="tooltip" class="room-scene__tooltip">{{ tooltip }}</p>
     <MonitorMusicSurface
       v-if="musicActive || props.nowPlaying"

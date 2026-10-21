@@ -1,3 +1,4 @@
+import { isMesh } from '~/utils/threeGuards'
 import { AdditiveBlending, Color, DoubleSide, Group, Mesh, PlaneGeometry, ShaderMaterial, Vector2, Vector3 } from 'three'
 import type { Box3, Object3D } from 'three'
 import { createRoomColorUniforms, roomColorPalette } from './roomColorPalette'
@@ -10,11 +11,11 @@ function nativeBounds(mesh: Mesh) {
 /** Bounds deliberately exclude children, runtime effects, tools and floor rug. */
 export function deskMatBounds(model: Object3D): Box3 | null {
   const mat = model.getObjectByName('static_desk_mat')
-  if (!(mat instanceof Mesh)) return null
+  if (!isMesh(mat)) return null
   model.updateWorldMatrix(true, true)
   const bounds = nativeBounds(mat)
   const rim = model.getObjectByName('static_desk_mat_rim')
-  if (rim instanceof Mesh) bounds.union(nativeBounds(rim))
+  if (isMesh(rim)) bounds.union(nativeBounds(rim))
   return bounds.isEmpty() ? null : bounds
 }
 
