@@ -44,6 +44,9 @@ export function measureJokerObstacles(room: Object3D): JokerObstacle[] {
 }
 export function createJokerScene(asset: GLTF, room: Object3D) {
   const root = asset.scene, group = new Group()
+  // The component can mount while the entry camera still gates update().
+  // Never render authored damage or unscaled effects before their first pose.
+  group.visible = false
   group.add(root)
   const light = new PointLight('#fff1dc', .8, 3, 2)
   group.add(light)
@@ -66,7 +69,7 @@ export function createJokerScene(asset: GLTF, room: Object3D) {
   const hidden: { node: Object3D; visible: boolean }[] = []
   for (const name of ['root_bugjar', 'root_phone', 'static_phone_stand', 'static_phone_stand_back', 'static_phone_stand_lip', 'static_style_storage_bin_0', 'static_style_bin_handle_0']) {
     const node = room.getObjectByName(name)
-    if (node) { hidden.push({ node, visible: node.visible }); node.visible = false }
+    if (node) hidden.push({ node, visible: node.visible })
   }
   mixer.setTime(1 / 24)
   const phoneNodes = new Set<Object3D>()
@@ -148,6 +151,10 @@ export function createJokerScene(asset: GLTF, room: Object3D) {
     const inCockpit = cameraRig.update(s, actor.position, car.position, camera, dt, reduced, viewport)
     // The eye camera sits inside the rigid head mesh; hide the owned avatar only in first person.
     actor.visible = !inCockpit
+    if (!group.visible) {
+      hidden.forEach(({ node }) => { node.visible = false })
+      group.visible = true
+    }
   }
 
   function dispose() {

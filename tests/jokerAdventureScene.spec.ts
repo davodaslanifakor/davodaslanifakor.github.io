@@ -7,12 +7,47 @@ function fixture() {
   const room = new Group(), scene = new Group()
   for (const name of ['root_bugjar', 'root_phone', 'static_phone_stand']) { const node = new Object3D(); node.name = name; room.add(node) }
   room.getObjectByName('static_phone_stand')!.visible = false
-  for (const name of ['JA_Joker', 'JA_Car', 'root_phone', 'JA_PhoneCrack_0']) { const node = new Object3D(); node.name = name; scene.add(node) }
+  for (const name of ['JA_Joker', 'JA_Car', 'root_phone', 'JA_PhoneCrack_0', 'JA_GrappleCable', 'JA_Umbrella']) { const node = new Object3D(); node.name = name; scene.add(node) }
   const track = new VectorKeyframeTrack('root_phone.position', [1 / 24, 815 / 24], [.405, .823, .185, .276, .7541, .107])
   const asset = { scene, animations: [new AnimationClip('fall', -1, [track])] } as GLTF
   return { room, scene, game: createJokerScene(asset, room) }
 }
 describe('adventure scene ownership', () => {
+  it.each([false, true])('keeps the room intact until the first prepared game frame (reduced motion: %s)', reduced => {
+    const { room, scene, game } = fixture(), camera = new PerspectiveCamera(38, 1.5, .05)
+    const visible: Object3D[] = []
+    try {
+      // Loading can finish while the room camera is still moving and update is gated.
+      game.group.traverseVisible(node => visible.push(node))
+      expect(visible).toHaveLength(0)
+      expect(room.getObjectByName('root_bugjar')!.visible).toBe(true)
+      expect(room.getObjectByName('root_phone')!.visible).toBe(true)
+      expect(camera.fov).toBe(38)
+      expect(camera.near).toBe(.05)
+
+      game.update(initialJokerState(), camera, 100, reduced)
+      expect(game.group.visible).toBe(true)
+      expect(room.getObjectByName('root_bugjar')!.visible).toBe(false)
+      expect(room.getObjectByName('root_phone')!.visible).toBe(false)
+      expect(scene.getObjectByName('root_phone')!.position.x).toBeCloseTo(.405)
+      for (const name of ['JA_PhoneCrack_0', 'JA_GrappleCable', 'JA_Umbrella', 'JA_Nitro', 'JA_UmbrellaTethers']) {
+        expect(scene.getObjectByName(name)!.visible, name).toBe(false)
+      }
+    } finally { game.dispose() }
+    expect(room.getObjectByName('root_bugjar')!.visible).toBe(true)
+    expect(room.getObjectByName('root_phone')!.visible).toBe(true)
+    expect(room.getObjectByName('static_phone_stand')!.visible).toBe(false)
+  })
+  it('can leave before the first game frame without presenting props or hiding room objects', () => {
+    const { room, game } = fixture()
+    try {
+      expect(game.group.visible).toBe(false)
+      expect(room.getObjectByName('root_bugjar')!.visible).toBe(true)
+    } finally { game.dispose() }
+    expect(room.getObjectByName('root_bugjar')!.visible).toBe(true)
+    expect(room.getObjectByName('root_phone')!.visible).toBe(true)
+    expect(room.getObjectByName('static_phone_stand')!.visible).toBe(false)
+  })
   it('does not resample the entire authored animation every frame during runtime movement', () => {
     const { game } = fixture(), camera = new PerspectiveCamera()
     const sample = vi.spyOn(AnimationMixer.prototype, 'setTime')
