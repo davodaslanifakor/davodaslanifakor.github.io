@@ -2,6 +2,7 @@ import type { MaybeRefOrGetter } from 'vue'
 import { toValue } from 'vue'
 import type { Object3D } from 'three'
 import type { SceneObject } from '~/content/portfolio'
+import { PORTRAIT_MESH_NAMES } from '~/utils/libraryArtwork'
 
 export interface ScenePointerEvent {
   object?: Object3D
@@ -29,6 +30,7 @@ export function resolveInteractiveMeshName(object: Object3D | null | undefined):
   let current = object ?? null
 
   while (current) {
+    if (PORTRAIT_MESH_NAMES.includes(current.name)) return 'int_library_portrait'
     if (current.name === 'static_subwoofer' || current.name.startsWith('static_subwoofer_')) return 'int_speakers'
     if (current.name.startsWith('int_')) return current.name
     if (['root_paratrooper', 'root_cards', 'root_robot'].includes(current.name)) return current.name.replace('root_', 'int_')

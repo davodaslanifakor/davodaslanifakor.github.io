@@ -14,7 +14,7 @@ describe('approved checkpoint GLB', () => {
     expect(asset.document.scenes).toHaveLength(1)
     expect(asset.document.cameras ?? []).toHaveLength(0)
     expect(asset.document.extensionsUsed ?? []).not.toContain('KHR_lights_punctual')
-    // Library wall frames and their cameras are runtime-owned (utils/libraryFrames.ts), not GLB nodes.
+    // Library wall panels and the portrait interaction/camera are runtime-owned.
     for (const object of sceneObjects.filter(object => !object.id.startsWith('library_'))) {
       expect(names).toContain(object.mesh)
       expect(names).toContain(object.camera)

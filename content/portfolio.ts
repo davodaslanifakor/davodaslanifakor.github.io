@@ -421,6 +421,23 @@ export const favouriteMusic: MusicTrack[] = [
   { id: 'light-playlist', title: 'Light', artist: 'Spotify', spotifyUrl: 'https://open.spotify.com/playlist/6RgbkiGSEMtH5lYyGfrggE', note: both('My listening shelf.', 'قفسهٔ شنیدنی‌های من.') },
 ]
 
+export const artworkViewerCopy = {
+  controls: both('Image zoom controls', 'کنترل بزرگ‌نمایی تصویر'),
+  zoomIn: both('Zoom in', 'بزرگ‌نمایی'),
+  zoomOut: both('Zoom out', 'کوچک‌نمایی'),
+  fit: both('Fit image', 'نمایش کامل'),
+  original: both('Open original', 'باز کردن تصویر اصلی'),
+  help: both('Scroll or pinch to zoom · Drag to explore · Keyboard: + / −, arrows, 0 to fit', 'اسکرول یا حرکت دو انگشت برای بزرگ‌نمایی · کشیدن برای جابه‌جایی · صفحه‌کلید: + / −، جهت‌ها، 0 برای نمایش کامل'),
+}
+
+export const libraryPortrait = {
+  title: both('Framed portrait', 'قاب عکس'),
+  image: '/images/library-portrait.jpeg',
+  width: 512,
+  height: 512,
+  imageAlt: both('Pixel-art portrait of Davoud Fakour beside the sea.', 'پرترهٔ پیکسلی داوود فکور کنار دریا.'),
+}
+
 /** Artwork and credential details from David's original certificate PDF. */
 export const vueCertificate = {
   title: both('Vue.js certification', 'گواهی Vue.js'),
@@ -459,6 +476,7 @@ export const sceneObjects: SceneObject[] = [
   { id: 'world_clocks', mesh: 'int_world_clocks', camera: 'cam_world_clocks', label: text('World clocks'), action: 'modal', contentRef: 'world-clocks' },
   { id: 'phone', mesh: 'int_phone', camera: 'cam_phone', label: text('Mobile preview'), action: 'modal', contentRef: 'mobile-preview' },
   { id: 'certificate', mesh: 'int_certificate', camera: 'cam_certificate', label: vueCertificate.title, action: 'modal', contentRef: 'certificate' },
+  { id: 'library_portrait', mesh: 'int_library_portrait', camera: 'cam_library_portrait', label: libraryPortrait.title, action: 'modal', contentRef: 'portrait' },
 ]
 
 export interface ScreenCity {

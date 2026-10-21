@@ -20,6 +20,15 @@ describe('interactive mesh resolution', () => {
     expect(normalizeMeshName('int_monitor_screen')).toBe('int_monitor')
   })
 
+  it('opens the portrait from its artwork, mat, and frame without renaming the source meshes', () => {
+    const raycast = useRaycast({ objects: sceneObjects })
+    for (const name of ['static_style_art_frame', 'static_style_art_paper', 'static_style_art_portrait']) {
+      const mesh = new Object3D()
+      mesh.name = name
+      expect(raycast.resolveObject({ object: mesh })).toMatchObject({ id: 'library_portrait', contentRef: 'portrait', action: 'modal' })
+    }
+  })
+
   it('walks up to the nearest interactive ancestor', () => {
     const parent = new Object3D()
     parent.name = 'int_elephant'

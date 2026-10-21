@@ -22,6 +22,7 @@ import { useRoomColors } from '~/composables/useRoomColors'
 import { frameRoom, roomFocusBounds } from '~/utils/roomFraming'
 import { DESK_OFFSET_X, deskFocusNames } from '~/utils/roomLayout'
 import { LIBRARY_FOCUS_POINTS } from '~/utils/libraryFrames'
+import { libraryPortraitFocus } from '~/utils/libraryArtwork'
 import { usePhoneScreenTexture } from '~/composables/usePhoneScreenTexture'
 import { useWorldClocks } from '~/composables/useWorldClocks'
 import { getMonitorQuad } from '~/utils/monitorProjection'
@@ -117,7 +118,7 @@ const focusPoints = computed(() => CAMERA_FOCUS_POINTS.map((point) => {
   }
   if (point.name !== 'cam_start') return point
   return { ...point, position: frameRoom(point.position, point.target, openingBounds.value, aspect.value) }
-}).concat(LIBRARY_FOCUS_POINTS, [jokerAdventureFocus(aspect.value), deskMinionFocus(deskWorld.value, aspect.value, viewportHeight.value, deskWorld.value.front, props.reducedMotion)], (() => {
+}).concat(LIBRARY_FOCUS_POINTS, libraryPortraitFocus(preparedModel.value, aspect.value), [jokerAdventureFocus(aspect.value), deskMinionFocus(deskWorld.value, aspect.value, viewportHeight.value, deskWorld.value.front, props.reducedMotion)], (() => {
   const bounds = musicBounds.value
   const target = bounds.isEmpty() ? new Vector3(-0.25, 1.125, -0.2) : bounds.getCenter(new Vector3())
   const size = bounds.isEmpty() ? new Vector3(1.34, 0.364, 0.1) : bounds.getSize(new Vector3())
