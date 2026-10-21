@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test('CV is readable without JavaScript on static hosting', async ({ browser, baseURL }) => {
+test('CV is readable without JavaScript on static hosting', { tag: '@pages' }, async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, ...(baseURL ? { baseURL } : {}) })
   try {
     const page = await context.newPage()
@@ -16,7 +16,7 @@ test('CV is readable without JavaScript on static hosting', async ({ browser, ba
   } finally { await context.close() }
 })
 
-test('legacy Modaltor links retain their anchors and still open the demo', async ({ page }) => {
+test('legacy Modaltor links retain their anchors and still open the demo', { tag: '@pages' }, async ({ page }) => {
   await page.goto('/modaltor/#basic')
   await expect(page).toHaveURL(/\/modaltor\.html#basic$/)
   await expect(page.getByRole('heading', { name: 'This Is Demo vue-modaltor', exact: true })).toBeVisible()

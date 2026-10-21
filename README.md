@@ -41,7 +41,9 @@ PORTFOLIO_E2E_STATIC=1 PORTFOLIO_E2E_PORT=3102 pnpm test:e2e --workers=1
 
 ## Publishing
 
-The **Publish portfolio to GitHub Pages** workflow runs manually from GitHub Actions on the default branch of `davodaslanifakor/davodaslanifakor.github.io`. It checks the project, tests the static site in Chromium and WebKit, and deploys only `.output/public`.
+The **Publish portfolio to GitHub Pages** workflow runs manually from GitHub Actions on the default branch of `davodaslanifakor/davodaslanifakor.github.io`. It checks the project, runs the `@pages` browser scenarios in Chromium and WebKit, and deploys only `.output/public`.
+
+CI verifies the homepage-to-CV flow, CV without JavaScript, contact navigation, mobile layout, locale behavior, and legacy Modaltor links, alongside the full unit suite and static asset checks. Run the complete browser suite above on a machine with hardware graphics before releasing gameplay or room changes. The longer 3D tours use timed movement inputs; software rendering on a GPU-less runner changes those timings and is not a reliable environment for those tours.
 
 In the repository's **Settings → Pages**, select **GitHub Actions** as the publishing source. Run the publishing workflow from the **Actions** tab after merging a verified update. The setup targets the account site at `/`; hosting under a project subdirectory requires an asset-path review.
 

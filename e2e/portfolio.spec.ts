@@ -5,7 +5,7 @@ async function openRoom(page: import('@playwright/test').Page) {
   await expect(page.locator('.room-page')).toHaveAttribute('data-ready', 'true')
 }
 
-test('recruiter can reach the CV and scan core sections', async ({ page }) => {
+test('recruiter can reach the CV and scan core sections', { tag: '@pages' }, async ({ page }) => {
   await openRoom(page)
   await page.getByRole('link', { name: /skip to cv/i }).click()
   await expect(page).toHaveURL(/\/cv$/)
@@ -61,7 +61,7 @@ test('world clocks and the mobile preview are reachable by keyboard navigation',
   await page.getByRole('button', { name: /close/i }).click()
 })
 
-test('contact remains one click away in the persistent HUD', async ({ page }) => {
+test('contact remains one click away in the persistent HUD', { tag: '@pages' }, async ({ page }) => {
   await openRoom(page)
   await page.getByRole('link', { name: 'Contact ↗' }).click()
   await expect(page).toHaveURL(/\/cv#contact$/)
@@ -101,7 +101,7 @@ test('mobile opens the editor as a full-screen DOM surface', async ({ page }) =>
   await expect(page.locator('.editor-mobile').getByRole('button', { name: 'Export PNG' })).toBeVisible()
 })
 
-test('mobile room uses the viewport without horizontal page overflow', async ({ page }) => {
+test('mobile room uses the viewport without horizontal page overflow', { tag: '@pages' }, async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 800 })
   await openRoom(page)
   await expect(page.getByRole('link', { name: /skip to cv/i })).toBeVisible()
@@ -115,7 +115,7 @@ test('mobile room uses the viewport without horizontal page overflow', async ({ 
   expect(metrics.sceneHeight).toBe(800)
 })
 
-test('English-only release offers no language switch, even with a saved Persian choice', async ({ page }) => {
+test('English-only release offers no language switch, even with a saved Persian choice', { tag: '@pages' }, async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('portfolio-locale', 'fa'))
   await page.goto('/cv')
   await expect(page.locator('.cv-page')).toHaveAttribute('data-ready', 'true')

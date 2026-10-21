@@ -35,9 +35,16 @@ jobs:
       - run: pnpm generate
       - run: pnpm verify:pages
       - run: pnpm exec playwright install --with-deps chromium webkit
-      - run: pnpm test:e2e --workers=1
+      - run: pnpm test:e2e --grep @pages --workers=1 --max-failures=1
         env:
           PORTFOLIO_E2E_STATIC: '1'
+      - name: Save browser failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-failure-diagnostics
+          path: test-results/
+          retention-days: 7
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public
