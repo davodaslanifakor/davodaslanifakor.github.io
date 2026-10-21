@@ -1,0 +1,216 @@
+{
+  "repository": "davodaslanifakor/davodaslanifakor.github.io",
+  "commit": "660c2e1fb229ddd82fdd5f5ea3b63873c919a99a",
+  "files": [
+    {
+      "path": "app-todo-vue/static/css/app.9156d36410bd341d1a6916e46105c25e.css",
+      "bytes": 35780,
+      "sha256": "12fc96e10272a7c91fb58ae2c514bcbc57150aebfb922e09b194fb6d80f7b8f6"
+    },
+    {
+      "path": "app-todo-vue/static/css/app.9156d36410bd341d1a6916e46105c25e.css.map",
+      "bytes": 39266,
+      "sha256": "e80e1fd61edd2f01c26d3e54ba918f685edf1b0488bc98ef8ff0a1e45ff54b41"
+    },
+    {
+      "path": "app-todo-vue/static/css/reset.css",
+      "bytes": 1092,
+      "sha256": "ed555a279183c054222c873e78d92c40b512498e49359b6abfda36048f141988"
+    },
+    {
+      "path": "app-todo-vue/static/css/style.css",
+      "bytes": 3620,
+      "sha256": "c08ae92561ace12667ec878a0ab322aa7fd7d67ff19b9e1f2d1070f077f80e67"
+    },
+    {
+      "path": "app-todo-vue/static/css/style.scss",
+      "bytes": 4473,
+      "sha256": "6fb20693d6e0460cb6c7dc135d63a131e632fbb500c4db41a5f2afd92459de81"
+    },
+    {
+      "path": "app-todo-vue/static/font/Flaticon.eot",
+      "bytes": 2642,
+      "sha256": "2e31723e4b0622ce4fce4fdf6475be875099ed45832a1751434f12b7e8b9d13c"
+    },
+    {
+      "path": "app-todo-vue/static/font/Flaticon.svg",
+      "bytes": 6775,
+      "sha256": "4dc8d55355489ad573604f69a69dd3ca1eb64cd124512312a0c2260d3f82c728"
+    },
+    {
+      "path": "app-todo-vue/static/font/Flaticon.ttf",
+      "bytes": 2464,
+      "sha256": "e81c98c61d28e1f736a0ebeb2591b3ddc60497dc76744de5f5b5fff01cbb5f6f"
+    },
+    {
+      "path": "app-todo-vue/static/font/Flaticon.woff",
+      "bytes": 1724,
+      "sha256": "fecf52fcf25327122670cb3ea6532c0d0b6c4825c55c3e5405cd13cdbf998575"
+    },
+    {
+      "path": "app-todo-vue/static/font/_flaticon.scss",
+      "bytes": 1384,
+      "sha256": "fb0b9315fdddd6e083fb513f51b229645d3537190ee00d0138c056ecc6a8ae3a"
+    },
+    {
+      "path": "app-todo-vue/static/font/flaticon.css",
+      "bytes": 1027,
+      "sha256": "097c79c4573b350886cc705b4b33e8b3fbb388eb5dd9b2628fd4a4dd95cfb99c"
+    },
+    {
+      "path": "app-todo-vue/static/font/flaticon.html",
+      "bytes": 18029,
+      "sha256": "f292342aca652082e387bcfd7a7021006db74b0c84c5bddf727b7c144d0f5f13"
+    },
+    {
+      "path": "app-todo-vue/static/js/app.f1b43b0bf3e6fef6496b.js",
+      "bytes": 4966,
+      "sha256": "5be8c3997d4e3b157817f7b86094a00ec900fa554528f4300612413bfce81d77"
+    },
+    {
+      "path": "app-todo-vue/static/js/app.f1b43b0bf3e6fef6496b.js.map",
+      "bytes": 18691,
+      "sha256": "348f55e01b2c2b8b3e9239cf3814d5162a5c6f70c6d2502272e9c2d40d2bdb6d"
+    },
+    {
+      "path": "app-todo-vue/static/js/manifest.39b912541cf972010815.js",
+      "bytes": 857,
+      "sha256": "5f3a5bcb9198e27210354f903edd38cb9c8bba657e2eac2755a62571de9003f3"
+    },
+    {
+      "path": "app-todo-vue/static/js/manifest.39b912541cf972010815.js.map",
+      "bytes": 4985,
+      "sha256": "9a6577dc38946c23add915dbd9c510ae1f36aefd58f403aa237448b3f6c4a0a4"
+    },
+    {
+      "path": "app-todo-vue/static/js/vendor.e179782fb609e37c892d.js",
+      "bytes": 94547,
+      "sha256": "91ee51078cdbd285061f4a24fd723c2d7b8078ae8e64a6b554359053e1536a38"
+    },
+    {
+      "path": "app-todo-vue/static/js/vendor.e179782fb609e37c892d.js.map",
+      "bytes": 477684,
+      "sha256": "86a4c6021e60ee03a6572bfa841866c2591176d4ddd8051f8d61b76c045133a9"
+    },
+    {
+      "path": "app-todo.html",
+      "bytes": 566,
+      "sha256": "204758a3a5f3b9853cebd4687abdcfac672625d5af7cbe390360cbfe99d63e56"
+    },
+    {
+      "path": "dist/vue-modaltor.js",
+      "bytes": 15232,
+      "sha256": "3097672f0edeacc0ee4b79385ff9814cacb1caea6387268b2d29b4f2b87498bc"
+    },
+    {
+      "path": "grid.min.css",
+      "bytes": 49610,
+      "sha256": "7712dc9a3ec3bf54ba9a79012430ff0d1e1f6dd8e58912d0aeb6a6f512a6b908"
+    },
+    {
+      "path": "img/william-rouse-593381-unsplash.jpg",
+      "bytes": 4218285,
+      "sha256": "507f9d1ed8b4d6fe29c15b56bdf467bf66702d3dfbf41deac2ed15c01ff0f877"
+    },
+    {
+      "path": "modaltor.html",
+      "bytes": 32728,
+      "sha256": "9a9687c76d7989e08a7bf6dd467835a27e7de324ae7585b2367f584034815586"
+    },
+    {
+      "path": "prism.css",
+      "bytes": 2328,
+      "sha256": "f9c01306576547090587f627663f69c149464432d945cd50769cc489704c1406"
+    },
+    {
+      "path": "prism.js",
+      "bytes": 10698,
+      "sha256": "2082d7200acd98ed86797de6e41088b17da0a66bc1d5c3e7a89117b6faf64482"
+    },
+    {
+      "path": "reset.css",
+      "bytes": 2228,
+      "sha256": "7f704942ebe2741f3a085136c2d497ec8d0cbecc4da8230ff63288667f646a2a"
+    },
+    {
+      "path": "style.css",
+      "bytes": 4766,
+      "sha256": "d7aa91fc13a244240b1fe7b35e05675ef9e2cc512f6bca60dc8cc8d0d32c5270"
+    },
+    {
+      "path": "style.less",
+      "bytes": 5003,
+      "sha256": "2acc24e6f5fa50153606fe56192104a489fc693ad2c9d427da7f0e5db0258ff3"
+    },
+    {
+      "path": "test.html",
+      "bytes": 1073,
+      "sha256": "5f4d49e71bd23db833d06a5b5c444a1440bf18883953d7deb8fa6ff648996c12"
+    },
+    {
+      "path": "todo-app/css/reset.css",
+      "bytes": 1092,
+      "sha256": "ed555a279183c054222c873e78d92c40b512498e49359b6abfda36048f141988"
+    },
+    {
+      "path": "todo-app/css/style.css",
+      "bytes": 4308,
+      "sha256": "c824d561152ddea637ac17dbe2fc239a0a1c6ef6b405098d3fa1097adc077c55"
+    },
+    {
+      "path": "todo-app/css/style.scss",
+      "bytes": 4390,
+      "sha256": "8c9c4b7ef5b7771bc003ed769c12d43a2c30c2721de3f563795e49c2f325e347"
+    },
+    {
+      "path": "todo-app/font/Flaticon.eot",
+      "bytes": 2642,
+      "sha256": "2e31723e4b0622ce4fce4fdf6475be875099ed45832a1751434f12b7e8b9d13c"
+    },
+    {
+      "path": "todo-app/font/Flaticon.svg",
+      "bytes": 6775,
+      "sha256": "4dc8d55355489ad573604f69a69dd3ca1eb64cd124512312a0c2260d3f82c728"
+    },
+    {
+      "path": "todo-app/font/Flaticon.ttf",
+      "bytes": 2464,
+      "sha256": "e81c98c61d28e1f736a0ebeb2591b3ddc60497dc76744de5f5b5fff01cbb5f6f"
+    },
+    {
+      "path": "todo-app/font/Flaticon.woff",
+      "bytes": 1724,
+      "sha256": "fecf52fcf25327122670cb3ea6532c0d0b6c4825c55c3e5405cd13cdbf998575"
+    },
+    {
+      "path": "todo-app/font/_flaticon.scss",
+      "bytes": 1384,
+      "sha256": "fb0b9315fdddd6e083fb513f51b229645d3537190ee00d0138c056ecc6a8ae3a"
+    },
+    {
+      "path": "todo-app/font/flaticon.css",
+      "bytes": 1027,
+      "sha256": "097c79c4573b350886cc705b4b33e8b3fbb388eb5dd9b2628fd4a4dd95cfb99c"
+    },
+    {
+      "path": "todo-app/font/flaticon.html",
+      "bytes": 18029,
+      "sha256": "f292342aca652082e387bcfd7a7021006db74b0c84c5bddf727b7c144d0f5f13"
+    },
+    {
+      "path": "todo-app/js/app.js",
+      "bytes": 5109,
+      "sha256": "30ab2e37a8442c661e0e7d541bae19c5cc85303129b2ec58032f33b002e45e9c"
+    },
+    {
+      "path": "todo.html",
+      "bytes": 1737,
+      "sha256": "23dfefceabb9ae9ab8a9d156a31341d1a0d541a75330c98a1fde02af526286e1"
+    },
+    {
+      "path": "vue.js",
+      "bytes": 93670,
+      "sha256": "9e0156dd49c03744e79bbea60eebbbb94b5811c1b71b91f5fb38a8270dedfbaf"
+    }
+  ]
+}
