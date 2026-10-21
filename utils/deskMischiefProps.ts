@@ -1,3 +1,4 @@
+import { isMesh } from '~/utils/threeGuards'
 import { Box3, CanvasTexture, Group, Mesh, MeshBasicMaterial, SRGBColorSpace, Vector3 } from 'three'
 import type { BufferGeometry, Material, Object3D } from 'three'
 import type { DeskMinionState } from '../composables/useDeskMinion'
@@ -14,7 +15,7 @@ export function createDeskMischiefProps(model: Object3D, active: MinionId) {
   const hide = (source: Object3D) => { originals.set(source, source.visible); source.visible = false }
   const pickTargets: Mesh[] = [], keys: Mesh[] = []
   const sourceKeys = model.getObjectByName('static_laptop_keycaps')
-  if (sourceKeys instanceof Mesh) {
+  if (isMesh(sourceKeys)) {
     const group = new Group(); group.applyMatrix4(sourceKeys.matrixWorld); object.add(group)
     keyboardParts(sourceKeys).forEach((part, index) => {
       const geometry = keyGeometry(sourceKeys.geometry, part), key = new Mesh(geometry, sourceKeys.material)
@@ -26,7 +27,7 @@ export function createDeskMischiefProps(model: Object3D, active: MinionId) {
   const sourceMouse = model.getObjectByName('root_mouse'), mouse = sourceMouse?.clone(true) ?? new Group()
   if (sourceMouse) {
     mouse.position.set(0, 0, 0); mouse.rotation.set(0, 0, 0); mouse.scale.setScalar(1); mouse.applyMatrix4(sourceMouse.matrixWorld); mouse.visible = true; hide(sourceMouse)
-    mouse.traverse(child => { if (child instanceof Mesh) { child.userData.deskAction = 'mouse'; pickTargets.push(child) } })
+    mouse.traverse(child => { if (isMesh(child)) { child.userData.deskAction = 'mouse'; pickTargets.push(child) } })
   }
   const mouseRest = mouse.position.clone(); object.add(mouse)
   const watchers = MINION_IDS.filter(id => id !== active).flatMap(id => {

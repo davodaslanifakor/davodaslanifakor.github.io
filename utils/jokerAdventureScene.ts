@@ -1,4 +1,5 @@
-import { AnimationClip, AnimationMixer, Box3, BoxGeometry, BufferGeometry, Float32BufferAttribute, Group, LineSegments, Mesh, MeshStandardMaterial, PointLight, RingGeometry, MeshBasicMaterial, DoubleSide, Vector3 } from 'three'
+import { isMesh, isLineSegments } from '~/utils/threeGuards'
+import { AnimationClip, AnimationMixer, Box3, BoxGeometry, BufferGeometry, Float32BufferAttribute, Group, Mesh, MeshStandardMaterial, PointLight, RingGeometry, MeshBasicMaterial, DoubleSide, Vector3 } from 'three'
 import type { Object3D, PerspectiveCamera, Texture } from 'three'
 import type { GLTF } from 'three/addons/loaders/GLTFLoader.js'
 import { JOKER_SPAWN, jokerFrame, jokerTransition, jokerObjective } from './jokerAdventure'
@@ -18,7 +19,7 @@ export function jokerAdventureFocus(aspect: number) {
 export function disposeJokerAsset(root: Object3D) {
   const textures = new Set<Texture>()
   root.traverse(node => {
-    if (!(node instanceof Mesh) && !(node instanceof LineSegments)) return
+    if (!isMesh(node) && !isLineSegments(node)) return
     node.geometry.dispose()
     for (const material of Array.isArray(node.material) ? node.material : [node.material]) {
       for (const value of Object.values(material)) if (value && typeof value === 'object' && 'isTexture' in value) textures.add(value as Texture)
@@ -77,8 +78,8 @@ export function createJokerScene(asset: GLTF, room: Object3D) {
   const damage: Object3D[] = [], limbs: { node: Object3D; angle: number; side: number }[] = []
   root.traverse(node => {
     if (/^JA_(PhoneCrack|PhoneDeadColumn|ScreenCornerChip|PhoneShard)/.test(node.name)) damage.push(node)
-    if (/^JA_Joker_hip_[lr]$/.test(node.name) || (node.name.startsWith('JA_Joker_shoulder_') && !(node instanceof Mesh))) limbs.push({ node, angle: node.name.includes('_hip_') ? Math.PI / 2 : 0, side: node.name.includes('_l') ? 1 : -1 })
-    if (node instanceof Mesh) { node.castShadow = true; node.receiveShadow = true }
+    if (/^JA_Joker_hip_[lr]$/.test(node.name) || (node.name.startsWith('JA_Joker_shoulder_') && !isMesh(node))) limbs.push({ node, angle: node.name.includes('_hip_') ? Math.PI / 2 : 0, side: node.name.includes('_l') ? 1 : -1 })
+    if (isMesh(node)) { node.castShadow = true; node.receiveShadow = true }
   })
   damage.forEach(node => phoneNodes.add(node))
   const snapshotPhone = () => [...phoneNodes].map(node => ({ node, p: node.position.clone(), q: node.quaternion.clone(), s: node.scale.clone() }))

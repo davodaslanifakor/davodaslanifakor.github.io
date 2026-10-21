@@ -1,3 +1,4 @@
+import { isMesh } from '~/utils/threeGuards'
 import { Box3, BoxGeometry, CircleGeometry, Group, LatheGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial, RingGeometry, SphereGeometry, TorusGeometry, Vector2, Vector3 } from 'three'
 import type { BufferGeometry, Material, Object3D } from 'three'
 
@@ -11,7 +12,7 @@ export function bassPulse(time: number) {
 /** Permanent room detail, with session-driven motion; only owned resources are disposed. */
 export function createSubwoofer(model: Object3D) {
   const cabinet = model.getObjectByName('static_subwoofer'), sourceKnob = model.getObjectByName('static_subwoofer_knob')
-  if (!cabinet || !(sourceKnob instanceof Mesh)) return null
+  if (!cabinet || !isMesh(sourceKnob)) return null
   model.updateMatrixWorld(true)
   const box = new Box3().setFromObject(cabinet), size = box.getSize(new Vector3()), center = box.getCenter(new Vector3())
   const object = new Group(); object.name = 'runtime_subwoofer_detail'

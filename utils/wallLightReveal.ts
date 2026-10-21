@@ -1,4 +1,5 @@
-import { AdditiveBlending, Box3, Color, DoubleSide, Group, Mesh, MeshStandardMaterial, PlaneGeometry, ShaderMaterial, Vector3 } from 'three'
+import { isMeshStandardMaterial } from '~/utils/threeGuards'
+import { AdditiveBlending, Box3, Color, DoubleSide, Group, Mesh, PlaneGeometry, ShaderMaterial, Vector3 } from 'three'
 import type { Object3D } from 'three'
 import { createRoomColorUniforms, roomColorPalette } from './roomColorPalette'
 
@@ -53,7 +54,7 @@ export function createWallLightReveal(model: Object3D, strips: Mesh[], colors = 
     }
     const materials = Array.isArray(strip.material) ? strip.material : [strip.material]
     for (const material of materials) {
-      if (!(material instanceof MeshStandardMaterial)) continue
+      if (!isMeshStandardMaterial(material)) continue
       material.onBeforeCompile = (shader) => {
         Object.assign(shader.uniforms, uniforms)
         shader.vertexShader = `varying vec3 vRevealPosition;\n${shader.vertexShader}`

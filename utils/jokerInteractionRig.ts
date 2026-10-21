@@ -1,3 +1,4 @@
+import { isMesh } from '~/utils/threeGuards'
 import { BoxGeometry, Mesh, MeshStandardMaterial, Quaternion, Vector3 } from 'three'
 import type { Object3D } from 'three'
 import type { JokerState } from './jokerAdventure'
@@ -34,9 +35,9 @@ export function createJokerInteractionRig(root: Object3D) {
   root.updateMatrixWorld(true)
   const arms = (['l', 'r'] as const).flatMap(side => {
     let pivot: Object3D | undefined
-    actor.traverse(node => { if (node.name.startsWith(`JA_Joker_shoulder_${side}`) && !(node instanceof Mesh)) pivot = node })
+    actor.traverse(node => { if (node.name.startsWith(`JA_Joker_shoulder_${side}`) && !isMesh(node)) pivot = node })
     const hand = actor.getObjectByName(`JA_Joker_hand_${side}`)
-    if (!pivot || !(hand instanceof Mesh)) return []
+    if (!pivot || !isMesh(hand)) return []
     hand.geometry.computeBoundingBox()
     const centre = hand.geometry.boundingBox!.getCenter(new Vector3())
     const rest = pivot.worldToLocal(hand.localToWorld(centre)).normalize()

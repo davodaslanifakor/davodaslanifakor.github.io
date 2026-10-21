@@ -1,4 +1,5 @@
-import { Mesh, Vector3 } from 'three'
+import { isMesh } from '~/utils/threeGuards'
+import { Vector3 } from 'three'
 import type { Object3D } from 'three'
 
 export type ScreenQuad = [Vector3, Vector3, Vector3, Vector3]
@@ -6,7 +7,7 @@ export type ScreenQuad = [Vector3, Vector3, Vector3, Vector3]
 /** UV order is top-left, top-right, bottom-right, bottom-left in the shipped glTF. */
 export function getMonitorQuad(model: Object3D, name: string): ScreenQuad | null {
   const mesh = model.getObjectByName(name)
-  if (!(mesh instanceof Mesh)) return null
+  if (!isMesh(mesh)) return null
   const position = mesh.geometry.getAttribute('position')
   const uv = mesh.geometry.getAttribute('uv')
   if (!position || !uv) return null

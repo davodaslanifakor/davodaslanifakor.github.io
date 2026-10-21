@@ -1,3 +1,4 @@
+import { isMesh } from '~/utils/threeGuards'
 import { Bone, Box3, CapsuleGeometry, CircleGeometry, Group, Mesh, MeshBasicMaterial, SphereGeometry, Vector3 } from 'three'
 import type { BufferGeometry, Material, Object3D } from 'three'
 import type { DeskMinionState } from '../composables/useDeskMinion'
@@ -38,7 +39,7 @@ export function createMinionRig(source: Object3D, character: MinionId) {
   signParts.forEach(child => { child.visible = false })
   avatar.updateMatrixWorld(true)
   const bounds = new Box3()
-  avatar.traverseVisible(child => { if (child instanceof Mesh) bounds.union(new Box3().setFromObject(child)) })
+  avatar.traverseVisible(child => { if (isMesh(child)) bounds.union(new Box3().setFromObject(child)) })
   const scale = bounds.isEmpty() ? 1 : BODY_HEIGHT / Math.max(0.035, bounds.max.y - bounds.min.y)
   avatar.scale.setScalar(scale); avatar.position.y = bounds.isEmpty() ? 0 : -bounds.min.y * scale
   actor.add(avatar); actor.updateMatrixWorld(true); spine.attach(avatar)
@@ -53,7 +54,7 @@ export function createMinionRig(source: Object3D, character: MinionId) {
     const suffix = character === 'cards' ? side < 0 ? '_-1' : '_1' : side < 0 ? '_l' : '_r'
     for (const arm of [true, false]) {
       const parts: Mesh[] = []
-      avatar.traverse(child => { if (child instanceof Mesh && child.name.endsWith(suffix) && (arm ? /_(arm|sleeve|hand|glove)_/.test(child.name) : /_(foot|boot)_/.test(child.name))) parts.push(child) })
+      avatar.traverse(child => { if (isMesh(child) && child.name.endsWith(suffix) && (arm ? /_(arm|sleeve|hand|glove)_/.test(child.name) : /_(foot|boot)_/.test(child.name))) parts.push(child) })
       const extremity = parts.find(part => arm ? /hand|glove/.test(part.name) : /foot|boot/.test(part.name))
       if (!extremity) continue
       const rest = new Box3().setFromObject(extremity).getCenter(new Vector3())
