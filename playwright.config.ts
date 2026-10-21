@@ -17,7 +17,9 @@ export default defineConfig({
     { name: 'chromium', use: { ...devices['Desktop Chrome'], launchOptions: { args: process.platform === 'darwin'
       ? ['--use-angle=metal']
       // Keep software rendering limited to WebGL on runners without a GPU.
-      : ['--use-gl=angle', '--use-angle=swiftshader-webgl', '--enable-unsafe-swiftshader'] } } },
+      : process.env.CI && process.platform === 'linux'
+        ? ['--use-gl=angle', '--use-angle=swiftshader-webgl', '--enable-unsafe-swiftshader']
+        : [] } } },
     { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
   webServer: {
