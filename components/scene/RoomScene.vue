@@ -617,8 +617,9 @@ onBeforeUnmount(() => {
       @close="emit('closeGame')"
     />
     <RoomLightControl
-      v-if="preparedModel && !props.focusedId && !props.editorActive"
+      v-if="!props.focusedId && !props.editorActive"
       :phase="lightPhase"
+      :ready="Boolean(preparedModel && surface)"
       :locale="props.locale"
       @activate="activateLights"
       @replay="replayLights"
@@ -629,7 +630,7 @@ onBeforeUnmount(() => {
       <button type="button" :aria-label="localize(ui.roomZoomOut, props.locale)" @click="zoomRoom('out')">−</button>
     </div>
 
-    <p v-if="isLoading || !preparedModel" class="room-scene__status" role="status">{{ localize(ui.loadingRoom, props.locale) }}</p>
+    <p v-if="(isLoading || !preparedModel) && (props.focusedId || props.editorActive || lightPhase !== 'off')" class="room-scene__status" role="status">{{ localize(ui.loadingRoom, props.locale) }}</p>
     <p v-else-if="tooltip" class="room-scene__tooltip">{{ tooltip }}</p>
     <MonitorMusicSurface
       v-if="musicActive || props.nowPlaying"

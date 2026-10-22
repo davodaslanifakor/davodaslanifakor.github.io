@@ -5,6 +5,7 @@ import { localize, profile, sceneObjects, ui } from '~/content/portfolio'
 import MiniEditor from '~/components/editor/MiniEditor.vue'
 import RoomScene from '~/components/scene/RoomScene.vue'
 import RoomRecovery from '~/components/scene/RoomRecovery.vue'
+import RoomLightControl from '~/components/scene/RoomLightControl.vue'
 import AccessibleObjectNav from '~/components/ui/AccessibleObjectNav.vue'
 import ObjectModal from '~/components/ui/ObjectModal.vue'
 import SceneHud from '~/components/ui/SceneHud.vue'
@@ -174,7 +175,9 @@ watch(shouldUseCvFallback, (shouldFallback) => {
         />
       </RoomRecovery>
       <template #fallback>
-        <div class="scene-fallback" aria-hidden="true" />
+        <div class="scene-fallback">
+          <RoomLightControl phase="off" :locale="locale" :ready="false" />
+        </div>
       </template>
     </ClientOnly>
 

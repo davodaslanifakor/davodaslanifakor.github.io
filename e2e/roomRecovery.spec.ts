@@ -8,7 +8,7 @@ test('room load failure offers retry and then finishes the room', async ({ page 
   await recovery.getByRole('button', { name: 'Reload room' }).click()
   await expect(page.locator('.room-scene')).toHaveAttribute('data-render-ready', 'true', { timeout: 20000 })
   await expect(recovery).toBeHidden()
-  await page.getByRole('button', { name: 'Turn on room lights' }).click()
+  await page.getByRole('button', { name: 'Step inside' }).click()
   await expect(page.locator('.room-scene')).toHaveAttribute('data-light-phase', 'on')
 })
 

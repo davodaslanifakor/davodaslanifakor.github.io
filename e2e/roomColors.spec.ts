@@ -11,7 +11,7 @@ test('default RGB lights activate and replay without color configuration', async
   for (const name of ['Warm', 'RGB', 'Pause colors', 'Resume colors']) {
     await expect(page.getByRole('button', { name, exact: true })).toHaveCount(0)
   }
-  await page.getByRole('button', { name: ui.turnOnRoomLights.en, exact: true }).press('Enter')
+  await page.getByRole('button', { name: ui.enterRoom.en, exact: true }).press('Enter')
   await expect(scene).toHaveAttribute('data-light-phase', 'on')
   await expect(scene).toHaveAttribute('data-color-motion', 'running')
   await expect(scene).toHaveAttribute('data-light-progress', '1')
@@ -34,7 +34,7 @@ test('reduced motion keeps the default RGB spectrum static through activation an
   await page.goto('/')
   const scene = page.locator('.room-scene')
   await expect(scene).toHaveAttribute('data-light-phase', 'off')
-  await page.getByRole('button', { name: ui.turnOnRoomLights.en, exact: true }).click()
+  await page.getByRole('button', { name: ui.enterRoom.en, exact: true }).click()
   await expect(scene).toHaveAttribute('data-light-phase', 'on')
   await expect(scene).toHaveAttribute('data-color-mode', 'rgb')
   await expect(scene).toHaveAttribute('data-color-motion', 'static')
@@ -53,8 +53,8 @@ test('mobile light button remains reachable without color configuration or overf
   await page.setViewportSize({ width: 360, height: 800 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/')
-  await expect(page.getByRole('button', { name: ui.turnOnRoomLights.en, exact: true })).toBeInViewport()
-  await page.getByRole('button', { name: ui.turnOnRoomLights.en, exact: true }).press('Enter')
+  await expect(page.getByRole('button', { name: ui.enterRoom.en, exact: true })).toBeInViewport()
+  await page.getByRole('button', { name: ui.enterRoom.en, exact: true }).press('Enter')
   const replay = page.getByRole('button', { name: ui.replayRoomLights.en, exact: true })
   await expect(replay).toBeInViewport()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)

@@ -128,7 +128,7 @@ test('system lighting changes on the same scene and respects reduced motion', as
   await openRoom(page)
   const scene = page.locator('.room-scene')
   await expect(scene).toHaveAttribute('data-light-phase', 'off')
-  await page.getByRole('button', { name: 'Turn on room lights' }).press('Enter')
+  await page.getByRole('button', { name: 'Step inside' }).press('Enter')
   await expect(scene).toHaveAttribute('data-light-phase', 'on')
   await expect(scene).toHaveAttribute('data-lighting', 'light')
   await expect(page.locator('.intro-title')).toHaveCSS('color', 'rgb(34, 40, 34)')
