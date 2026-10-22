@@ -41,14 +41,14 @@ function updateFrame() {
 }
 defineExpose({ updateFrame })
 
-watch(() => props.active, async active => {
-  if (!active) return
+watch([() => props.active, close], async ([active, button]) => {
+  if (!active || !button) return
   const firstOpen = !started.value
   started.value = true
   await nextTick()
   updateFrame()
-  if (firstOpen) close.value?.focus({ preventScroll: true })
-}, { immediate: true })
+  if (firstOpen) button.focus({ preventScroll: true })
+}, { immediate: true, flush: 'post' })
 
 function focusCalendar() { host.value?.querySelector('iframe')?.focus() }
 </script>
@@ -79,8 +79,9 @@ function focusCalendar() { host.value?.querySelector('iframe')?.focus() }
 </template>
 
 <style scoped>
-.macbook-booking { position: absolute; z-index: 8; inset: 0; overflow: hidden; pointer-events: none; visibility: hidden; }
-.macbook-booking--active { visibility: visible; }
+/* Use display so inherited visibility transitions cannot delay keyboard focus. */
+.macbook-booking { display: none; position: absolute; z-index: 8; inset: 0; overflow: hidden; pointer-events: none; }
+.macbook-booking--active { display: block; }
 .booking-screen { position: absolute; top: 0; left: 0; width: 720px; transform-origin: 0 0; overflow: hidden; visibility: hidden; background: #fff; }
 .macbook-booking--active .booking-screen--ready { visibility: visible; pointer-events: auto; }
 .booking-toolbar { position: absolute; z-index: 1; bottom: 6rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 1rem; width: max-content; max-width: calc(100% - 2rem); pointer-events: auto; }

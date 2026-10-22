@@ -61,6 +61,7 @@ test('a stalled calendar keeps the return and external link available', async ({
   await page.route('https://calendly.com/**', () => {})
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/')
+  await expect(page.locator('.room-page')).toHaveAttribute('data-ready', 'true')
   await page.getByRole('button', { name: 'Book a call', exact: false }).click()
   const booking = page.getByRole('dialog', { name: 'Let’s talk', exact: true })
   await expect(booking.getByRole('status')).toHaveText('Opening the calendar…')
