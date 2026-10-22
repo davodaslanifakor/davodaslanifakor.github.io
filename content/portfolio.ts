@@ -98,6 +98,8 @@ export const profile = {
 
 /** Short, scannable copy for the CV; the full project stories remain below. */
 export const cvPresentation = {
+  useLightMode: both('Switch to light mode', 'تغییر به حالت روشن'),
+  useDarkMode: both('Switch to dark mode', 'تغییر به حالت تیره'),
   introduction: both('I build editors, design systems, and the frontend foundations behind useful products.', 'ویرایشگرها، سیستم‌های طراحی و زیرساخت فرانت‌اند محصولات کاربردی را می‌سازم.'),
   availability: both('Open to senior and lead roles', 'آمادهٔ همکاری در نقش‌های ارشد و راهبری'),
   work: both('Work', 'کارها'),

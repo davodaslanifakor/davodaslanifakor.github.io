@@ -1,0 +1,35 @@
+/* Scoped to the CV document so room lighting and UI retain their own palette. */
+:root.cv-document {
+  --canvas: #f3efe7;
+  --panel: #eae5db;
+  --ink: #302e29;
+  --muted: #696860;
+  --acid: #59664f;
+  --line: rgb(48 46 41 / 20%);
+  --font-heading: Georgia, 'Times New Roman', serif;
+  color-scheme: light;
+}
+
+:root.cv-document[data-cv-theme='dark'] {
+  --canvas: #151817;
+  --panel: #1c211e;
+  --ink: #f0eee8;
+  --muted: #aeb5ae;
+  --acid: #c6d8a2;
+  --line: rgb(240 238 232 / 20%);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root.cv-document:not([data-cv-theme='light']) {
+    --canvas: #151817;
+    --panel: #1c211e;
+    --ink: #f0eee8;
+    --muted: #aeb5ae;
+    --acid: #c6d8a2;
+    --line: rgb(240 238 232 / 20%);
+    color-scheme: dark;
+  }
+}
+
+.cv-document body { color-scheme: inherit; }
