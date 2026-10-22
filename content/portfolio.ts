@@ -89,6 +89,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/davoud-fakour',
   github: 'https://github.com/davodaslanifakor',
   medium: 'https://medium.com/@DavoudAslaniFakour',
+  calendly: 'https://calendly.com/davodaslanifakor/request-call',
   // TODO(David): add the public CV PDF to /public and set its path here.
   cvPath: 'TODO(David)',
   education: text('Associate’s Degree, Computer Software Engineering — Azad University (2013–2015)'),
@@ -96,6 +97,14 @@ export const profile = {
 }
 
 export const ui = {
+  bookCall: both('Book a call', 'رزرو تماس'),
+  bookingTitle: both('Let’s talk', 'بیایید صحبت کنیم'),
+  bookingFrame: both('Schedule a call with Davoud on Calendly', 'رزرو تماس با داوود در Calendly'),
+  bookingLoading: both('Opening the calendar…', 'در حال باز کردن تقویم…'),
+  bookingSlow: both('Calendar taking a while? Try again or open Calendly directly.', 'تقویم دیر باز می‌شود؟ دوباره تلاش کنید یا Calendly را مستقیم باز کنید.'),
+  bookingRetry: both('Try again', 'تلاش دوباره'),
+  bookingExternal: both('Open Calendly', 'باز کردن Calendly'),
+  bookingBack: both('Back to the room', 'بازگشت به اتاق'),
   roomTitle: text('Behind the Build'),
   portfolioLabel: text('Portfolio / 2026'),
   portfolioControls: text('Portfolio controls'),
@@ -471,6 +480,7 @@ export const sceneObjects: SceneObject[] = [
   { id: 'library_career', mesh: 'int_library_career', camera: 'cam_library_career', label: text('Career'), action: 'modal', contentRef: 'timeline' },
   { id: 'library_contact', mesh: 'int_library_contact', camera: 'cam_library_contact', label: text('Contact'), action: 'modal', contentRef: 'contact' },
   { id: 'monitor', mesh: 'int_monitor', camera: 'cam_monitor', label: text('Visual editor'), action: 'zoom-editor', contentRef: 'monitor' },
+  { id: 'booking', mesh: 'int_monitor_screen', camera: 'cam_monitor', label: ui.bookCall, action: 'modal', contentRef: 'booking' },
   { id: 'screen_left', mesh: 'int_screen_left', camera: 'cam_screen_left', label: text('Selected work'), action: 'modal', contentRef: 'selected-work' },
   { id: 'screen_right', mesh: 'int_screen_right', camera: 'cam_screen_right', label: text('Skills and tools'), action: 'modal', contentRef: 'skills' },
   { id: 'clock', mesh: 'int_clock', camera: 'cam_clock', label: text('Career timeline'), action: 'modal', contentRef: 'timeline' },

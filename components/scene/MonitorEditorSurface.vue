@@ -122,6 +122,7 @@ onBeforeUnmount(() => {
     class="monitor-editor-host"
     :class="{ 'monitor-editor-host--active': props.active }"
     :aria-hidden="!props.active"
+    :inert="!props.active"
     :role="props.active ? 'dialog' : undefined"
     :aria-modal="props.active ? true : undefined"
     :aria-label="props.active ? localize(ui.editorTitle, props.locale) : undefined"

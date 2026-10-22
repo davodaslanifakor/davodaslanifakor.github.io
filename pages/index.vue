@@ -25,7 +25,7 @@ const socialImage = new URL('/og-portfolio.jpg', siteUrl).href
 const pageTitle = computed(() => `${profile.name} — ${localize(ui.roomTitle, locale.value)}`)
 
 const activeObject = computed(() => sceneObjects.find((object) => object.id === focusedId.value) ?? null)
-const modalContent = computed(() => activeObject.value?.action === 'modal' && activeObject.value.contentRef !== 'music' ? activeObject.value.contentRef ?? '' : '')
+const modalContent = computed(() => activeObject.value?.action === 'modal' && !['music', 'booking'].includes(activeObject.value.contentRef ?? '') ? activeObject.value.contentRef ?? '' : '')
 let returnFocus: HTMLElement | null = null
 useHead(() => ({
   title: pageTitle.value,
@@ -169,6 +169,7 @@ watch(shouldUseCvFallback, (shouldFallback) => {
           @close-editor="closeLayer"
           @close-music="closeLayer"
           @close-game="closeLayer"
+          @close-booking="closeLayer"
           @select-music="scene.setNowPlaying($event)"
           @music-playback="scene.setMusicPlayback($event)"
           @failed="fail"

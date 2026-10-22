@@ -10,7 +10,7 @@ import type { Locale, SceneObject } from '~/content/portfolio'
 import { favouriteMusic, localize, ui } from '~/content/portfolio'
 import { useCameraRig } from '~/composables/useCameraRig'
 import { CAMERA_FOCUS_POINTS } from '~/composables/generated/cameraFocus'
-import { normalizeMeshName, resolveInteractiveMeshName, useRaycast } from '~/composables/useRaycast'
+import { resolveSceneObject, resolveInteractiveMeshName, useRaycast } from '~/composables/useRaycast'
 import { useQuality } from '~/composables/useQuality'
 import { usePointerPicking } from '~/composables/usePointerPicking'
 import { useHoverMotion } from '~/composables/useHoverMotion'
@@ -28,6 +28,8 @@ import { usePhoneScreenTexture } from '~/composables/usePhoneScreenTexture'
 import { useWorldClocks } from '~/composables/useWorldClocks'
 import { bindRoomScreens } from '~/utils/roomScreens'
 import { getMonitorQuad } from '~/utils/monitorProjection'
+import { bookingCamera } from '~/utils/bookingScreen'
+import MacBookBookingSurface from './MacBookBookingSurface.vue'
 import MonitorMusicSurface from './MonitorMusicSurface.vue'
 import MonitorEditorSurface from './MonitorEditorSurface.vue'
 import RoomLightControl from './RoomLightControl.vue'
@@ -65,6 +67,7 @@ interface Emits {
   selectMusic: [id: string | null]
   closeEditor: []
   closeGame: []
+  closeBooking: []
   failed: [error: unknown]
 }
 
@@ -93,6 +96,8 @@ const viewportHeight = shallowRef(800)
 const musicBounds = shallowRef(new Box3())
 const musicSurface = useTemplateRef<InstanceType<typeof MonitorMusicSurface>>('musicSurface')
 const musicActive = computed(() => props.focusedId === 'speakers')
+const bookingActive = computed(() => props.focusedId === 'booking')
+const bookingSurface = useTemplateRef<InstanceType<typeof MacBookBookingSurface>>('bookingSurface')
 const roomBounds = shallowRef(new Box3())
 const openingBounds = shallowRef(new Box3())
 const preparedModel = shallowRef<Object3D | null>(null)
@@ -133,7 +138,7 @@ const focusPoints = computed(() => CAMERA_FOCUS_POINTS.map((point) => {
   }
   if (point.name !== 'cam_start') return point
   return { ...point, position: frameRoom(point.position, point.target, openingBounds.value, aspect.value) }
-}).concat(LIBRARY_FOCUS_POINTS, libraryPortraitFocus(preparedModel.value, aspect.value), [jokerAdventureFocus(aspect.value), deskMinionFocus(deskWorld.value, aspect.value, viewportHeight.value, deskWorld.value.front, props.reducedMotion)], (() => {
+}).concat(LIBRARY_FOCUS_POINTS, libraryPortraitFocus(preparedModel.value, aspect.value), [bookingCamera(preparedModel.value, aspect.value, viewportHeight.value), jokerAdventureFocus(aspect.value), deskMinionFocus(deskWorld.value, aspect.value, viewportHeight.value, deskWorld.value.front, props.reducedMotion)], (() => {
   const bounds = musicBounds.value
   const target = bounds.isEmpty() ? new Vector3(-0.25, 1.125, -0.2) : bounds.getCenter(new Vector3())
   const size = bounds.isEmpty() ? new Vector3(1.34, 0.364, 0.1) : bounds.getSize(new Vector3())
@@ -243,8 +248,7 @@ function collectInteractive(root: Object3D) {
     const meshName = resolveInteractiveMeshName(child)
     if (!meshName) return
 
-    const contractMesh = normalizeMeshName(meshName)
-    const owner = props.objects.find(object => object.mesh === contractMesh)
+    const owner = resolveSceneObject(meshName, props.objects)
     if (!owner) return
 
     // Static clock parts are pickable but retain their shared material finish.
@@ -439,6 +443,7 @@ function updateInteractiveToy(time: number) {
   if (camera.value) minionHint.value?.updateFrame(toRaw(camera.value))
   cameraTime = time
   musicSurface.value?.updateFrame()
+  bookingSurface.value?.updateFrame()
   updateHoverFrame(time)
   updateFrameHover(activeHover.value, time, props.reducedMotion)
 }
@@ -447,6 +452,7 @@ watch([aspect, viewportHeight, openingBounds, musicBounds, preparedModel], () =>
   if (minionCharacter.value) focus('minion_game')
   else if (jokerActive.value) { if (!jokerLoaded.value) focus('joker_game') }
   else if (musicActive.value) focus('music')
+  else if (bookingActive.value) focus('booking')
   else if (!props.focusedId) reset()
 })
 watch(() => props.reducedMotion, () => { if (minionCharacter.value) focus('minion_game') })
@@ -643,6 +649,15 @@ onBeforeUnmount(() => {
       @select="emit('selectMusic', $event)"
       @close="emit('closeMusic')"
       @playback="emit('musicPlayback', $event)"
+    />
+    <MacBookBookingSurface
+      v-if="bookingActive"
+      ref="bookingSurface"
+      :active="!isMoving && Boolean(preparedModel && surface)"
+      :camera="camera"
+      :model="preparedModel"
+      :locale="props.locale"
+      @close="emit('closeBooking')"
     />
     <MonitorEditorSurface
       :active="Boolean(props.editorActive) && !isMoving"
