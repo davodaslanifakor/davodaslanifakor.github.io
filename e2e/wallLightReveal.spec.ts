@@ -47,7 +47,9 @@ for (const key of ['Enter', 'Space']) {
   test(`light switch and replay finish immediately with ${key}`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' })
     const scene = await openDarkRoom(page)
-    await page.getByRole('button', { name: 'Step inside' }).press(key)
+    const entry = page.getByRole('button', { name: 'Step inside' })
+    await expect(entry).toBeEnabled()
+    await entry.press(key)
     await expect(scene).toHaveAttribute('data-light-phase', 'on')
     await expect(scene).toHaveAttribute('data-light-progress', '1')
     await expect(page.getByRole('button', { name: 'Replay room lights' })).toBeFocused()
