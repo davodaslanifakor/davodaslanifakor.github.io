@@ -10,6 +10,7 @@ import WritingSection from '~/components/cv/WritingSection.vue'
 import TimelineList from '~/components/cv/TimelineList.vue'
 
 const { locale, direction, toggleLocale, canSwitchLocale } = usePortfolioLocale()
+const { theme, themeReady, toggleTheme } = useCvTheme()
 const isReady = shallowRef(false)
 const siteUrl = useRuntimeConfig().public.siteUrl
 const socialImage = new URL('/og-portfolio.jpg', siteUrl).href
@@ -55,7 +56,7 @@ useHead({
 
 <template>
   <div class="cv-page" :dir="direction" :data-ready="isReady">
-    <CvNavigation :locale="locale" :can-switch-locale="canSwitchLocale" @toggle-locale="toggleLocale" />
+    <CvNavigation :locale="locale" :can-switch-locale="canSwitchLocale" :theme="theme" :theme-ready="themeReady" @toggle-locale="toggleLocale" @toggle-theme="toggleTheme" />
     <main class="cv-main">
       <ProfileHero :locale="locale" />
       <CaseStudyGrid :locale="locale" />
@@ -69,7 +70,7 @@ useHead({
 </template>
 
 <style scoped>
-.cv-page { --canvas: #f3efe7; --panel: #eae5db; --ink: #302e29; --muted: #696860; --acid: #59664f; --line: rgb(48 46 41 / 20%); --font-heading: Georgia, 'Times New Roman', serif; min-height: 100svh; background: var(--canvas); color: var(--ink); color-scheme: light; font-kerning: normal; text-rendering: optimizeLegibility; }
+.cv-page { min-height: 100svh; background: var(--canvas); color: var(--ink); font-kerning: normal; text-rendering: optimizeLegibility; }
 .cv-main { width: min(76rem, calc(100% - 4rem)); margin-inline: auto; }
 .cv-main :deep(section[id]) { scroll-margin-top: 6.5rem; }
 @media (max-width: 640px) { .cv-main { width: calc(100% - 2.5rem); } }

@@ -1,4 +1,5 @@
 @import './fonts.css';
+@import './cv-theme.css';
 
 :root {
   --canvas: #0b0d0f;
@@ -18,7 +19,6 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: var(--canvas); -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--canvas); color: var(--ink); font-size: 16px; }
-.cv-document,.cv-document body { background: #f3efe7; color-scheme: light; }
 button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }

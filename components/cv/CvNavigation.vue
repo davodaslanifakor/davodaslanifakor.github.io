@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { Locale } from '~/content/portfolio'
+import type { CvTheme } from '~/composables/useCvTheme'
 import { cvPresentation, localize, ui, writing } from '~/content/portfolio'
+import CvThemeToggle from '~/components/cv/CvThemeToggle.vue'
 
-const props = defineProps<{ locale: Locale; canSwitchLocale: boolean }>()
-const emit = defineEmits<{ toggleLocale: [] }>()
+const props = defineProps<{ locale: Locale; canSwitchLocale: boolean; theme: CvTheme; themeReady: boolean }>()
+const emit = defineEmits<{ toggleLocale: []; toggleTheme: [] }>()
 </script>
 
 <template>
@@ -16,6 +18,7 @@ const emit = defineEmits<{ toggleLocale: [] }>()
       <a v-if="writing.articles.length" class="secondary" href="#writing">{{ localize(ui.writing, props.locale) }}</a>
       <a class="nav-contact" href="#contact">{{ localize(ui.contact, props.locale) }} <span aria-hidden="true">↗</span></a>
       <button v-if="props.canSwitchLocale" type="button" @click="emit('toggleLocale')">{{ props.locale === 'en' ? 'FA' : 'EN' }}</button>
+      <CvThemeToggle :locale="props.locale" :theme="props.theme" :ready="props.themeReady" @toggle="emit('toggleTheme')" />
     </div>
   </nav>
 </template>
@@ -25,7 +28,7 @@ const emit = defineEmits<{ toggleLocale: [] }>()
 .cv-mark { display: flex; align-items: center; flex-shrink: 0; min-height: 44px; color: var(--ink); font-size: 1rem; font-weight: 650; text-decoration: none; }
 .room-link { color: var(--muted); font-weight: 400; white-space: pre; }
 .cv-nav-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: end; gap: .5rem 1.5rem; }
-.cv-nav-links a,.cv-nav-links button { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; border: 0; background: transparent; color: var(--muted); font: 500 .875rem/1.4 var(--font-display); text-decoration: none; }
+.cv-nav-links a,.cv-nav-links > button:not(.cv-theme-toggle) { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; border: 0; background: transparent; color: var(--muted); font: 500 .875rem/1.4 var(--font-display); text-decoration: none; }
 .cv-nav-links a:hover,.cv-nav-links button:hover,.cv-mark:hover { color: var(--acid); }
 .cv-nav-links .nav-contact { color: var(--ink); }
 @media (max-width: 640px) {
@@ -34,5 +37,5 @@ const emit = defineEmits<{ toggleLocale: [] }>()
   .cv-nav-links a,.cv-nav-links button { font-size: .8125rem; }
   .secondary,.room-link { display: none !important; }
 }
-@media (max-width: 350px) { .cv-nav { width: calc(100% - 2rem); } .cv-nav-links { gap: .6rem; } }
+@media (max-width: 350px) { .cv-nav { width: calc(100% - 2rem); gap: .5rem; } .cv-nav-links { gap: .5rem; } .nav-contact span { display: none; } }
 </style>
