@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, shallowRef, toRaw, useTemplateRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, toRaw, useTemplateRef, watch } from 'vue'
 import type { Object3D, PerspectiveCamera } from 'three'
 import type { Locale } from '~/content/portfolio'
 import { localize, profile, ui } from '~/content/portfolio'
@@ -14,6 +14,9 @@ const close = useTemplateRef<HTMLButtonElement>('close')
 const transform = shallowRef('')
 const screenHeight = shallowRef(474)
 const started = shallowRef(false)
+// Once open, resize-driven camera adjustments must not make the iframe inert
+// again: WebKit drops keyboard focus when its focused subtree becomes inert.
+const visible = computed(() => props.active || started.value)
 let measured: Object3D | null = null
 let quad: ScreenQuad | null = null
 const WIDTH = 720
@@ -54,12 +57,12 @@ function focusCalendar() { host.value?.querySelector('iframe')?.focus() }
   <div
     ref="host"
     class="macbook-booking"
-    :class="{ 'macbook-booking--active': props.active }"
+    :class="{ 'macbook-booking--active': visible }"
     role="dialog"
     :aria-label="localize(ui.bookingTitle, props.locale)"
-    :aria-modal="props.active ? true : undefined"
-    :aria-hidden="!props.active"
-    :inert="!props.active"
+    :aria-modal="visible ? true : undefined"
+    :aria-hidden="!visible"
+    :inert="!visible"
     :dir="props.locale === 'fa' ? 'rtl' : 'ltr'"
     @keydown.esc.stop="emit('close')"
   >
