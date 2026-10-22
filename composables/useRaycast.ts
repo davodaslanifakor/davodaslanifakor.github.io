@@ -26,6 +26,12 @@ export function normalizeMeshName(meshName: string): string {
   return meshName.replace(MESH_SUFFIX, '')
 }
 
+/** A separately registered screen owns its click; other laptop parts keep their existing action. */
+export function resolveSceneObject(meshName: string, objects: readonly SceneObject[]): SceneObject | undefined {
+  return objects.find(object => object.mesh === meshName)
+    ?? objects.find(object => object.mesh === normalizeMeshName(meshName))
+}
+
 export function resolveInteractiveMeshName(object: Object3D | null | undefined): string | null {
   let current = object ?? null
 
@@ -50,8 +56,7 @@ export function useRaycast(options: UseRaycastOptions) {
     const meshName = resolveInteractiveMeshName(hit)
     if (!meshName) return fallback
 
-    const contractMesh = normalizeMeshName(meshName)
-    return toValue(options.objects).find(object => object.mesh === contractMesh) ?? fallback
+    return resolveSceneObject(meshName, toValue(options.objects)) ?? fallback
   }
 
   function handlePointerEnter(event: ScenePointerEvent, fallback?: SceneObject) {

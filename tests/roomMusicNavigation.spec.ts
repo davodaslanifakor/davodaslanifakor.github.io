@@ -28,7 +28,7 @@ describe('music during room navigation', () => {
       room.vm.$emit('musicPlayback', { trackId: track.id, playing: true, positionMs: 42000, durationMs: 180000 })
       await nextTick()
       const snapshot = { ...scene.musicPlayback }
-      for (const id of ['speakers', 'clock', 'library_about', 'screen_right', 'monitor', 'bugjar']) {
+      for (const id of ['speakers', 'clock', 'library_about', 'screen_right', 'monitor', 'booking', 'bugjar']) {
         await wrapper.get(`[data-object-id="${id}"]`).trigger('click')
         expect(scene.focusedId).toBe(id)
         expect(scene.nowPlaying).toBe(track.id)

@@ -16,6 +16,9 @@ for (const frame of [
     const artwork = dialog.getByRole('img')
     await expect(artwork).toBeVisible()
     await expect.poll(() => artwork.evaluate(image => (image as HTMLImageElement).naturalWidth)).toBe(frame.width)
+    // Vue's enter-from scale can exist for a frame even with reduced motion.
+    // Measure the resting artwork, not that temporary scale.
+    await expect(page.locator('.backdrop')).toHaveCSS('transform', 'none')
     const bounds = await artwork.boundingBox()
     expect(bounds!.width / bounds!.height).toBeCloseTo(frame.width / frame.height, 2)
     expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(page.viewportSize()!.width)

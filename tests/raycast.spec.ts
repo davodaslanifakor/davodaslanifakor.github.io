@@ -20,6 +20,18 @@ describe('interactive mesh resolution', () => {
     expect(normalizeMeshName('int_monitor_screen')).toBe('int_monitor')
   })
 
+  it('gives the screen its booking action while retaining the editor on other laptop meshes', () => {
+    const raycast = useRaycast({ objects: sceneObjects })
+    const screen = new Object3D()
+    screen.name = 'int_monitor_screen'
+    expect(raycast.resolveObject({ object: screen })).toMatchObject({ id: 'booking', contentRef: 'booking' })
+    const body = new Object3D()
+    body.name = 'int_monitor__2'
+    expect(raycast.resolveObject({ object: body })).toMatchObject({ id: 'monitor', action: 'zoom-editor' })
+    const legacy = useRaycast({ objects: sceneObjects.filter(object => object.id !== 'booking') })
+    expect(legacy.resolveObject({ object: screen })?.id).toBe('monitor')
+  })
+
   it('opens the portrait from its artwork, mat, and frame without renaming the source meshes', () => {
     const raycast = useRaycast({ objects: sceneObjects })
     for (const name of ['static_style_art_frame', 'static_style_art_paper', 'static_style_art_portrait']) {
@@ -83,7 +95,7 @@ describe('interactive mesh resolution', () => {
     }
 
     expect(activated).toEqual([
-      'monitor',
+      'booking',
       'screen_left',
       'screen_right',
       'clock',

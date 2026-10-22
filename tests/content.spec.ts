@@ -3,10 +3,10 @@ import { caseStudies, roles, sceneObjects, screenContent, skills } from '../cont
 
 describe('portfolio content contracts', () => {
   it('defines every interactive room object with unique mesh names', () => {
-    expect(sceneObjects).toHaveLength(18)
+    expect(sceneObjects).toHaveLength(19)
     expect(sceneObjects.map((object) => object.id)).toEqual([
       'library_about', 'library_story', 'library_career', 'library_contact',
-      'monitor', 'screen_left', 'screen_right', 'clock', 'elephant', 'bugjar',
+      'monitor', 'booking', 'screen_left', 'screen_right', 'clock', 'elephant', 'bugjar',
       'paratrooper', 'robot', 'cards', 'speakers', 'world_clocks', 'phone', 'certificate', 'library_portrait',
     ])
     expect(new Set(sceneObjects.map((object) => object.mesh)).size).toBe(sceneObjects.length)
