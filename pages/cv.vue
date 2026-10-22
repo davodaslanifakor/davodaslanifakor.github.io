@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { localize, profile, ui, writing } from '~/content/portfolio'
+import { profile } from '~/content/portfolio'
+import CvNavigation from '~/components/cv/CvNavigation.vue'
 import CaseStudyGrid from '~/components/cv/CaseStudyGrid.vue'
 import ContactCard from '~/components/cv/ContactCard.vue'
 import ProfileHero from '~/components/cv/ProfileHero.vue'
@@ -18,6 +19,7 @@ onMounted(() => {
 })
 
 useHead({
+  htmlAttrs: { class: 'cv-document' },
   title: `${profile.name} — Senior Frontend Engineer & Technical Lead`,
   link: [{ rel: 'canonical', href: new URL('/cv/', siteUrl).href }],
   meta: [
@@ -53,24 +55,13 @@ useHead({
 
 <template>
   <div class="cv-page" :dir="direction" :data-ready="isReady">
-    <nav class="cv-nav" :aria-label="localize(ui.cvNavigation, locale)">
-      <NuxtLink class="cv-mark" to="/">DF</NuxtLink>
-      <div class="cv-nav-links">
-        <a href="#story">{{ localize(ui.lifeStory, locale) }}</a>
-        <a href="#experience">{{ localize(ui.experience, locale) }}</a>
-        <a href="#work">{{ localize(ui.selectedWork, locale) }}</a>
-        <a v-if="writing.articles.length" href="#writing">{{ localize(ui.writing, locale) }}</a>
-        <a href="#contact">{{ localize(ui.contact, locale) }}</a>
-        <button v-if="canSwitchLocale" type="button" @click="toggleLocale">{{ locale === 'en' ? 'FA' : 'EN' }}</button>
-      </div>
-    </nav>
-
+    <CvNavigation :locale="locale" :can-switch-locale="canSwitchLocale" @toggle-locale="toggleLocale" />
     <main class="cv-main">
       <ProfileHero :locale="locale" />
-      <StorySection :locale="locale" />
+      <CaseStudyGrid :locale="locale" />
       <TimelineList :locale="locale" />
       <SkillsGrid :locale="locale" />
-      <CaseStudyGrid :locale="locale" />
+      <StorySection :locale="locale" />
       <WritingSection :locale="locale" />
       <ContactCard :locale="locale" />
     </main>
@@ -78,12 +69,9 @@ useHead({
 </template>
 
 <style scoped>
-.cv-page { min-height: 100svh; background: var(--canvas); }
-.cv-nav { position: fixed; z-index: 20; top: 0; inset-inline: 0; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem clamp(1rem,4vw,3.5rem); background: linear-gradient(to bottom, var(--canvas) 20%, transparent); }
-.cv-mark { display: grid; width: 2.8rem; height: 2.8rem; place-items: center; border: 1px solid var(--line); color: var(--acid); font: 1rem/1 var(--font-display); text-decoration: none; }
-.cv-nav-links { display: flex; align-items: center; gap: clamp(.7rem,2vw,1.5rem); }
-.cv-nav-links a,.cv-nav-links button { border: 0; background: transparent; color: var(--muted); font: .72rem/1 var(--font-mono); text-decoration: none; text-transform: uppercase; }
-.cv-nav-links a:hover,.cv-nav-links button:hover { color: var(--acid); }
-.cv-main { width: min(92rem, calc(100% - 2rem)); margin: 0 auto; }
-@media (max-width: 600px) { .cv-nav-links a { display: none; } }
+.cv-page { --canvas: #f3efe7; --panel: #eae5db; --ink: #302e29; --muted: #696860; --acid: #59664f; --line: rgb(48 46 41 / 20%); --font-heading: Georgia, 'Times New Roman', serif; min-height: 100svh; background: var(--canvas); color: var(--ink); color-scheme: light; font-kerning: normal; text-rendering: optimizeLegibility; }
+.cv-main { width: min(76rem, calc(100% - 4rem)); margin-inline: auto; }
+.cv-main :deep(section[id]) { scroll-margin-top: 6.5rem; }
+@media (max-width: 640px) { .cv-main { width: calc(100% - 2.5rem); } }
+@media (max-width: 350px) { .cv-main { width: calc(100% - 2rem); } }
 </style>

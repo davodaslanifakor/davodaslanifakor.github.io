@@ -51,7 +51,7 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
 
 <template>
   <div class="backdrop" role="presentation" @mousedown.self="emit('close')">
-    <div ref="dialog" class="modal" :class="{ 'modal--artwork': ['certificate', 'portrait'].includes(props.contentRef) }" role="dialog" aria-modal="true" :aria-label="title" @keydown="onKeydown">
+    <div ref="dialog" class="modal" :class="{ 'modal--artwork': ['certificate', 'portrait'].includes(props.contentRef), 'modal--phone': props.contentRef === 'mobile-preview' }" role="dialog" aria-modal="true" :aria-label="title" @keydown="onKeydown">
       <header class="modal-header">
         <p class="modal-kicker">{{ localize(ui.roomContext, props.locale) }} / {{ props.contentRef }}</p>
         <button class="close" type="button" @click="emit('close')">{{ localize(ui.close, props.locale) }} <span aria-hidden="true">×</span></button>
@@ -160,6 +160,9 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
 .modal--artwork { width: min(86rem, 100%); max-height: 94svh; }
 .modal--artwork .modal-body { padding: clamp(.8rem, 3vw, 2rem); }
 .modal--artwork .modal-title { margin-bottom: 1.25rem; font-size: clamp(1.8rem, 4vw, 2.75rem); }
+.modal--phone { width: min(58rem, 100%); max-height: 94svh; }
+.modal--phone .modal-body { padding: clamp(1.25rem, 3vw, 2rem); }
+.modal--phone .modal-title { margin-bottom: 1.5rem; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.035em; }
 .modal-list { margin: 0; padding: 0; list-style: none; }
 .modal-list li { display: grid; grid-template-columns: minmax(8rem,.55fr) 1fr 1.5fr; gap: 1rem; border-top: 1px solid var(--line); padding: 1.1rem 0; }
 .modal-list strong { color: var(--acid); font-size: 0.8rem; }

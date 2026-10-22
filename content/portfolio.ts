@@ -96,6 +96,23 @@ export const profile = {
   languages: text('English — professional working proficiency · Persian — native'),
 }
 
+/** Short, scannable copy for the CV; the full project stories remain below. */
+export const cvPresentation = {
+  introduction: both('I build editors, design systems, and the frontend foundations behind useful products.', 'ویرایشگرها، سیستم‌های طراحی و زیرساخت فرانت‌اند محصولات کاربردی را می‌سازم.'),
+  availability: both('Open to senior and lead roles', 'آمادهٔ همکاری در نقش‌های ارشد و راهبری'),
+  work: both('Work', 'کارها'),
+  room: both('The room', 'اتاق'),
+  readStory: both('Read my story', 'داستانم را بخوانید'),
+  storyPreview: both('From technical school to building products across borders.', 'از هنرستان تا ساخت محصول فراتر از مرزها.'),
+  caseSummaries: {
+    monitor: both('A Vue editor for multi-page documents, image tools, and export.', 'ویرایشگر Vue برای اسناد چندصفحه‌ای، ابزارهای تصویر و خروجی.'),
+    paratrooper: both('A stalled crypto platform, rebuilt and shipped in three months.', 'بازسازی و انتشار یک پلتفرم رمزارز متوقف‌شده در سه ماه.'),
+    bugjar: both('Tracing a production file-upload failure to its source on Android.', 'ردیابی علت خطای بارگذاری فایل در اندروید.'),
+    robot: both('Giving AI agents the architecture and product context they need.', 'فراهم کردن زمینهٔ معماری و محصول برای عامل‌های هوش مصنوعی.'),
+    cards: both('One source of truth for business cards, letterheads, and signatures.', 'یک منبع واحد برای کارت ویزیت، سربرگ و امضا.'),
+  } as Record<string, I18nText>,
+}
+
 export const ui = {
   bookCall: both('Book a call', 'رزرو تماس'),
   bookingTitle: both('Let’s talk', 'بیایید صحبت کنیم'),
@@ -142,7 +159,7 @@ export const ui = {
   resumeRoomColors: { en: 'Resume colors', fa: 'ادامهٔ رنگ‌ها' },
   resetView: text('Reset view'),
   mobilePreviewTitle: text('On your phone'),
-  mobilePreviewIntro: text('The same portfolio, built mobile-first. Scroll the CV inside this phone, or open it on your own device.'),
+  mobilePreviewIntro: text('Work, experience, and a little of my story. Scroll inside the phone to explore.'),
   mobilePreviewOnPhone: text('You are already on a phone — the CV is one tap away.'),
   mobilePreviewFrame: text('Mobile preview of the CV page'),
   openCv: text('Open the CV'),
