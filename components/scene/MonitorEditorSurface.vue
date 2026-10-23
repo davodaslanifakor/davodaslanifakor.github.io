@@ -149,7 +149,7 @@ onBeforeUnmount(() => {
   pointer-events: auto;
   opacity: 1;
 }
-.monitor-editor-close { position: absolute; z-index: 2; inset-block-end: 7rem; inset-inline-end: 2rem; min-height: 2.75rem; border: 1px solid #c6d8a2; border-radius: .5rem; padding: .65rem .9rem; background: #111814; color: #c6d8a2; font: .75rem/1 var(--font-mono); pointer-events: auto; }
+.monitor-editor-close { position: absolute; z-index: 2; inset-block-end: 7rem; inset-inline-end: 2rem; min-height: 2.75rem; border: 1px solid #c6d8a2; border-radius: .5rem; padding: .65rem .9rem; background: #111814; color: #c6d8a2; font: .75rem/1 var(--font-body); pointer-events: auto; }
 
 .monitor-editor-surface {
   width: 840px;

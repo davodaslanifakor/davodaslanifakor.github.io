@@ -14,7 +14,7 @@ const hasContact = computed(() => !profile.email.startsWith('TODO') && !profile.
       <p class="contact-kicker">{{ localize(profile.cta, props.locale) }}</p>
       <h2 class="contact-title">{{ localize(ui.contact, props.locale) }}</h2>
       <div v-if="hasContact" class="contact-links">
-        <a :href="profile.calendly" rel="noopener noreferrer" target="_blank">{{ localize(ui.bookCall, props.locale) }} ↗</a>
+        <a class="booking-link" :href="profile.calendly" rel="noopener noreferrer" target="_blank">{{ localize(ui.bookCall, props.locale) }} ↗</a>
         <a :href="`mailto:${profile.email}`">{{ localize(ui.emailLabel, props.locale) }}</a>
         <a :href="profile.linkedin" rel="noopener" target="_blank">{{ localize(ui.linkedinLabel, props.locale) }}</a>
         <a :href="profile.github" rel="noopener" target="_blank">{{ localize(ui.githubLabel, props.locale) }}</a>
@@ -33,5 +33,7 @@ const hasContact = computed(() => !profile.email.startsWith('TODO') && !profile.
 .contact-links { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; }
 .contact-links a { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 1px solid var(--line); padding-block: .6rem; color: var(--ink); font-size: .9375rem; text-decoration: none; }
 .contact-links a:hover { color: var(--acid); border-color: var(--acid); }
+.contact-links .booking-link { padding-inline: 1rem; border: 1px solid transparent; border-radius: 4px; background: var(--cv-sunlight); color: var(--cv-on-sunlight); font-weight: 600; transition: background-color 160ms ease; }
+.contact-links .booking-link:hover { background: var(--cv-sunlight-hover); color: var(--cv-on-sunlight); border-color: transparent; }
 .pending { max-width: 32rem; color: var(--muted); }
 </style>

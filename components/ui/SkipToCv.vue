@@ -25,6 +25,7 @@ const label = computed(() => localize(ui.skipToCv, props.locale))
   padding: 0.7rem 1rem;
   background: rgb(12 14 17 / 76%);
   color: var(--ink);
+  font: 500 .8125rem/1.4 var(--font-body);
   text-decoration: none;
   backdrop-filter: blur(16px);
   transition: border-color 180ms ease, transform 180ms ease;

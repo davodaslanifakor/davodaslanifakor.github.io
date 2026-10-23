@@ -114,7 +114,7 @@ function navigateThemes(event: KeyboardEvent) {
 .theme-option:hover .segment { background: rgb(255 255 255 / 7%); }
 @media (max-width: 720px) {
   .screen-preview { position: static; }
-  .preview-toggle { width: 2.5rem; height: 2.5rem; }
+  .preview-toggle { width: 2.75rem; height: 2.75rem; }
   .theme-options { inset-block-start: calc(100% - .25rem); inset-inline-end: .7rem; }
 }
 </style>

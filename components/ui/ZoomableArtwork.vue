@@ -39,7 +39,7 @@ watch(() => props.src, reset)
 .artwork-tools button:disabled { opacity: .35; cursor: default; }
 .artwork-tools button:hover:not(:disabled),.artwork-original:hover { border-color: var(--acid); }
 .artwork-original { margin-inline-start: auto; text-decoration: none; }
-.artwork-scale { min-width: 3.2em; text-align: center; color: var(--muted); font: .75rem/1.2 var(--font-mono); }
+.artwork-scale { min-width: 3.2em; text-align: center; color: var(--muted); font: .75rem/1.2 var(--font-body); }
 .artwork-viewport { position: relative; height: min(56svh, 40rem); overflow: hidden; background: #080c0d; border: 1px solid var(--line); border-radius: .3rem; touch-action: none; overscroll-behavior: contain; cursor: zoom-in; }
 .artwork-viewport--zoomed { cursor: grab; }
 .artwork-viewport--dragging { cursor: grabbing; }

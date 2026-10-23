@@ -8,8 +8,12 @@
   --muted: #92989e;
   --line: rgb(242 239 232 / 15%);
   --acid: #d8ff3e;
-  --font-display: 'Manrope', system-ui, sans-serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+  --font-display: var(--font-body);
+  --font-heading: Georgia, 'Times New Roman', serif;
   --font-mono: 'DM Mono', ui-monospace, monospace;
+  --brand-color-display: none;
+  --brand-white-display: block;
   color-scheme: dark;
   font-family: var(--font-display);
   background: var(--canvas);

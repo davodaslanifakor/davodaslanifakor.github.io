@@ -760,3 +760,18 @@ export const jokerAdventureCopy = {
     exit: both('Get out of the car', 'از ماشین پیاده شو'),
   },
 }
+
+// Assets supplied in the Aslani Fakour brand book; the supporting colors come
+// from Davoud's accompanying palette. Dark ink keeps every editable card readable.
+export const portfolioBrand = {
+  lockup: '/images/brand/brand-color.svg',
+  lockupWhite: '/images/brand/brand-white.svg',
+  symbol: '/images/brand/lion-color.svg',
+  palette: [
+    { name: text('Periwinkle'), background: '#676fff', foreground: '#15151f' },
+    { name: text('Sunlight'), background: '#ffe066', foreground: '#15151f' },
+    { name: text('Lavender'), background: '#7c80bf', foreground: '#15151f' },
+    { name: text('Sand'), background: '#aaa17d', foreground: '#15151f' },
+    { name: text('Slate'), background: '#737380', foreground: '#ffffff' },
+  ],
+}

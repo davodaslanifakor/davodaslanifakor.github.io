@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { RotateCcw } from '@lucide/vue'
 import type { Locale } from '~/content/portfolio'
 import { enabledLocales, localize, profile, ui } from '~/content/portfolio'
 import SkipToCv from './SkipToCv.vue'
+import PortfolioBrand from './PortfolioBrand.vue'
 import ScreenThemePicker from './ScreenThemePicker.vue'
 import type { ScreenThemeId } from '~/utils/screenTheme'
 
@@ -23,15 +25,12 @@ const emit = defineEmits<{
 <template>
   <header class="hud" :class="{ 'hud--game': gameActive }">
     <div v-if="!gameActive" class="identity">
-      <NuxtLink class="mark" to="/" :aria-label="localize(ui.home, props.locale)">DF</NuxtLink>
-      <div>
-        <p class="name">{{ profile.name }}</p>
-        <p class="role">{{ localize(profile.role, props.locale) }}</p>
-      </div>
+      <NuxtLink no-prefetch class="mark" to="/" :aria-label="localize(ui.home, props.locale)"><PortfolioBrand /></NuxtLink>
+      <p class="role">{{ localize(profile.role, props.locale) }}</p>
     </div>
 
     <nav class="actions" :aria-label="localize(ui.portfolioControls, props.locale)">
-      <button v-if="!gameActive" class="control reset-view" type="button" @click="emit('resetView')">{{ localize(ui.resetView, props.locale) }}</button>
+      <button v-if="!gameActive" class="control reset-view" type="button" :title="localize(ui.resetView, props.locale)" @click="emit('resetView')"><RotateCcw class="reset-icon" :size="16" aria-hidden="true" /><span>{{ localize(ui.resetView, props.locale) }}</span></button>
       <button v-if="enabledLocales.length > 1" class="control" type="button" @click="emit('toggleLocale')">
         {{ props.locale === 'en' ? 'FA' : 'EN' }}
         <span class="sr-only">{{ localize(ui.language, props.locale) }}</span>
@@ -46,7 +45,7 @@ const emit = defineEmits<{
         {{ localize(ui.sound, props.locale) }}: {{ localize(props.soundOn ? ui.on : ui.off, props.locale) }}
       </button>
       <ScreenThemePicker v-if="!gameActive" :locale="props.locale" :theme="props.screenTheme" @select="emit('selectScreenTheme', $event)" />
-      <NuxtLink class="contact-link" to="/cv#contact">{{ localize(ui.contactLink, props.locale) }} ↗</NuxtLink>
+      <NuxtLink class="contact-link" to="/cv#contact">{{ localize(ui.contactLink, props.locale) }} <span>↗</span></NuxtLink>
       <SkipToCv :locale="props.locale" />
     </nav>
   </header>
@@ -72,25 +71,22 @@ const emit = defineEmits<{
   gap: 0.75rem;
   pointer-events: auto;
 }
+.identity { flex-direction: column; align-items: flex-start; gap: .3rem; }
 
 .mark {
+  --brand-width: 236px;
+  --brand-size: 40px;
+  --brand-symbol-filter: brightness(0) invert(1);
+  --brand-color-display: none;
+  --brand-white-display: block;
   display: grid;
-  width: 2.75rem;
-  height: 2.75rem;
+  min-height: 2.75rem;
   place-items: center;
-  border: 1px solid var(--line);
-  border-radius: .7rem;
-  background: rgb(198 216 162 / 6%);
-  color: var(--acid);
-  font-family: var(--font-display);
   text-decoration: none;
 }
 
-.name,
-.role { margin: 0; }
 .hud--game { justify-content:flex-end; padding-block:.65rem; }
-.name { font: 600 0.85rem/1.1 var(--font-display); letter-spacing: -0.01em; }
-.role { margin-top: 0.25rem; color: var(--muted); font-size: 0.75rem; }
+.role { margin: 0; color: var(--muted); font: .75rem/1.5 var(--font-body); }
 
 .control {
   min-height: 2.75rem;
@@ -100,47 +96,50 @@ const emit = defineEmits<{
   background: rgb(12 14 17 / 76%);
   color: var(--ink);
   backdrop-filter: blur(16px);
-  font-size: .75rem;
+  font: 500 .8125rem/1.4 var(--font-body);
   transition: border-color 180ms ease, background 180ms ease;
 }
 
 .control:hover,
 .control:focus-visible { border-color: var(--acid); }
+.reset-icon { display: none; }
 
 .contact-link {
   display: inline-flex;
   min-height: 2.75rem;
   align-items: center;
   justify-content: center;
+  gap: .3rem;
   border: 1px solid rgb(198 216 162 / 35%);
   border-radius: 999px;
   padding: .6rem .9rem;
   background: rgb(198 216 162 / 6%);
   color: var(--acid);
-  font-size: .75rem;
+  font: 500 .8125rem/1.4 var(--font-body);
   text-decoration: none;
 }
 .contact-link:hover,.contact-link:focus-visible { border-color: var(--acid); }
 
-@media (max-width: 1100px) and (min-aspect-ratio: 1/1) {
+@media (max-width: 1100px) {
   .role { display: none; }
-  .name { white-space: nowrap; }
+  .mark { --brand-width: 210px; }
   .actions { gap: .4rem; }
-  .control,.contact-link { min-height: 2.4rem; padding: .45rem .65rem; font-size: .68rem; white-space: nowrap; }
-  .hud :deep(.skip-button) { min-height: 2.4rem; padding: .45rem .65rem; white-space: nowrap; }
+  .control,.contact-link { padding: .45rem .65rem; font-size: .75rem; white-space: nowrap; }
+  .hud :deep(.skip-button) { padding: .45rem .65rem; white-space: nowrap; }
 }
 
 @media (max-width: 720px) {
   .hud { padding: .75rem .7rem; gap: .3rem; }
-  .role,
-  .name,
   .sound-control { display: none; }
   .identity { gap: .5rem; }
-  .mark { width: 2.5rem; height: 2.5rem; }
+  .mark { min-width: 2.75rem; }
   .actions { gap: .3rem; }
-  .control { min-height: 2.5rem; padding: .5rem .55rem; }
-  .contact-link { min-height: 2.5rem; padding: .5rem .55rem; font-size: .67rem; white-space: nowrap; }
-  .reset-view { font-size: .67rem; white-space: nowrap; }
-  .hud :deep(.skip-button) { min-height: 2.5rem; padding: .5rem .6rem; gap: .25rem; font-size: .67rem; white-space: nowrap; }
+  .control { padding: .5rem .55rem; }
+  .contact-link { padding: .5rem .4rem; font-size: .75rem; white-space: nowrap; }
+  .reset-view { display: grid; min-width: 2.75rem; place-items: center; }
+  .reset-icon { display: block; }
+  .reset-view span { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .contact-link span,.hud :deep(.skip-button > span:last-child) { display: none; }
+  .hud :deep(.skip-button) { padding: .5rem .4rem; gap: 0; font-size: .75rem; white-space: nowrap; }
 }
 </style>

@@ -28,9 +28,9 @@ const clocks = computed(() => screenContent.cities.map(city => ({
 .clock-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; }
 .clock-card { display: grid; gap: .6rem; min-height: 9rem; border: 1px solid var(--line); padding: 1.1rem; background: rgb(198 216 162 / 4%); }
 .clock-card p,.clock-card time,.clock-card span { margin: 0; color: var(--muted); }
-.clock-card p { font: .72rem/1.2 var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
+.clock-card p { font: .72rem/1.2 var(--font-body); letter-spacing: .07em; text-transform: uppercase; }
 .clock-card strong { font: 500 clamp(2rem, 4vw, 3.3rem)/1 var(--font-display); font-variant-numeric: tabular-nums; }
 .clock-card time { font-size: .82rem; }
-.clock-card span { font: .62rem/1.3 var(--font-mono); opacity: .7; }
+.clock-card span { font: .62rem/1.3 var(--font-body); opacity: .7; }
 @media (max-width: 700px) { .clock-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>

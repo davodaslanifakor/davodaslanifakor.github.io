@@ -207,6 +207,8 @@ watch(shouldUseCvFallback, (shouldFallback) => {
 .room-page {
   --acid: #c6d8a2;
   --muted: #a4aaa0;
+  font-family: var(--font-body);
+  font-kerning: normal;
   position: relative;
   min-height: 100svh;
   height: 100svh;
@@ -216,7 +218,7 @@ watch(shouldUseCvFallback, (shouldFallback) => {
 .room-intro {
   position: absolute;
   z-index: 4;
-  inset-block-start: 5.5rem;
+  inset-block-start: 6.75rem;
   inset-inline-start: clamp(1rem, 3vw, 2.5rem);
   padding: 0;
   display: grid;
@@ -252,33 +254,33 @@ watch(shouldUseCvFallback, (shouldFallback) => {
 }
 .intro-label { grid-column: 1 / -1; }
 .intro-label,.intro-title,.intro-copy,.intro-hint { margin: 0; }
-.intro-label { color: var(--acid); font: .68rem/1 var(--font-mono); letter-spacing: .13em; text-transform: uppercase; }
-.intro-title { margin-top: .3rem; font: 500 clamp(1.5rem, 2.2vw, 2rem)/1.1 var(--font-display); letter-spacing: -.04em; }
+.intro-label { color: var(--acid); font: 500 .75rem/1.5 var(--font-body); }
+.intro-title { margin-top: .3rem; font: 400 clamp(1.75rem, 2.5vw, 2.5rem)/1.15 var(--font-heading); letter-spacing: -.035em; text-wrap: balance; }
 .intro-title em { color: transparent; font-style: normal; -webkit-text-stroke: 1px rgb(242 239 232 / 62%); }
 .intro-copy { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
-.intro-hint { max-inline-size: 21rem; padding-bottom: .25rem; color: var(--muted); font: .7rem/1.7 var(--font-mono); text-wrap: balance; }
+.intro-hint { max-inline-size: 21rem; padding-bottom: .25rem; color: var(--muted); font: .8125rem/1.6 var(--font-body); text-wrap: balance; }
 .scene-fallback { position: absolute; inset: 0; background: #090b0c; }
 .editor-overlay { display: none; position: fixed; z-index: 90; inset: auto auto 1.5rem 50%; transform: translateX(-50%); border: 1px solid var(--line); background: #0c0e11; box-shadow: 0 20px 60px #000; }
-.editor-close { justify-self: start; min-height: 2.8rem; border: 0; padding: .7rem 1rem; background: #0c0e11; color: var(--acid); font: .74rem/1 var(--font-mono); }
+.editor-close { justify-self: start; min-height: 2.8rem; border: 0; padding: .7rem 1rem; background: #0c0e11; color: var(--acid); font: 500 .8125rem/1.4 var(--font-body); }
 .editor-mobile { display: none; }
 .layer-enter-active,.layer-leave-active { transition: opacity 220ms ease, transform 220ms ease; }
 .layer-enter-from,.layer-leave-to { opacity: 0; transform: translateY(12px) scale(.985); }
 @media (max-width: 760px) {
   .room-intro { inset-block-start: 5.4rem; gap: .2rem; }
   .intro-title { margin-top: .25rem; }
-  .intro-hint { max-inline-size: 17rem; font-size: .62rem; }
+  .intro-hint { max-inline-size: 17rem; font-size: .75rem; }
   .editor-overlay { display: grid; inset: .5rem; min-height: 0; grid-template-rows: auto 1fr; transform: none; }
   .editor-mobile { display: grid; }
 }
 @media (max-width: 1100px) and (min-aspect-ratio: 1/1) {
-  .room-intro { inset-block-start: 4.2rem; max-inline-size: 10rem; gap: .2rem; }
-  .intro-label { font-size: .5rem; letter-spacing: .08em; }
-  .intro-title { font-size: 1rem; line-height: 1.12; overflow-wrap: anywhere; }
+  .room-intro { inset-block-start: 5rem; max-inline-size: 14rem; gap: .2rem; }
+  .intro-label { font-size: .6875rem; }
+  .intro-title { font-size: clamp(1.2rem, 2.3vw, 1.6rem); line-height: 1.15; }
   .intro-hint { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
 }
 @media (max-width: 760px) and (min-aspect-ratio: 1/1) {
-  .room-intro { max-inline-size: 7.5rem; }
-  .intro-title { font-size: .8rem; }
-  .intro-label { font-size: .42rem; }
+  .room-intro { max-inline-size: 10.5rem; }
+  .intro-title { font-size: 1.1rem; }
+  .intro-label { font-size: .625rem; }
 }
 </style>
