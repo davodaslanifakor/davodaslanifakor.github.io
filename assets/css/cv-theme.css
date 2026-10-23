@@ -1,35 +1,69 @@
 /* Scoped to the CV document so room lighting and UI retain their own palette. */
 :root.cv-document {
+  /* Aslani Fakour palette, shared with the Studio's brand direction. */
+  --cv-brand: #676fff;
+  --cv-lavender: #7c80bf;
+  --cv-sunlight: #ffe066;
+  --cv-action: #555dde;
+  --cv-action-hover: #4c54ca;
+  --cv-on-action: #ffffff;
+  --cv-on-sunlight: #22222e;
+  --cv-sunlight-hover: #f5d04a;
   --canvas: #f3efe7;
   --panel: #eae5db;
   --ink: #302e29;
   --muted: #696860;
-  --acid: #59664f;
+  --acid: #5259cd;
+  --cv-heading-ink: #4b456b;
+  --cv-signal: #88641a;
+  --cv-detail-surface: color-mix(in srgb, var(--cv-lavender) 9%, var(--canvas));
+  --cv-detail-ink: #48425f;
+  --cv-accent-border: color-mix(in srgb, var(--cv-brand) 45%, var(--canvas));
   --line: rgb(48 46 41 / 20%);
-  --font-heading: Georgia, 'Times New Roman', serif;
+  --brand-color-display: block;
+  --brand-white-display: none;
+  --brand-symbol-filter: none;
   color-scheme: light;
 }
 
 :root.cv-document[data-cv-theme='dark'] {
+  --brand-color-display: none;
+  --brand-white-display: block;
+  --brand-symbol-filter: brightness(0) invert(1);
   --canvas: #151817;
   --panel: #1c211e;
   --ink: #f0eee8;
   --muted: #aeb5ae;
-  --acid: #c6d8a2;
+  --acid: #a5aaff;
+  --cv-heading-ink: #d4cfee;
+  --cv-signal: var(--cv-sunlight);
+  --cv-detail-surface: color-mix(in srgb, var(--cv-lavender) 14%, var(--canvas));
+  --cv-detail-ink: #d7d4e8;
+  --cv-accent-border: color-mix(in srgb, var(--cv-brand) 60%, var(--canvas));
   --line: rgb(240 238 232 / 20%);
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root.cv-document:not([data-cv-theme='light']) {
+    --brand-color-display: none;
+    --brand-white-display: block;
+    --brand-symbol-filter: brightness(0) invert(1);
     --canvas: #151817;
     --panel: #1c211e;
     --ink: #f0eee8;
     --muted: #aeb5ae;
-    --acid: #c6d8a2;
+    --acid: #a5aaff;
+    --cv-heading-ink: #d4cfee;
+    --cv-signal: var(--cv-sunlight);
+    --cv-detail-surface: color-mix(in srgb, var(--cv-lavender) 14%, var(--canvas));
+    --cv-detail-ink: #d7d4e8;
+    --cv-accent-border: color-mix(in srgb, var(--cv-brand) 60%, var(--canvas));
     --line: rgb(240 238 232 / 20%);
     color-scheme: dark;
   }
 }
 
 .cv-document body { color-scheme: inherit; }
+.cv-document ::selection { background: var(--cv-sunlight); color: var(--cv-on-sunlight); }
+.cv-document .section-number { color: var(--acid); }

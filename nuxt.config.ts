@@ -21,6 +21,19 @@ export default defineNuxtConfig({
     '@tresjs/nuxt',
   ],
   css: ['~/assets/css/main.css'],
+  vite: {
+    $client: {
+      build: {
+        rolldownOptions: {
+          output: {
+            // Keep lazy page modules isolated from the 3D entry. Server output
+            // retains Nuxt's default module format for its SSR renderer.
+            strictExecutionOrder: true,
+          },
+        },
+      },
+    },
+  },
   typescript: {
     strict: true,
     typeCheck: true,
@@ -40,6 +53,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'en', dir: 'ltr' },
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/images/brand/lion-color.svg' }],
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'theme-color', content: '#171512' },

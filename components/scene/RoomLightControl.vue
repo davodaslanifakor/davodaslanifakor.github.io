@@ -68,7 +68,7 @@ const emit = defineEmits<{
   border-radius: 999px;
   background: #151714;
   color: #ffe1b6;
-  font: .72rem/1.4 var(--font-mono);
+  font: 500 .8125rem/1.4 var(--font-body);
   text-align: start;
   cursor: pointer;
   overflow-wrap: anywhere;
@@ -81,13 +81,13 @@ const emit = defineEmits<{
   text-align: center;
   color: #f2efe8;
 }
-.room-welcome__copy h2 { margin: 0; font: 500 clamp(2rem, 4.2vw, 3.5rem)/1.08 var(--font-display); letter-spacing: -.045em; text-wrap: balance; }
+.room-welcome__copy h2 { margin: 0; font: 400 clamp(2rem, 4.2vw, 3.5rem)/1.15 var(--font-heading); letter-spacing: -.035em; text-wrap: balance; }
 .room-welcome__copy p { max-inline-size: 26rem; margin: 1rem auto 1.8rem; color: #b5b9af; font: .95rem/1.65 var(--font-display); text-wrap: balance; }
 .room-welcome--entry .room-welcome__actions { justify-content: center; }
 .room-welcome--entry .room-light-control { min-block-size: 50px; padding: .8rem 1.35rem; gap: .85rem; background: #c6d8a2; border-color: #c6d8a2; color: #192018; font: 600 .88rem/1.3 var(--font-display); }
 .room-welcome--entry .room-light-control:disabled { opacity: .55; cursor: wait; }
 .room-welcome__cv { display: inline-flex; align-items: center; gap: .6rem; min-block-size: 48px; color: #eeeee6; font: 500 .88rem/1.3 var(--font-display); text-decoration: none; text-underline-offset: .3em; }
-.room-welcome__loading { position: absolute; inset: 100% 0 auto; margin: 1rem 0 0; color: #a4aaa0; font: .68rem/1.5 var(--font-mono); }
+.room-welcome__loading { position: absolute; inset: 100% 0 auto; margin: 1rem 0 0; color: #a4aaa0; font: .75rem/1.5 var(--font-body); }
 .room-light-control:focus-visible, .room-welcome__cv:focus-visible { outline: 2px solid #c6d8a2; outline-offset: 5px; }
 @media (hover: hover) and (pointer: fine) {
   .room-light-control:hover:not(:disabled) { background: #27291f; }
@@ -96,7 +96,7 @@ const emit = defineEmits<{
 }
 @media (max-width: 760px) {
   .room-welcome:not(.room-welcome--entry) { inset-block-end: 6.1rem; inset-inline-start: .7rem; }
-  .room-light-control { font-size: .65rem; padding-inline: .55rem; }
+  .room-light-control { font-size: .75rem; padding-inline: .55rem; }
   .room-welcome__copy p { font-size: .85rem; margin-block: .85rem 1.4rem; }
   .room-welcome__actions { gap: 1rem; }
 }

@@ -28,17 +28,17 @@ const props = defineProps<{ locale: Locale }>()
 .hero { display: grid; grid-template-columns: 1.1fr 1fr; align-items: end; gap: clamp(2.5rem, 7vw, 7rem); padding-block: clamp(4rem, 8vw, 7rem) clamp(4rem, 7vw, 6rem); }
 .hero-identity,.hero-intro { min-width: 0; }
 .hero-location { margin: 0 0 1.75rem; color: var(--muted); font: 500 .8125rem/1.5 var(--font-display); }
-.headline { max-width: 8ch; margin: 0; font: 400 clamp(4rem, 8.2vw, 7.25rem)/1.04 var(--font-heading, var(--font-display)); letter-spacing: -.055em; }
+.headline { max-width: 8ch; margin: 0; color: var(--cv-heading-ink); font: 400 clamp(4rem, 8.2vw, 7.25rem)/1.04 var(--font-heading, var(--font-display)); letter-spacing: -.055em; }
 .role { max-width: 30ch; margin: 1.5rem 0 0; font-size: 1rem; line-height: 1.5; text-wrap: balance; }
-.specialties { margin: .45rem 0 0; color: var(--muted); font-size: .875rem; line-height: 1.5; }
+.specialties { margin: .45rem 0 0; color: var(--acid); font-size: .875rem; line-height: 1.5; }
 .tagline { max-width: 29ch; margin: 0; font-size: clamp(1.25rem, 2.1vw, 1.75rem); line-height: 1.5; letter-spacing: -.015em; text-wrap: pretty; }
 .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; margin-top: 2rem; }
 .hero-actions a { display: inline-flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px; color: var(--ink); font-size: .875rem; font-weight: 600; text-decoration: none; }
 .hero-actions a:hover { color: var(--acid); }
-.hero-actions .work-link { padding-block: .8rem; border-bottom: 1px solid var(--ink); }
-.hero-actions .work-link:hover { color: var(--acid); border-color: var(--acid); }
+.hero-actions .work-link { padding: .8rem 1rem; border: 1px solid transparent; border-radius: 4px; background: var(--cv-action); color: var(--cv-on-action); transition: background-color 160ms ease; }
+.hero-actions .work-link:hover { background: var(--cv-action-hover); color: var(--cv-on-action); }
 .availability { display: flex; align-items: center; gap: .6rem; margin: 1.75rem 0 0; color: var(--muted); font-size: .8125rem; line-height: 1.5; }
-.availability span { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--acid); }
+.availability span { flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--cv-signal); }
 @media (max-width: 700px) {
   .hero { grid-template-columns: 1fr; gap: 2rem; padding-block: 2.75rem 3.25rem; }
   .hero-location { margin-bottom: 1.25rem; }

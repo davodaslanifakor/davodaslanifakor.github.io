@@ -153,10 +153,10 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
 .backdrop { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: clamp(0.6rem, 3vw, 2rem); background: rgb(4 5 6 / 78%); backdrop-filter: blur(12px); }
 .modal { width: min(68rem, 100%); max-height: min(86svh, 52rem); overflow: auto; border: 1px solid var(--line); background: var(--panel); box-shadow: 0 30px 100px rgb(0 0 0 / 55%); }
 .modal-header { position: sticky; z-index: 2; top: 0; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); padding: 1rem 1.25rem; background: rgb(18 21 25 / 92%); backdrop-filter: blur(16px); }
-.modal-kicker { margin: 0; color: var(--muted); font: 0.68rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
-.close { border: 0; background: transparent; color: var(--ink); font: 0.76rem/1 var(--font-mono); }
+.modal-kicker { margin: 0; color: var(--muted); font: 500 .75rem/1.4 var(--font-body); }
+.close { min-height: 44px; border: 0; background: transparent; color: var(--ink); font: 500 .8125rem/1.4 var(--font-body); }
 .modal-body { padding: clamp(1.5rem, 5vw, 4.5rem); }
-.modal-title { max-width: 52rem; margin: 0 0 3.5rem; font: clamp(2.8rem, 7vw, 6rem)/0.9 var(--font-display); letter-spacing: -0.055em; }
+.modal-title { max-width: 52rem; margin: 0 0 3.5rem; font: 400 clamp(2.8rem, 7vw, 6rem)/1.08 var(--font-heading); letter-spacing: -0.035em; }
 .modal--artwork { width: min(86rem, 100%); max-height: 94svh; }
 .modal--artwork .modal-body { padding: clamp(.8rem, 3vw, 2rem); }
 .modal--artwork .modal-title { margin-bottom: 1.25rem; font-size: clamp(1.8rem, 4vw, 2.75rem); }
@@ -169,16 +169,16 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
 .modal-list p { margin: 0; color: var(--muted); line-height: 1.5; }
 .skill-columns { display: grid; grid-template-columns: repeat(2,1fr); gap: 2rem; }
 .skill-columns section { border-top: 1px solid var(--line); padding-top: 1rem; }
-.skill-columns h3 { color: var(--acid); font: 0.76rem/1.3 var(--font-mono); text-transform: uppercase; }
+.skill-columns h3 { color: var(--ink); font: 400 1.5rem/1.25 var(--font-heading); }
 .skill-columns p { color: var(--muted); line-height: 1.5; }
 .skill-columns strong { color: var(--ink); }
 .statement { max-width: 44rem; font-size: clamp(1.8rem,4vw,3.8rem); line-height: 1.1; }
  .case-index { display: grid; gap: 1rem; }
-.case-index h3 { font-size: 1rem; margin: 0 0 0.25rem; }
+.case-index h3 { margin: 0 0 .5rem; font: 400 1.5rem/1.25 var(--font-heading); }
 .case-index p { margin: 0; opacity: 0.8; }
 .case-flow { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin: 0; }
 .case-flow div { border-top: 1px solid var(--line); padding-top: 1rem; }
-.case-flow dt { color: var(--acid); font: 0.72rem/1 var(--font-mono); text-transform: uppercase; }
+.case-flow dt { color: var(--acid); font: 500 .8125rem/1.5 var(--font-body); }
 .case-flow dd { margin: 1rem 0 0; line-height: 1.62; }
 .contact-block { max-width: 36rem; font-size: 1.2rem; line-height: 1.5; }
 .about-block { max-width: 44rem; font-size: 1.2rem; line-height: 1.6; }
@@ -186,10 +186,10 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
 .case-link { margin: 2rem 0 0; }
 .case-link a { border-bottom: 1px solid var(--acid); color: var(--ink); text-decoration: none; }
 .case-link a:hover { color: var(--acid); }
-.modal-subhead { margin: 2.5rem 0 1rem; color: var(--acid); font: 0.72rem/1.35 var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; }
+.modal-subhead { margin: 2.5rem 0 1rem; color: var(--ink); font: 400 1.5rem/1.25 var(--font-heading); }
 .architecture-note { max-width: 44rem; margin: 0; font-size: clamp(1.25rem,2.4vw,1.8rem); line-height: 1.4; }
 .about-facts { display: grid; gap: 0.75rem; margin: 1.5rem 0 0; border-top: 1px solid var(--line); padding-top: 1rem; font-size: 1rem; }
-.about-facts dt { color: var(--acid); font: 0.7rem/1.3 var(--font-mono); letter-spacing: 0.05em; text-transform: uppercase; }
+.about-facts dt { color: var(--acid); font: 500 .8125rem/1.5 var(--font-body); }
 .about-facts dd { margin: 0.25rem 0 0; }
 .contact-links { display: grid; gap: 0.5rem; margin: 1.25rem 0; padding: 0; list-style: none; }
 .contact-links a { border-bottom: 1px solid var(--acid); color: var(--ink); text-decoration: none; overflow-wrap: anywhere; }
