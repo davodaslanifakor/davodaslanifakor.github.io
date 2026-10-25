@@ -760,3 +760,231 @@ export const jokerAdventureCopy = {
     exit: both('Get out of the car', 'از ماشین پیاده شو'),
   },
 }
+
+/** Independent preview: concise presentation of the existing, verified portfolio. */
+export interface StudioProject {
+  id: string
+  title: I18nText
+  category: I18nText
+  company: string
+  period?: string
+  role: I18nText
+  platform: I18nText
+  tools: string[]
+  summary: I18nText
+  study: CaseStudy
+}
+
+// Studio records deliberately do not mutate the finalized CV facts.
+export const studioResume = '/studio/Davoud_Aslani_Fakour_Resume.pdf'
+
+/** Public LinkedIn project portfolio + final resume. Sources: docs/STUDIO_PROJECT_SOURCES.md. */
+export const studioSpotlight = {
+  label: text('Selected product work'),
+  choose: text('Choose a product'),
+  pause: text('Pause project rotation'),
+  resume: text('Resume project rotation'),
+  visit: text('Visit website'),
+  story: text('Explore my work'),
+  contribution: text('My contribution'),
+  projects: [
+    {
+      id: 'zoviz', name: 'Zoviz', domain: 'zoviz.com', href: 'https://zoviz.com/',
+      period: '2024–present', role: text('Frontend Technical Lead'),
+      category: text('AI SaaS / Creative tools'),
+      title: text('One product. Connected creative tools.'),
+      summary: text('Frontend architecture, a reusable visual editor, brand profiles, and shared workspaces across an AI SaaS platform.'),
+      tags: ['Vue 3', 'TypeScript', 'Pinia'],
+      image: '/images/projects/zoviz-dashboard-source.jpg',
+      imageAlt: text('Zoviz product dashboard from my public LinkedIn project portfolio, with account details removed.'),
+      imageNote: text('Product dashboard · from my public project portfolio'),
+      anchor: '#project-monitor',
+    },
+    {
+      id: 'sarmayex', name: 'Sarmayex', domain: 'sarmayex.com', href: 'https://sarmayex.com/',
+      period: '2022–2023', role: text('Frontend Team Lead'),
+      category: text('Fintech / Trading platforms'),
+      title: text('A trading platform, moving forward.'),
+      summary: text('Led frontend delivery for Nuxt P2P and React B2B trading applications, bringing both to an end-user-ready state in under three months.'),
+      tags: ['Nuxt', 'React', 'TradingView'],
+      image: '/images/projects/sarmayex-product.webp',
+      imageAlt: text('Current Sarmayex trading interface shown on the company’s public website.'),
+      imageNote: text('Current product imagery · my work focused on the web applications'),
+      anchor: '#project-paratrooper',
+    },
+    {
+      id: 'ostadbank', name: 'OstadBank', domain: 'ostadbank.com', href: 'https://www.ostadbank.com/',
+      period: '2017–2022', role: text('Senior Frontend Developer → Frontend Team Lead'),
+      category: text('Education / Private tutoring'),
+      title: text('A shared foundation for learning.'),
+      summary: text('Separated a tightly coupled application into Vue and Nuxt frontends. Introduced shared packages, Storybook, and lazy hydration across a multi-application monorepo.'),
+      tags: ['Vue', 'Nuxt', 'Storybook'],
+      image: '/images/projects/ostadbank-homepage.webp',
+      imageAlt: text('Current OstadBank public homepage, showing its online and in-person private tutoring service.'),
+      imageNote: text('Current public website · my contribution: 2017–2022'),
+      anchor: '#career-ostadbank',
+    },
+  ],
+}
+
+export interface StudioCareerChapter {
+  id: string
+  company: string
+  period: I18nText
+  role: I18nText
+  contribution: I18nText
+  link: { label: I18nText; href: string }
+}
+export const studioCareer: StudioCareerChapter[] = [
+  { id: 'zoviz', company: 'Zoviz', period: text('2024–present'), role: text('Senior Frontend Engineer → Frontend Technical Lead'), contribution: text('Building creative tools on shared foundations: a reusable Vue editor, brand systems, and Zo, an AI assistant that turns requests into editable changes. My work connects frontend architecture with the backend, billing flows, and the tests that keep a product dependable.'), link: { label: text('Inside the editor'), href: '#project-monitor' } },
+  { id: 'smile', company: 'Smile IT Solutions', period: text('2023–2024'), role: text('Frontend Engineer → Full-Stack Engineer'), contribution: text('Moved between Vue, Nuxt, React, and Next.js to deliver client products with a remote UK team. Co-developed a shared project foundation, built an AI exercise-generation feature across interface and storage, and added Playwright coverage to the admin workflows people depended on.'), link: { label: text('Full experience in my CV'), href: studioResume } },
+  { id: 'sarmayex', company: 'Sarmayex', period: text('2022–2023'), role: text('Frontend Team Lead'), contribution: text('Helped a stalled platform find a path back to delivery. I documented the inherited architecture, retained viable work, and led two trading applications to an end-user-ready state in under three months, coordinating frontend delivery with design and two backend teams.'), link: { label: text('The recovery story'), href: '#project-paratrooper' } },
+  { id: 'ostadbank', company: 'OstadBank', period: text('2017–2022'), role: text('Senior Frontend Developer → Frontend Team Lead'), contribution: text('Helped separate a tightly coupled application into a Vue and Nuxt frontend. Introduced a multi-application monorepo, shared components, and Storybook documentation; improved high-traffic pages with lazy hydration and resource-loading changes, while supporting the team through reviews, pairing, and onboarding guides.'), link: { label: text('The monorepo walkthrough'), href: 'https://medium.com/after-deploy/creating-a-nuxt-js-project-with-yarn-workspace-lerna-monorepo-in-3-steps-bdd379f4e0ba' } },
+  { id: 'pay', company: 'Pay.ir', period: text('2015–2017'), role: text('Frontend Developer · Mid-level → Senior'), contribution: text('As the sole frontend engineer, implemented a redesigned customer dashboard and new payment features in a Laravel-backed product. Vue, Laravel Mix, and real-time Socket.IO updates connected the interface to payment services, with close attention to backend constraints and integration.'), link: { label: text('Full experience in my CV'), href: studioResume } },
+]
+
+export interface StudioArticle {
+  id: string
+  title: I18nText
+  summary: I18nText
+  published: string
+  dateLabel: I18nText
+  source: I18nText
+  href: string
+}
+// Verified source inventory and publication dates: docs/STUDIO_NARRATIVE_PLAN.md §6.
+export const studioWriting: StudioArticle[] = [
+  { id: 'sentry', title: text('Stop Firefighting Production Bugs. Build This Sentry System Instead.'), summary: text('Turn an error feed into a useful investigation system: filtering, breadcrumbs, release context, and alerts that give the next debugging session a place to start.'), published: '2026-06-09', dateLabel: text('9 June 2026'), source: text('After Deploy · Medium'), href: 'https://medium.com/after-deploy/stop-firefighting-production-bugs-build-this-sentry-system-instead-1a7f9cff0e62' },
+  { id: 'localstorage', title: text('Stop Guarding localStorage With typeof. It Is the Crash.'), summary: text('A storage check can be the operation that fails. A production investigation into browser access, misleading assumptions, and using AI-assisted triage to narrow the search.'), published: '2026-08-17', dateLabel: text('17 August 2026'), source: text('After Deploy · Medium'), href: 'https://medium.com/after-deploy/stop-guarding-localstorage-with-typeof-it-is-the-crash-9091aefd62dc' },
+  { id: 'design-md', title: text('Stop writing rules for your AI agent. Give it a DESIGN.md instead.'), summary: text('Give an agent the patterns already present in your codebase. A practical argument for documenting architecture and decisions before adding another list of rules.'), published: '2026-06-24', dateLabel: text('24 June 2026'), source: text('LinkedIn'), href: 'https://www.linkedin.com/pulse/stop-writing-rules-your-ai-agent-give-designmd-davoud-aslani-fakour-hdyne' },
+]
+
+export const studioOpenSource = [
+  { name: text('vue-modaltor'), description: text('A Vue modal component I created, with responsive sizing, scroll handling, and Nuxt integration. An earlier open-source project.'), href: 'https://github.com/davodaslanifakor/modaltor' },
+  { name: text('Nuxt workspace'), description: text('The companion example to my 2022 monorepo walkthrough: shared components and configuration with Yarn Workspaces and Lerna. Historical Nuxt tooling.'), href: 'https://github.com/davodaslanifakor/nuxt-workspace' },
+]
+
+export const studioProjects: StudioProject[] = [
+  { id: 'monitor', title: text('A Vue editor for people who create.'), category: text('Visual editing / Creative tools'), company: 'Zoviz', role: text('Frontend engineering & technical leadership'), platform: text('Web'), tools: ['Vue 3', 'TypeScript', 'Pinia', 'Shared packages', 'HTML / PNG / PDF'],
+    summary: text('A reusable, multi-page Vue editor: direct manipulation, layers, non-destructive cropping, synchronized brand colors, and export. Packaged for the main product and admin tools.'),
+    study: { id: 'monitor', title: text('A Vue editor for people who create.'), problem: text('Creative tools need a coherent editing model across pages, assets, and applications. A change to a brand color or an image should remain editable all the way to export.'), action: text('Built a reusable Vue 3 editor with drag, resize, rotate, layers, non-destructive cropping, and shared packages. Designed and built Zo end to end: natural-language requests become schema-validated editor operations, grouped into a single undo step, with Persian and RTL support. Its backend uses Node.js, Fastify, PostgreSQL, and Redis with multiple AI providers.'), result: text('The editor supports multi-page work and HTML, PNG, and PDF export across the product and admin tools. Zo connects AI requests to the same editing model, so generated changes remain under the user’s control. The interactive example on this page is an independent portfolio demo.'), links: [{ label: 'Final resume · project scope', href: studioResume }] } },
+  { id: 'bugjar', title: text('Production errors, made actionable.'), category: text('Production debugging / Reliability'), company: 'Browser investigation', role: text('Investigation & frontend implementation'), platform: text('Mobile web'), tools: ['Sentry', 'Chrome DevTools', 'FileReader API'],
+    summary: text('Sentry and real-device debugging traced an Android upload failure to provider-backed files. The product offered a clear fallback when the browser could not read the file.'),
+    study: { id: 'bugjar', title: text('Production errors, made actionable.'), problem: text('An Android file picker returned a file that looked valid, but FileReader failed with NotReadableError. Desktop reproduction did not explain what users were encountering.'), action: text('Used Sentry and Chrome remote debugging on a real device to investigate provider-backed URIs and the browser’s file-access boundary. Built a clear fallback for the unsupported path.'), result: text('Users received an actionable next step instead of a dead-end upload error. The browser limitation was not fixed. My separate Sentry article describes a broader observability workflow; it is not a claim about this incident’s impact.'), links: [{ label: 'Android handed us a file the browser could not read · 27 August 2026', href: 'https://medium.com/@DavoudAslaniFakour/android-handed-us-a-file-the-browser-could-not-read-32181455e7a6' }] } },
+  { id: 'paratrooper', title: text('Two trading products. A route back to delivery.'), category: text('Platform recovery / Fintech'), company: 'Sarmayex', period: '2022–2023', role: text('Frontend Team Lead'), platform: text('Web'), tools: ['Nuxt', 'React', 'TradingView', 'Frontend architecture'],
+    summary: text('Document the inherited architecture, retain what works, and coordinate the route forward. Two trading applications reached an end-user-ready state in under three months.'),
+    study: { id: 'paratrooper', title: text('Two trading products. A route back to delivery.'), problem: text('A stalled platform needed a practical path forward across two trading applications and independent backend systems.'), action: text('Documented the architecture and retained viable work. Led frontend delivery for Nuxt-based P2P and React-based B2B applications, coordinating integration with design and backend teams and supporting developers through practical mentoring.'), result: text('Two trading applications reached an end-user-ready state in under three months. The work combined delivery leadership, integration, and continuity with the existing product.'), links: [{ label: 'Final resume · Sarmayex', href: studioResume }] } },
+  { id: 'robot', title: text('Better context. Better code.'), category: text('AI workflow / Developer experience'), company: 'Engineering practice', role: text('Architecture & AI workflow'), platform: text('Development workflow'), tools: ['Vue', 'DESIGN.md', 'AI coding agents'],
+    summary: text('Document the patterns a codebase actually uses. Give AI tools architectural context and clear boundaries before asking them to make a change.'),
+    study: { id: 'robot', title: text('Better context. Better code.'), problem: text('A list of rules cannot explain how a product’s components, data, and decisions fit together.'), action: text('Documented codebase patterns in DESIGN.md and explored clearer module boundaries for AI-assisted development. A separate prompt-wizard project addresses the product experience of shaping a request.'), result: text('The writing makes architectural context explicit and available for the next change. The prompt wizard and brand-profile experiments remain separate subjects, with their own public accounts.'), links: [{ label: 'DESIGN.md · architecture and agent context', href: studioWriting[2]!.href }, ...(caseStudies.find(study => study.id === 'robot')?.links ?? []), ...(caseStudies.find(study => study.id === 'cards')?.links ?? [])] } },
+]
+
+// Assets supplied in the Aslani Fakour brand book; the supporting colors come
+// from Davoud's accompanying palette. Dark ink keeps every editable card readable.
+export const portfolioBrand = {
+  lockup: '/images/brand/brand-color.svg',
+  lockupWhite: '/images/brand/brand-white.svg',
+  symbol: '/images/brand/lion-color.svg',
+  palette: [
+    { name: text('Periwinkle'), background: '#676fff', foreground: '#15151f' },
+    { name: text('Sunlight'), background: '#ffe066', foreground: '#15151f' },
+    { name: text('Lavender'), background: '#7c80bf', foreground: '#15151f' },
+    { name: text('Sand'), background: '#aaa17d', foreground: '#15151f' },
+    { name: text('Slate'), background: '#737380', foreground: '#ffffff' },
+  ],
+}
+
+export const studioCopy = {
+  title: text('Davoud Aslani Fakour / Engineering & selected work'),
+  brandHome: text('Davoud Fakour studio'),
+  nav: text('Portfolio navigation'),
+  skip: text('Skip to content'),
+  work: text('Work'), about: text('About'), contact: text('Let’s talk'), cv: text('Read CV'), room: text('Explore the room'),
+  available: cvPresentation.availability,
+  downloadCv: text('Download CV'),
+  careerTitle: text('The experience behind the work.'),
+  careerIntro: text('The path here. Five companies, from the present back to the beginning.'),
+  career: text('Career'), careerIndex: text('Career chapters'), skipCareer: text('Skip career'),
+  writing: text('Writing'), writingTitle: text('After deploy, the work continues.'),
+  writingIntro: text('Notes on production debugging, observability, automation, and giving AI tools the context to help.'),
+  publication: text('Read After Deploy'), publicationUrl: 'https://medium.com/after-deploy',
+  openSourceTitle: text('Built to be shared.'),
+  practiceTitle: text('More on how I work'),
+  zoTitle: text('From a request to an editable change.'),
+  zoBody: text('I designed and built Zo, an AI assistant for the editor. Schema-validated operations, one undo step per set of changes, and Persian/RTL support keep the result editable and under the user’s control.'),
+
+  heroEyebrow: text('Davoud Aslani Fakour · Senior Frontend Engineer & Technical Lead'),
+  heroLines: [text('I build tools'), text('people create with.')],
+  heroPhrases: [text('people create with.'), text('teams build on.'), text('ideas take shape in.')],
+  heroPhraseLabel: text('Choose a headline'),
+  heroPause: text('Pause headline animation'),
+  heroPlay: text('Play headline animation'),
+  heroShowPhrase: text('Show headline'),
+  heroIntro: text('Visual editors, shared frontend systems, and AI-powered features. Built with Vue and TypeScript, with care for what happens after deploy.'),
+  viewWork: text('Explore the work'),
+  selectedTitle: text('The work, in use.'),
+  selectedIntro: text('Creative tools first. Then the production decisions that keep a product useful.'),
+  viewProject: text('Explore project'), close: text('Close project'), next: text('Next project'),
+  role: text('Role'), platform: text('Platform'), period: text('Period'), tools: text('Tools & approach'),
+  challenge: text('The challenge'), approach: text('The approach'), outcome: text('What changed'),
+  visualLabel: text('Original portfolio illustration; no employer interface or assets reproduced.'),
+  demoTitle: text('Don’t just look. Make a move.'),
+  demoIntro: text('A small, working editor built for this portfolio. Drag the type, change the color, or make it your own.'),
+  demoCaption: text('Original portfolio demo. The production editor is described in the project story.'),
+  canvasLabel: text('Editable design card'), canvasHint: text('Drag the name, or focus it and use the arrow keys.'),
+  nameLabel: text('Your text'), colorLabel: text('Choose a color'), reset: text('Reset'), export: text('Save image'),
+  studioLabel: text('A little room to create'), demoName: text('Make it yours.'), demoSubline: text('A thought, taking shape.'),
+  processTitle: text('From problem to product.'),
+  processIntro: text('A way through the work, informed by the projects above.'),
+  process: [
+    { title: text('Understand'), body: text('Find the failure behind the symptom. The Android upload investigation started with Sentry and a real device.'), fragment: ['Sentry', 'Real device', 'Reproduce'] },
+    { title: text('Define'), body: text('Make boundaries explicit: what the browser controls, what the product needs, and where the system should stop.'), fragment: ['Constraints', 'Ownership', 'Clear contracts'] },
+    { title: text('Explore'), body: text('Make an idea tangible. The brand-system experiment connected cards, letterheads, and signatures to one profile.'), fragment: ['One profile', 'Many formats', 'Shared identity'] },
+    { title: text('Build'), body: text('Give the product foundations it can grow on: typed interfaces, reusable components, and coherent editor state.'), fragment: ['TypeScript', 'Components', 'State'] },
+    { title: text('Validate'), body: text('Exercise the real flow. Use end-to-end tests, production diagnostics, and device testing to find the gaps.'), fragment: ['Playwright', 'Sentry', 'Device testing'] },
+    { title: text('Refine'), body: text('Keep the system useful as it grows. Improve performance, document context, and make the next change easier.'), fragment: ['Performance', 'Context', 'Iteration'] },
+  ],
+  capabilitiesTitle: text('The craft behind the work.'),
+  capabilityHint: text('Choose a capability to see where it fits.'),
+  capabilityGroups: [
+    { title: text('Frontend systems'), ids: ['vue-3', 'nuxt', 'typescript', 'pinia', 'architecture', 'components'] },
+    { title: text('Quality & delivery'), ids: ['performance', 'accessibility', 'playwright', 'sentry', 'cicd', 'mentoring'] },
+    { title: text('Beyond the interface'), ids: ['react', 'next', 'postgresql', 'docker', 'agents', 'ai-sdk'] },
+  ],
+  aboutTitle: text('A person behind the pixels.'),
+  aboutBody: text('I’m Davoud, a frontend engineer and technical lead in Istanbul. My work spans creative tools, fintech, payments, and education. I care about the systems underneath an interface as much as the way it feels to use.'),
+  aboutSecond: text('I like making complex tools understandable, sharing what I learn, and giving the next engineer a clearer place to start.'),
+  contactLines: [text('Let’s build'), text('something useful.')],
+  contactBody: profile.cta,
+  contactHover: text('Let’s make it work'),
+  footer: text('Davoud Fakour. Built with care, and Vue.'),
+  previewLabel: text('Portfolio concept'), motionLink: text('Try the theme study'), backStudio: text('Back to the portfolio'),
+  themeLight: text('Switch to light mode'), themeDark: text('Switch to dark mode'),
+  themeLabTitle: text('A change of atmosphere.'),
+  themeLabIntro: text('Move between light and dark. The letters and their background change together as the new palette crosses the page.'),
+  themeLabControl: text('Reveal style'), themeReplay: text('Change the atmosphere'),
+  themeStyles: { iris: text('Iris reveal'), sweep: text('Soft sweep') },
+  themeLabNote: text('Two directions for the portfolio. Your existing CV stays as it is.'),
+  themeLabQuote: text('Good interfaces make the complex feel clear.'),
+  themeLabDetail: text('Type, space, and interaction. Working together.'),
+  cursorView: text('View'), cursorOpen: text('Open'), cursorDrag: text('Drag'), cursorPlay: text('Play'),
+  visual: {
+    editor: { headline: text('Make room\nfor ideas.'), label: text('Creative tools'), layers: [text('Typography'), text('Composition'), text('Identity')] },
+    recovery: { words: [text('Stabilise'), text('Rebuild'), text('Deliver')], caption: text('A clear path back to production.'), big: text('Under 3 months'), small: text('Two applications, end-user ready') },
+    debug: { input: text('A valid-looking file.'), error: text('NotReadableError'), resolved: text('A clear next step.'), caption: text('A better ending to an error state.') },
+    ai: { files: ['DESIGN.md', 'Product context', 'components/'], context: text('Context before code.'), caption: text('Give the model the architecture it is changing.') },
+  },
+}
+
+/** Interactive treatment of the supplied pixel-art portrait; no generated imagery. */
+export const studioPortrait = {
+  label: text('Portrait filters'),
+  cycle: text('Change portrait filter'),
+  hoverHint: text('Move to explore · click to switch'),
+  tapHint: text('Tap a filter to change the portrait'),
+  filters: [
+    { id: 'original', label: text('Original') },
+    { id: 'duotone', label: text('Periwinkle') },
+    { id: 'mono', label: text('Monochrome') },
+  ],
+}
