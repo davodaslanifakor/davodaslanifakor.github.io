@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/', '/cv'],
+      routes: ['/', '/cv', '/studio', '/studio/motion'],
       crawlLinks: true,
       failOnError: true,
     },
@@ -21,6 +21,19 @@ export default defineNuxtConfig({
     '@tresjs/nuxt',
   ],
   css: ['~/assets/css/main.css'],
+  vite: {
+    $client: {
+      build: {
+        rolldownOptions: {
+          output: {
+            // Keep lazy page modules isolated from the 3D entry. Server output
+            // retains Nuxt's default module format for its SSR renderer.
+            strictExecutionOrder: true,
+          },
+        },
+      },
+    },
+  },
   typescript: {
     strict: true,
     typeCheck: true,

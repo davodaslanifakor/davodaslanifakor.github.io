@@ -5,7 +5,7 @@ import { join } from 'node:path'
 
 const output = '.output/public'
 const site = process.env.NUXT_PUBLIC_SITE_URL || 'https://davodaslanifakor.github.io'
-for (const file of ['index.html', 'cv/index.html', '404.html', '.nojekyll', 'models/room.glb', 'models/joker-adventure.glb', 'modaltor/index.html']) {
+for (const file of ['index.html', 'cv/index.html', '404.html', '.nojekyll', 'models/room.glb', 'models/joker-adventure.glb', 'modaltor/index.html', 'studio/index.html', 'studio/motion/index.html', 'studio/Davoud_Aslani_Fakour_Resume.pdf']) {
   assert.ok(existsSync(join(output, file)), `Missing Pages output: ${file}`)
 }
 const room = readFileSync(join(output, 'index.html'), 'utf8')
@@ -24,3 +24,14 @@ for (const file of legacy.files) {
   assert.equal(createHash('sha256').update(bytes).digest('hex'), file.sha256, `Legacy demo changed or was omitted: ${file.path}`)
 }
 console.log(`Pages output verified: prerendered room/CV, public sharing URLs, 3D assets and ${legacy.files.length} unchanged legacy demo files.`)
+
+const studio = readFileSync(join(output, 'studio/index.html'), 'utf8')
+assert.ok(studio.includes(new URL('/studio/', site).href), 'Missing Studio canonical URL')
+assert.ok(studio.includes('Download CV') && studio.includes('Zoviz'), 'Studio must prerender its content and CV CTA')
+assert.doesNotMatch(studio, /name="robots"[^>]+noindex/, 'Published Studio must be indexable')
+assert.equal(
+  createHash('sha256').update(readFileSync(join(output, 'studio/Davoud_Aslani_Fakour_Resume.pdf'))).digest('hex'),
+  createHash('sha256').update(readFileSync('public/studio/Davoud_Aslani_Fakour_Resume.pdf')).digest('hex'),
+  'Published download must match the final resume',
+)
+console.log('Studio output verified: canonical URL, readable content and final CV download.')

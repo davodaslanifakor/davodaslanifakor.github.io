@@ -1,0 +1,32 @@
+import { expect, test } from '@playwright/test'
+
+test('footer mark is white on desktop dark mode and preserves brand colors in light mode', async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 1440, height: 1000 })
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await page.goto('/studio/')
+  const footer = page.locator('.studio-footer')
+  const path = footer.locator('.studio-footer-mark path').first()
+  await footer.scrollIntoViewIfNeeded()
+  await expect(path).toHaveCSS('fill', 'rgb(255, 255, 255)')
+  await expect(path).toHaveCSS('fill-opacity', '1')
+  if (testInfo.project.name === 'chromium')
+    await footer.screenshot({ path: 'docs/renders/studio-projects/footer-white.png' })
+  await page.getByRole('button', { name: 'Switch to light mode', exact: true }).click()
+  await expect(path).not.toHaveCSS('fill', 'rgb(255, 255, 255)')
+})
+
+test('footer lion traces its actual paths on entry and stays complete with reduced motion', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 })
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/studio/')
+  const footer = page.locator('.studio-footer')
+  const path = footer.locator('.studio-footer-mark path').first()
+  await expect(path).toHaveCSS('fill-opacity', '0')
+  await footer.scrollIntoViewIfNeeded()
+  await expect(path).toHaveCSS('stroke-opacity', '1')
+  await expect(path).toHaveCSS('fill-opacity', '1', { timeout: 6000 })
+  await expect(path).toHaveCSS('stroke-opacity', '0')
+  await page.emulateMedia({ reducedMotion: 'reduce' })
+  await expect(path).toHaveCSS('fill-opacity', '1')
+  await expect(path).toHaveCSS('fill', 'rgb(255, 255, 255)')
+})

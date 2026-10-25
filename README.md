@@ -6,7 +6,7 @@ Built with Nuxt 4, Vue 3, TypeScript, Pinia, and Three.js.
 
 ## Website and repositories
 
-The target for this project is **https://davodaslanifakor.github.io/**, with the CV at `/cv/`.
+The target for this project is **https://davodaslanifakor.github.io/**, with the CV at `/cv/` and the Studio portfolio at [`/studio/`](https://davodaslanifakor.github.io/studio/).
 
 - **`davodaslanifakor.github.io`** hosts this portfolio and the preserved legacy demos.
 - **`davodaslanifakor`** is the separate GitHub profile README repository.

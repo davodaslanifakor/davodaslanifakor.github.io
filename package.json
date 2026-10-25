@@ -7,6 +7,7 @@
     "node": ">=22.0.0"
   },
   "scripts": {
+    "postinstall": "nuxt prepare",
     "build": "nuxt build",
     "generate": "nuxt build --preset github_pages",
     "verify:pages": "node tools/pages/verify-output.mjs",
@@ -22,6 +23,7 @@
     "export:room": "/Applications/Blender.app/Contents/MacOS/Blender --background tools/blender/review/reference-restyle/room-light-dark.blend --python-exit-code 1 --python tools/blender/export_review_room.py"
   },
   "dependencies": {
+    "@lucide/vue": "^1.61.0",
     "@nuxtjs/i18n": "^10.6.0",
     "@pinia/nuxt": "^1.0.2",
     "@tresjs/cientos": "^5.9.0",
