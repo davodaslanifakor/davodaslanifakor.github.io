@@ -52,3 +52,14 @@ for (const file of ['index.html', 'cv/index.html', 'studio/index.html']) {
   ]) assert.ok(person.sameAs.includes(profile), `Missing identity link ${profile}: ${file}`)
 }
 console.log('Identity verified: one full name, stable Person ID and four sameAs links on room, CV and Studio.')
+
+const manifest = JSON.parse(readFileSync(join(output, 'manifest.json'), 'utf8'))
+assert.equal(manifest.name, 'Davoud Aslani Fakour — Portfolio')
+for (const icon of manifest.icons) assert.ok(existsSync(join(output, icon.src.replace(/^\//, ''))), `Missing manifest icon: ${icon.src}`)
+for (const icon of ['favicon.svg', 'favicon.ico', 'favicon-32x32.png', 'apple-touch-icon.png']) assert.ok(existsSync(join(output, icon)), `Missing favicon: ${icon}`)
+for (const file of ['index.html', 'cv/index.html', 'studio/index.html', 'studio/motion/index.html', '404.html']) {
+  const html = readFileSync(join(output, file), 'utf8')
+  assert.ok(html.includes('href="/manifest.json"'), `Missing manifest link: ${file}`)
+  assert.ok(html.includes('href="/favicon.svg"'), `Missing favicon link: ${file}`)
+}
+console.log('Site icons verified: manifest and icon links on every portfolio page and the error page.')

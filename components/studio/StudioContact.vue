@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ContactEmail from '~/components/ui/ContactEmail.vue'
 import { ArrowUpRight, Download } from '@lucide/vue'
 import { profile, studioResume, studioCopy as copy, ui } from '~/content/portfolio'
 import StudioMagnetic from './StudioMagnetic.vue'
@@ -54,8 +55,7 @@ useStudioScene(section, STUDIO_TABLET_UP, ({ gsap }) => {
       ></StudioMagnetic>
       </div>
       <div class="studio-socials">
-        <a :href="`mailto:${profile.email}`">{{ ui.emailLabel.en }}</a
-        ><a :href="profile.linkedin" target="_blank" rel="noopener noreferrer">{{
+        <ContactEmail /><a :href="profile.linkedin" target="_blank" rel="noopener noreferrer">{{
           ui.linkedinLabel.en
         }}</a
         ><a :href="profile.github" target="_blank" rel="noopener noreferrer">{{

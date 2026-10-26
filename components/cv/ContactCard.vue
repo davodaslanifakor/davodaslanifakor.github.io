@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ContactEmail from '~/components/ui/ContactEmail.vue'
 import type { Locale } from '~/content/portfolio'
 import { localize, profile, ui, writing } from '~/content/portfolio'
 
@@ -15,7 +16,7 @@ const hasContact = computed(() => !profile.email.startsWith('TODO') && !profile.
       <h2 class="contact-title">{{ localize(ui.contact, props.locale) }}</h2>
       <div v-if="hasContact" class="contact-links">
         <a :href="profile.calendly" rel="noopener noreferrer" target="_blank">{{ localize(ui.bookCall, props.locale) }} ↗</a>
-        <a :href="`mailto:${profile.email}`">{{ localize(ui.emailLabel, props.locale) }}</a>
+        <ContactEmail :locale="props.locale" />
         <a :href="profile.linkedin" rel="noopener" target="_blank">{{ localize(ui.linkedinLabel, props.locale) }}</a>
         <a :href="profile.github" rel="noopener" target="_blank">{{ localize(ui.githubLabel, props.locale) }}</a>
         <a :href="profile.medium" rel="noopener" target="_blank">{{ localize(ui.mediumLabel, props.locale) }}</a>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ContactEmail from '~/components/ui/ContactEmail.vue'
 import { caseStudies, libraryPortrait, localize, profile, roles, skillGroups, skills, ui, vueCertificate, writing } from '~/content/portfolio'
 import type { Locale } from '~/content/portfolio'
 import WorldClocksPanel from './WorldClocksPanel.vue'
@@ -126,7 +127,7 @@ onMounted(() => dialog.value?.querySelector<HTMLElement>('button')?.focus())
         <div v-else-if="props.contentRef === 'contact'" class="contact-block">
           <p>{{ localize(profile.cta, props.locale) }}</p>
           <ul class="contact-links">
-            <li><a :href="`mailto:${profile.email}`">{{ localize(ui.emailLabel, props.locale) }} · {{ profile.email }}</a></li>
+            <li><ContactEmail :locale="props.locale" /></li>
             <li><a :href="profile.linkedin" rel="noopener" target="_blank">{{ localize(ui.linkedinLabel, props.locale) }} ↗</a></li>
             <li><a :href="profile.github" rel="noopener" target="_blank">{{ localize(ui.githubLabel, props.locale) }} ↗</a></li>
             <li><a :href="profile.medium" rel="noopener" target="_blank">{{ localize(ui.mediumLabel, props.locale) }} ↗</a></li>

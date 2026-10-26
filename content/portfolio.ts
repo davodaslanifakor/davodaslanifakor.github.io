@@ -1002,3 +1002,11 @@ export function personStructuredData(siteUrl: string) {
     knowsAbout: ['Vue.js', 'Nuxt', 'TypeScript', 'Frontend architecture', 'Visual editors', 'AI SaaS'],
   }
 }
+
+export const contactEmailCopy = {
+  mailApp: both('Open email app', 'باز کردن برنامهٔ ایمیل'),
+  gmail: both('Write in Gmail', 'نوشتن در Gmail'),
+  copy: both('Copy email address', 'کپی آدرس ایمیل'),
+  copied: both('Email address copied.', 'آدرس ایمیل کپی شد.'),
+  selectAddress: both('Select the email address above to copy it.', 'برای کپی، آدرس ایمیل بالا را انتخاب کنید.'),
+}
