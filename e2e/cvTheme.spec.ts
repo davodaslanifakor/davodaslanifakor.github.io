@@ -40,7 +40,7 @@ test('a saved preference applies before the application scripts load', { tag: '@
   await page.route('**/_nuxt/**', route => route.request().resourceType() === 'script' ? route.abort() : route.continue())
   await page.goto('/cv/')
   await expect(page.locator('.cv-page')).toHaveCSS('background-color', dark)
-  await expect(page.getByRole('heading', { name: 'Davoud Fakour', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Davoud Aslani Fakour', exact: true })).toBeVisible()
 })
 
 test('CV system colors remain readable without JavaScript', { tag: '@pages' }, async ({ browser, baseURL }) => {
@@ -67,7 +67,7 @@ test('the preference syncs across CV tabs and stays out of the room', { tag: '@p
     await page.getByRole('button', { name: 'Switch to dark mode' }).click()
     await expect(other.locator('.cv-page')).toHaveCSS('background-color', dark)
     await expect(other.getByRole('button', { name: 'Switch to light mode' })).toBeVisible()
-    await page.getByRole('link', { name: 'Davoud Fakour home', exact: true }).click()
+    await page.getByRole('link', { name: 'Davoud Aslani Fakour home', exact: true }).click()
     await expect(page).toHaveURL(/\/$/)
     await expect(page.locator('html')).not.toHaveClass(/cv-document/)
     await expect(page.locator('html')).not.toHaveAttribute('data-cv-theme')

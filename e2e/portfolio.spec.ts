@@ -9,7 +9,7 @@ test('recruiter can reach the CV and scan core sections', { tag: '@pages' }, asy
   await openRoom(page)
   await page.getByRole('link', { name: /skip to cv/i }).click()
   await expect(page).toHaveURL(/\/cv$/)
-  await expect(page.getByRole('heading', { name: 'Davoud Fakour' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Davoud Aslani Fakour' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Experience' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Selected work' })).toBeVisible()
 })

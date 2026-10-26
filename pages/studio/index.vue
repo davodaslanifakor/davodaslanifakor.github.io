@@ -11,6 +11,7 @@ import StudioAbout from '~/components/studio/StudioAbout.vue'
 import StudioContact from '~/components/studio/StudioContact.vue'
 import StudioFooter from '~/components/studio/StudioFooter.vue'
 const siteUrl = useRuntimeConfig().public.siteUrl
+usePortfolioIdentity()
 useHead({
   title: studioCopy.title.en,
   link: [{ rel: 'canonical', href: new URL('/studio/', siteUrl).href }],

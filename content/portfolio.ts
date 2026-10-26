@@ -51,7 +51,7 @@ const text = (en: string): I18nText => ({
   fa: `TODO(translate): ${en}`,
 })
 
-/** Copy David supplied in both languages. */
+/** Copy supplied by Davoud Aslani Fakour in both languages. */
 const both = (en: string, fa: string): I18nText => ({ en, fa })
 
 export interface StoryChapter {
@@ -76,12 +76,12 @@ export interface Keepsake {
 }
 
 export const profile = {
-  name: 'Davoud Fakour',
-  alternateNames: ['Davod Fakor', 'Davoud Aslani Fakour'],
+  name: 'Davoud Aslani Fakour',
+  alternateNames: [] as string[],
   role: text('Senior Frontend Engineer & Technical Lead'),
   location: text('Istanbul, Türkiye'),
   specialties: 'Vue.js / Nuxt / TypeScript',
-  header: text('Davoud Fakour — Senior Frontend Engineer & Technical Lead · Vue.js / TypeScript · Istanbul'),
+  header: text('Davoud Aslani Fakour — Senior Frontend Engineer & Technical Lead · Vue.js / TypeScript · Istanbul'),
   summary: text('10+ years building production SaaS, fintech, payments, and education products — from client-side architecture through testing, release, and performance. AI-assisted development and AI SDKs ship with human review before production.'),
   tagline: text('Most frontend engineers build interfaces. I build the systems people use to create, collaborate, and keep a product coherent as it grows.'),
   cta: text('Open to senior Vue / frontend leadership roles in AI SaaS — available for remote work from Türkiye.'),
@@ -90,8 +90,8 @@ export const profile = {
   github: 'https://github.com/davodaslanifakor',
   medium: 'https://medium.com/@DavoudAslaniFakour',
   calendly: 'https://calendly.com/davodaslanifakor/request-call',
-  // TODO(David): add the public CV PDF to /public and set its path here.
-  cvPath: 'TODO(David)',
+  // Final approved CV shared by the CV and Studio download buttons.
+  cvPath: '/studio/Davoud_Aslani_Fakour_Resume.pdf',
   education: text('Associate’s Degree, Computer Software Engineering — Azad University (2013–2015)'),
   languages: text('English — professional working proficiency · Persian — native'),
 }
@@ -118,7 +118,7 @@ export const cvPresentation = {
 export const ui = {
   bookCall: both('Book a call', 'رزرو تماس'),
   bookingTitle: both('Let’s talk', 'بیایید صحبت کنیم'),
-  bookingFrame: both('Schedule a call with Davoud on Calendly', 'رزرو تماس با داوود در Calendly'),
+  bookingFrame: both('Schedule a call with Davoud Aslani Fakour on Calendly', 'رزرو تماس با داوود اصلانی فکور در Calendly'),
   bookingLoading: both('Opening the calendar…', 'در حال باز کردن تقویم…'),
   bookingSlow: both('Calendar taking a while? Try again or open Calendly directly.', 'تقویم دیر باز می‌شود؟ دوباره تلاش کنید یا Calendly را مستقیم باز کنید.'),
   bookingRetry: both('Try again', 'تلاش دوباره'),
@@ -136,7 +136,7 @@ export const ui = {
     mono: both('Mono', 'تک‌رنگ'),
   },
   cvNavigation: text('CV navigation'),
-  home: text('Davoud Fakour home'),
+  home: text('Davoud Aslani Fakour home'),
   skipToCv: text('Skip to CV'),
   exploreHint: text('Choose an object to open a real project story.'),
   objectNav: text('Explore the room'),
@@ -347,7 +347,7 @@ export const caseStudies: CaseStudy[] = [
     title: text('A visual editor built in the DOM'),
     problem: text('Users needed a rich, embeddable editor for multi-page brand documents without a canvas-only rendering model.'),
     action: text('Built a Vue 3 HTML-rendering editor with drag, resize, rotate, cropping, AI image tools, and HTML, PNG, and PDF export.'),
-    result: text('Version 6 represents about 19 months and 1,300 commits, with about 84% authored by David.'),
+    result: text('Version 6 represents about 19 months and 1,300 commits, with about 84% authored by Davoud Aslani Fakour.'),
   },
 ]
 
@@ -451,7 +451,7 @@ export const lifeStory = {
   ] satisfies Keepsake[],
 }
 
-/** David's supplied playlist; title verified with Spotify oEmbed. */
+/** Davoud Aslani Fakour's supplied playlist; title verified with Spotify oEmbed. */
 export const favouriteMusic: MusicTrack[] = [
   { id: 'light-playlist', title: 'Light', artist: 'Spotify', spotifyUrl: 'https://open.spotify.com/playlist/6RgbkiGSEMtH5lYyGfrggE', note: both('My listening shelf.', 'قفسهٔ شنیدنی‌های من.') },
 ]
@@ -470,10 +470,10 @@ export const libraryPortrait = {
   image: '/images/library-portrait.jpeg',
   width: 512,
   height: 512,
-  imageAlt: both('Pixel-art portrait of Davoud Fakour beside the sea.', 'پرترهٔ پیکسلی داوود فکور کنار دریا.'),
+  imageAlt: both('Pixel-art portrait of Davoud Aslani Fakour beside the sea.', 'پرترهٔ پیکسلی داوود اصلانی فکور کنار دریا.'),
 }
 
-/** Artwork and credential details from David's original certificate PDF. */
+/** Artwork and credential details from Davoud Aslani Fakour's original certificate PDF. */
 export const vueCertificate = {
   title: both('Vue.js certification', 'گواهی Vue.js'),
   qualification: both('Vue.js Developer Level I', 'توسعه‌دهندهٔ Vue.js — سطح یک'),
@@ -537,7 +537,7 @@ export const screenContent = {
     { id: 'stockholm', label: 'Stockholm', displayName: text('Stockholm'), timeZone: 'Europe/Stockholm' },
     { id: 'atlantic', label: 'Atlantic', displayName: text('Atlantic · Reykjavík'), timeZone: 'Atlantic/Reykjavik' },
   ] satisfies ScreenCity[],
-  /** David keeps the little desk clock on Iran time, near his family. */
+  /** Davoud Aslani Fakour keeps the little desk clock on Iran time, near his family. */
   deskClockTimeZone: 'Asia/Tehran',
   left: {
     menu: ['File', 'Edit', 'View', 'Window'],
@@ -896,7 +896,7 @@ export const portfolioBrand = {
 
 export const studioCopy = {
   title: text('Davoud Aslani Fakour / Engineering & selected work'),
-  brandHome: text('Davoud Fakour studio'),
+  brandHome: text('Davoud Aslani Fakour studio'),
   nav: text('Portfolio navigation'),
   skip: text('Skip to content'),
   work: text('Work'), about: text('About'), contact: text('Let’s talk'), cv: text('Read CV'), room: text('Explore the room'),
@@ -952,12 +952,12 @@ export const studioCopy = {
     { title: text('Beyond the interface'), ids: ['react', 'next', 'postgresql', 'docker', 'agents', 'ai-sdk'] },
   ],
   aboutTitle: text('A person behind the pixels.'),
-  aboutBody: text('I’m Davoud, a frontend engineer and technical lead in Istanbul. My work spans creative tools, fintech, payments, and education. I care about the systems underneath an interface as much as the way it feels to use.'),
+  aboutBody: text('I’m Davoud Aslani Fakour, a frontend engineer and technical lead in Istanbul. My work spans creative tools, fintech, payments, and education. I care about the systems underneath an interface as much as the way it feels to use.'),
   aboutSecond: text('I like making complex tools understandable, sharing what I learn, and giving the next engineer a clearer place to start.'),
   contactLines: [text('Let’s build'), text('something useful.')],
   contactBody: profile.cta,
   contactHover: text('Let’s make it work'),
-  footer: text('Davoud Fakour. Built with care, and Vue.'),
+  footer: text('Davoud Aslani Fakour. Built with care, and Vue.'),
   previewLabel: text('Portfolio concept'), motionLink: text('Try the theme study'), backStudio: text('Back to the portfolio'),
   themeLight: text('Switch to light mode'), themeDark: text('Switch to dark mode'),
   themeLabTitle: text('A change of atmosphere.'),
@@ -987,4 +987,18 @@ export const studioPortrait = {
     { id: 'duotone', label: text('Periwinkle') },
     { id: 'mono', label: text('Monochrome') },
   ],
+}
+
+/** One public identity shared by the room, CV and Studio metadata. */
+export function personStructuredData(siteUrl: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': new URL('/#person', siteUrl).href,
+    name: profile.name,
+    url: new URL('/studio/', siteUrl).href,
+    sameAs: [profile.github, profile.linkedin, profile.medium, new URL('/', siteUrl).href],
+    jobTitle: profile.role.en,
+    knowsAbout: ['Vue.js', 'Nuxt', 'TypeScript', 'Frontend architecture', 'Visual editors', 'AI SaaS'],
+  }
 }

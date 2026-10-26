@@ -1,6 +1,6 @@
 # Behind the Build
 
-Davoud Fakour’s interactive portfolio: a 3D room with project stories, a small visual editor, music, and playable desk toys. A separate HTML CV stays readable without JavaScript or the 3D scene.
+Davoud Aslani Fakour’s interactive portfolio: a 3D room with project stories, a small visual editor, music, and playable desk toys. A separate HTML CV stays readable without JavaScript or the 3D scene.
 
 Built with Nuxt 4, Vue 3, TypeScript, Pinia, and Three.js.
 

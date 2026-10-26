@@ -120,7 +120,7 @@ async function save() {
     const url = URL.createObjectURL(blob)
     const anchor = document.createElement('a')
     anchor.href = url
-    anchor.download = 'davoud-fakour-studio.png'
+    anchor.download = 'davoud-aslani-fakour-studio.png'
     anchor.click()
     setTimeout(() => URL.revokeObjectURL(url), 1000)
   })

@@ -19,6 +19,7 @@ onMounted(() => {
   isReady.value = true
 })
 
+usePortfolioIdentity()
 useHead({
   htmlAttrs: { class: 'cv-document' },
   title: `${profile.name} — Senior Frontend Engineer & Technical Lead`,
@@ -37,20 +38,7 @@ useHead({
     { name: 'twitter:description', content: profile.tagline.en },
     { name: 'twitter:image', content: socialImage },
   ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: profile.name,
-        alternateName: profile.alternateNames,
-        jobTitle: profile.role.en,
-        address: { '@type': 'PostalAddress', addressLocality: profile.location.en },
-        knowsAbout: ['Vue.js', 'Nuxt', 'TypeScript', 'Frontend architecture', 'Visual editors', 'AI SaaS'],
-      }),
-    },
-  ],
+
 })
 </script>
 

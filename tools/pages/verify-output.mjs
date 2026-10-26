@@ -11,7 +11,7 @@ for (const file of ['index.html', 'cv/index.html', '404.html', '.nojekyll', 'mod
 const room = readFileSync(join(output, 'index.html'), 'utf8')
 const cv = readFileSync(join(output, 'cv/index.html'), 'utf8')
 assert.ok(room.includes('Behind the Build'), 'The homepage must contain prerendered portfolio content')
-assert.ok(cv.includes('Davoud Fakour') && cv.includes('Experience'), 'The CV must contain readable HTML before JavaScript runs')
+assert.ok(cv.includes('Davoud Aslani Fakour') && cv.includes('Experience'), 'The CV must contain readable HTML before JavaScript runs')
 for (const html of [room, cv]) {
   assert.ok(html.includes(new URL('/og-portfolio.jpg', site).href), 'Sharing images must use the public site origin')
   assert.doesNotMatch(html, /<link[^>]+(?:href="[^"]*(?:localhost|127\.0\.0\.1))[^>]*>/, 'Public page links must not point to the build server')
@@ -35,3 +35,20 @@ assert.equal(
   'Published download must match the final resume',
 )
 console.log('Studio output verified: canonical URL, readable content and final CV download.')
+
+for (const file of ['index.html', 'cv/index.html', 'studio/index.html']) {
+  const html = readFileSync(join(output, file), 'utf8')
+  const schemas = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+    .map(match => JSON.parse(match[1]))
+  const person = schemas.find(schema => schema['@type'] === 'Person')
+  assert.ok(person, `Missing server-rendered Person identity: ${file}`)
+  assert.equal(person.name, 'Davoud Aslani Fakour', `Wrong identity name: ${file}`)
+  assert.equal(person['@id'], new URL('/#person', site).href, `Identity ID must match across pages: ${file}`)
+  for (const profile of [
+    'https://github.com/davodaslanifakor',
+    'https://www.linkedin.com/in/davoud-fakour',
+    'https://medium.com/@DavoudAslaniFakour',
+    new URL('/', site).href,
+  ]) assert.ok(person.sameAs.includes(profile), `Missing identity link ${profile}: ${file}`)
+}
+console.log('Identity verified: one full name, stable Person ID and four sameAs links on room, CV and Studio.')
