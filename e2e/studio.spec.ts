@@ -228,6 +228,8 @@ test(
       viewport: { width: 390, height: 844 },
       hasTouch: true,
       isMobile: true,
+      // Isolate editing behavior from the scroll/reveal motion covered separately.
+      reducedMotion: 'reduce',
       ...(baseURL ? { baseURL } : {}),
     })
     try {
@@ -241,6 +243,12 @@ test(
       const text = page.locator('.studio-editable-text')
       await text.scrollIntoViewIfNeeded()
       await text.hover()
+      await text.focus()
+      await expect.poll(() => text.evaluate((element) => {
+        const bounds = element.getBoundingClientRect()
+        const target = document.elementFromPoint(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2)
+        return target === element || !!target && element.contains(target)
+      })).toBe(true)
       const before = await text.boundingBox()
       const canvas = await page.locator('.studio-editor-canvas').boundingBox()
       await page.mouse.move(before!.x + before!.width / 2, before!.y + before!.height / 2)
@@ -251,6 +259,7 @@ test(
         { steps: 8 },
       )
       await page.mouse.up()
+      await expect.poll(async () => (await text.boundingBox())!.x).toBeGreaterThan(before!.x)
       const after = await text.boundingBox()
       expect(after!.x).toBeGreaterThan(before!.x)
       expect(after!.x + after!.width).toBeLessThanOrEqual(canvas!.x + canvas!.width + 1)
