@@ -8,7 +8,7 @@ test('CV is readable without JavaScript on static hosting', { tag: '@pages' }, a
     page.on('request', request => requested.push(request.url()))
     const response = await page.goto('/cv/')
     expect(response?.status()).toBe(200)
-    await expect(page.getByRole('heading', { name: 'Davoud Fakour', exact: true })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Davoud Aslani Fakour', exact: true })).toBeVisible()
     await expect(page.getByRole('heading', { name: 'Experience', exact: true })).toBeVisible()
     await expect(page.getByRole('link', { name: 'LinkedIn', exact: true })).toBeVisible()
     expect(requested.some(url => /\/models\/|\/draco\//.test(url))).toBe(false)

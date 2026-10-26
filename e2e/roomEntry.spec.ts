@@ -8,7 +8,7 @@ test('entry offers a working CV route while the 3D asset is still loading', asyn
   await expect(entry.getByRole('button', { name: 'Step inside' })).toBeDisabled()
   await entry.getByRole('link', { name: 'View my CV' }).click()
   await expect(page).toHaveURL(/\/cv\/?$/)
-  await expect(page.getByRole('heading', { name: 'Davoud Fakour', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Davoud Aslani Fakour', exact: true })).toBeVisible()
 })
 
 test('entry and its CV link are available without JavaScript', async ({ browser, baseURL }) => {
@@ -20,6 +20,6 @@ test('entry and its CV link are available without JavaScript', async ({ browser,
     await expect(entry.getByRole('button', { name: 'Step inside' })).toBeDisabled()
     await entry.getByRole('link', { name: 'View my CV' }).click()
     await expect(page).toHaveURL(/\/cv\/?$/)
-    await expect(page.getByRole('heading', { name: 'Davoud Fakour', exact: true })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Davoud Aslani Fakour', exact: true })).toBeVisible()
   } finally { await context.close() }
 })

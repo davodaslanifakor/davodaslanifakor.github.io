@@ -27,11 +27,12 @@ const pageTitle = computed(() => `${profile.name} — ${localize(ui.roomTitle, l
 const activeObject = computed(() => sceneObjects.find((object) => object.id === focusedId.value) ?? null)
 const modalContent = computed(() => activeObject.value?.action === 'modal' && !['music', 'booking'].includes(activeObject.value.contentRef ?? '') ? activeObject.value.contentRef ?? '' : '')
 let returnFocus: HTMLElement | null = null
+usePortfolioIdentity()
 useHead(() => ({
   title: pageTitle.value,
   link: [{ rel: 'canonical', href: new URL('/', siteUrl).href }],
   meta: [
-    { name: 'description', content: 'Explore the work of senior Vue.js engineer and technical lead Davoud Fakour through an interactive room.' },
+    { name: 'description', content: 'Explore the work of senior Vue.js engineer and technical lead Davoud Aslani Fakour through an interactive room.' },
     { property: 'og:type', content: 'website' },
     { property: 'og:title', content: pageTitle.value },
     { property: 'og:description', content: profile.tagline.en },

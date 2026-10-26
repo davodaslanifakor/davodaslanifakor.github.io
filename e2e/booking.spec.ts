@@ -29,7 +29,7 @@ for (const mobile of [false, true]) {
     await expect(booking).toBeVisible()
     const iframe = booking.locator('iframe')
     await expect(iframe).toHaveAttribute('src', /calendly.com\/davodaslanifakor\/request-call\?embed_domain=127.0.0.1&embed_type=Inline/)
-    const calendar = page.frameLocator('iframe[title="Schedule a call with Davoud on Calendly"]')
+    const calendar = page.frameLocator('iframe[title="Schedule a call with Davoud Aslani Fakour on Calendly"]')
     await expect(calendar.getByRole('heading', { name: 'Choose a time' })).toBeVisible()
     const back = booking.getByRole('button', { name: 'Back to the room' })
     await expect(back).toBeFocused()

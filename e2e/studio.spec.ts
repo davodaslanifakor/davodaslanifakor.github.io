@@ -76,7 +76,7 @@ test(
     await expect(page.locator('.cv-page')).toBeVisible()
     await expect(page.locator('html')).not.toHaveClass(/studio-document/)
     await expect(page.locator('html')).not.toHaveAttribute('data-studio-theme')
-    await expect(page.getByRole('heading', { name: 'Davoud Fakour', exact: true })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Davoud Aslani Fakour', exact: true })).toBeVisible()
     expect(errors).toEqual([])
   },
 )
@@ -101,7 +101,7 @@ test(
     )
     const download = page.waitForEvent('download')
     await page.getByRole('button', { name: 'Save image', exact: true }).click()
-    expect((await download).suggestedFilename()).toBe('davoud-fakour-studio.png')
+    expect((await download).suggestedFilename()).toBe('davoud-aslani-fakour-studio.png')
     await page.getByRole('button', { name: 'Reset', exact: true }).click()
     await expect(page.getByLabel('Your text', { exact: true })).toHaveValue('Make it yours.')
     await expect(text).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 0, 0)')

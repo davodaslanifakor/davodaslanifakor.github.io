@@ -122,7 +122,7 @@ function exportPng() {
   context.fillRect(880, 500, 240, 90)
 
   const anchor = document.createElement('a')
-  anchor.download = 'davoud-fakour-editor-demo.png'
+  anchor.download = 'davoud-aslani-fakour-editor-demo.png'
   anchor.href = canvas.toDataURL('image/png')
   anchor.click()
 }
