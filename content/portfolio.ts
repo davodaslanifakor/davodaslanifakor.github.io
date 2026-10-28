@@ -1010,3 +1010,142 @@ export const contactEmailCopy = {
   copied: both('Email address copied.', 'آدرس ایمیل کپی شد.'),
   selectAddress: both('Select the email address above to copy it.', 'برای کپی، آدرس ایمیل بالا را انتخاب کنید.'),
 }
+
+
+export interface StudioRecommendation {
+  avatar: string
+  id: string
+  author: string
+  role: I18nText
+  relationship: I18nText
+  date: string
+  profileUrl: string
+  quote: I18nText
+}
+
+/** Verbatim excerpts from public received recommendations, read 28 October 2026.
+ * Roles are the profile headlines at collection time, not inferred past titles.
+ * Original spelling is preserved; excerpts omit unrelated or mistaken names.
+ */
+export const studioRecommendations: StudioRecommendation[] = [
+  {
+    avatar: '/images/recommendations/mojtaba-niknam.jpg',
+    id: 'mojtaba-niknam', author: 'Mojtaba Niknam',
+    role: both('CTO at Zoviz.com', 'مدیر فناوری Zoviz.com'),
+    relationship: both('Managed me directly', 'مدیر مستقیم من'),
+    date: '2026-10-22', profileUrl: 'https://www.linkedin.com/in/mojtabaniknam/',
+    quote: text('He is someone you can truly rely on, not just to get things done, but to take responsibility and follow through until the desired outcome is achieved.'),
+  },
+  {
+    avatar: '/images/recommendations/erhan-kaya.jpg',
+    id: 'erhan-kaya', author: 'Erhan Kaya',
+    role: both('Founder & CEO at Zoviz', 'بنیان‌گذار و مدیرعامل Zoviz'),
+    relationship: both('Managed me directly', 'مدیر مستقیم من'),
+    date: '2026-10-21', profileUrl: 'https://www.linkedin.com/in/erhan-kaya/',
+    quote: text('His technical expertise, senior-level experience, and professional attitude make him a valuable team member. He is reliable, dedicated, and always willing to take responsibility and deliver high-quality work.'),
+  },
+  {
+    avatar: '/images/recommendations/hamid-teimouri.jpg',
+    id: 'hamid-teimouri', author: 'Hamid Teimouri',
+    role: both('Go · Blockchain · Micro-Service · PHP', 'Go · Blockchain · Micro-Service · PHP'),
+    relationship: both('Worked on the same team', 'همکار در یک تیم'),
+    date: '2026-09-21', profileUrl: 'https://www.linkedin.com/in/hamidteimouri/',
+    quote: text("He was precise about what he needed from the API and clear when something on our end didn't match what the frontend required, which made the integration far less painful than it could have been."),
+  },
+  {
+    avatar: '/images/recommendations/ed-soltani.jpg',
+    id: 'ed-soltani', author: 'Ed Soltani',
+    role: both('AI & App Modernisation on AWS', 'هوش مصنوعی و نوسازی اپلیکیشن در AWS'),
+    relationship: both('Managed me directly', 'مدیر مستقیم من'),
+    date: '2024-02-18', profileUrl: 'https://www.linkedin.com/in/edsoltani/',
+    quote: text("I have had the pleasure of working closely with Davoud at Smile IT Solutions, where he demonstrates remarkable expertise in Vue.js and E2E testing. Davoud's positivity, dedication, and can-do attitude are truly commendable."),
+  },
+  {
+    avatar: '/images/recommendations/soroush-jolai.jpg',
+    id: 'soroush-jolai', author: 'Soroush Jolai',
+    role: both('Software Engineer', 'مهندس نرم‌افزار'),
+    relationship: both('Reported to me directly', 'عضو تیم تحت مدیریت من'),
+    date: '2023-03-27', profileUrl: 'https://www.linkedin.com/in/soroush-july-jolai/',
+    quote: text('He is optimistic, hard-working, and a clean coder. Also, at the time, he was always available to help me with my challenges. Davoud always tried to keep his knowledge updated and incorporate the best and the latest technologies in our projects.'),
+  },
+  {
+    avatar: '/images/recommendations/sorena-sarabadani.jpg',
+    id: 'sorena-sarabadani', author: 'Sorena Sarabadani',
+    role: both('Staff Software Engineer at Kleinanzeigen', 'مهندس ارشد نرم‌افزار در Kleinanzeigen'),
+    relationship: both('Managed me directly', 'مدیر مستقیم من'),
+    date: '2023-03-07', profileUrl: 'https://www.linkedin.com/in/sorena-sarabadani/',
+    quote: text('I had the chance to work with Davoud on two projects and I can for sure say that he is a talented developer with deep knowledge about frontend technologies and also when it comes to interaction with others, he has a great attitude toward others.'),
+  },
+  {
+    avatar: '/images/recommendations/amir-naimi.jpg',
+    id: 'amir-naimi', author: 'Amir Naimi',
+    role: both('Senior Software Engineer', 'مهندس ارشد نرم‌افزار'),
+    relationship: both('Worked on the same team', 'همکار در یک تیم'),
+    date: '2023-02-11', profileUrl: 'https://www.linkedin.com/in/amir-naimi-85ba9b43/',
+    quote: text('His attention to detail and ability to collaborate effectively with team members make him a valuable asset to any project. I highly recommend Davoud for any Front End development role.'),
+  },
+  {
+    avatar: '/images/recommendations/moein-rahimi.jpg',
+    id: 'moein-rahimi', author: 'Moein Rahimi',
+    role: both('Senior Back-End Developer at Tether land', 'توسعه‌دهندهٔ ارشد بک‌اند در Tether land'),
+    relationship: both('Worked on the same team', 'همکار در یک تیم'),
+    date: '2023-02-11', profileUrl: 'https://www.linkedin.com/in/moeinrahimi/',
+    quote: text('He is a fantastic communicator and always goes the extra mile to ensure that projects are delivered on time and to the highest standard. I highly recommend Davoud for any Front End development role and I am confident that he will be an asset to any team.'),
+  },
+  {
+    avatar: '/images/recommendations/mahdi-zareie.jpg',
+    id: 'mahdi-zareie', author: 'Mahdi Zareie',
+    role: both('Senior Software Engineer at Delivery Hero SE', 'مهندس ارشد نرم‌افزار در Delivery Hero SE'),
+    relationship: both('Worked on the same team', 'همکار در یک تیم'),
+    date: '2023-01-17', profileUrl: 'https://www.linkedin.com/in/mohammad-mahdi-zareie/',
+    quote: text('His understanding of complex issues extends beyond the scope of his immediate expertise.  In addition to being a reliable and forward-looking software developer, he is also a skilled team player who can lead the team to success.'),
+  },
+  {
+    avatar: '/images/recommendations/saeed-vaziry.jpg',
+    id: 'saeed-vaziry', author: 'Saeed Vaziry',
+    role: both('Payments Tech Lead at METRO Markets GmbH', 'راهبر فنی پرداخت در METRO Markets GmbH'),
+    relationship: both('Managed me directly', 'مدیر مستقیم من'),
+    date: '2022-12-22', profileUrl: 'https://www.linkedin.com/in/saeedvaziry/',
+    quote: text('He has a good knowledge on what he does and is a perfect fit for any frontend engineering positions'),
+  },
+  {
+    avatar: '/images/recommendations/amin-delavar.jpg',
+    id: 'amin-delavar', author: 'Amin Delavar',
+    role: both('UI/UX Designer & Web Developer', 'طراح UI/UX و توسعه‌دهندهٔ وب'),
+    relationship: both('I was senior to Amin', 'همکار ارشد امین بودم'),
+    date: '2022-06-07', profileUrl: 'https://www.linkedin.com/in/amin-delavar/',
+    quote: text('If you’re looking to work with someone who can help you reach your full potential, Davoud is that person. I’ve worked with Davoud for several month, and he played an integral role in helping me develop my skills in this industry.'),
+  },
+  {
+    avatar: '/images/recommendations/mohsen-adli.jpg',
+    id: 'mohsen-adli', author: 'Mohsen Adli',
+    role: both('CEO & Founder at Madya Online Courses', 'بنیان‌گذار و مدیرعامل آموزش آنلاین مادیا'),
+    relationship: both('Managed me directly', 'مدیر مستقیم من'),
+    date: '2022-06-07', profileUrl: 'https://www.linkedin.com/in/mohsen297/',
+    quote: text("He was a stand-out IC and then a talented and respected leader, and any company would be lucky to have him. I'd work with him again in a heartbeat."),
+  },
+  {
+    avatar: '/images/recommendations/vahid-ebrahimirad.jpg',
+    id: 'vahid-ebrahimirad', author: 'Vahid Ebrahimirad',
+    role: both('Technical Lead at Ostado.com & Ostadbank.com', 'راهبر فنی Ostado.com و Ostadbank.com'),
+    relationship: both('Managed me directly', 'مدیر مستقیم من'),
+    date: '2022-03-29', profileUrl: 'https://www.linkedin.com/in/ebrahimirad/',
+    quote: text('Davoud is a brilliant and gifted Team Lead who really understands how to get the best out of people, Davoud and I worked together on a large scale project for along time.'),
+  },
+]
+
+export const studioRecommendationCopy = {
+  title: both('Good work is never a solo act.', 'کار خوب، نتیجهٔ همکاری است.'),
+  intro: both('In the words of the people I’ve built with.', 'از زبان کسانی که با آن‌ها کار کرده‌ام.'),
+  source: both('LinkedIn recommendation · excerpt', 'بخشی از توصیه‌نامهٔ لینکدین'),
+  view: both('Read on LinkedIn', 'خواندن در لینکدین'),
+  author: both('View profile', 'مشاهدهٔ پروفایل'),
+  previous: both('Previous recommendation', 'توصیه‌نامهٔ قبلی'),
+  next: both('Next recommendation', 'توصیه‌نامهٔ بعدی'),
+  list: both('Read as a list', 'خواندن به‌صورت فهرست'),
+  wheel: both('Explore the cards', 'مرور کارت‌ها'),
+  skip: both('Continue to writing', 'ادامه به نوشته‌ها'),
+  hint: both('Scroll to meet the next voice', 'برای دیدن نظر بعدی پیمایش کنید'),
+  all: both('All recommendations on LinkedIn', 'همهٔ توصیه‌نامه‌ها در لینکدین'),
+  url: 'https://www.linkedin.com/in/davoud-fakour/details/recommendations/?detailScreenTabIndex=0',
+}
