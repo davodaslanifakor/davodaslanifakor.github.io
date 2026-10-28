@@ -40,7 +40,8 @@ import { studioCopy as copy, studioWriting } from '~/content/portfolio'
 
 <style scoped>
 .studio-writing {
-  margin-top: var(--st-space);
+  /* Adjacent opaque chapters must meet: margins expose the sticky Work layer. */
+  margin-top: 0;
   padding-block: var(--st-space);
   background: var(--st-surface);
 }

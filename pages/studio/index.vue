@@ -4,6 +4,7 @@ import StudioShell from '~/components/studio/StudioShell.vue'
 import StudioHero from '~/components/studio/StudioHero.vue'
 import StudioWork from '~/components/studio/StudioWork.vue'
 import StudioCareer from '~/components/studio/StudioCareer.vue'
+import StudioRecommendations from '~/components/studio/StudioRecommendations.vue'
 import StudioWriting from '~/components/studio/StudioWriting.vue'
 import StudioOpenSource from '~/components/studio/StudioOpenSource.vue'
 import StudioPractice from '~/components/studio/StudioPractice.vue'
@@ -28,6 +29,7 @@ useHead({
       <StudioHero data-stack /><StudioCareer />
     </div>
     <StudioWork data-stack />
+    <StudioRecommendations />
     <StudioWriting data-stack />
     <div class="studio-closing" data-stack>
       <StudioOpenSource /><StudioPractice /><StudioAbout />
