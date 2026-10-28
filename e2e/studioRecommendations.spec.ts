@@ -18,7 +18,8 @@ test('recommendations follow the wheel timeline and release into writing @pages'
   await expect(section.locator('[data-recommendation="mojtaba-niknam"]')).toHaveAttribute('inert', '')
   // Perspective and z recession keep the wheel volumetric, while the front stays sharp.
   await expect(section.locator('.recommendation-track')).toHaveCSS('perspective', '1100px')
-  await expect(section.locator('[data-recommendation="erhan-kaya"]')).toHaveCSS('filter', 'blur(0px)')
+  // ScrollTrigger may settle a few millionths of a pixel off the snap point.
+  await expect.poll(() => section.locator('[data-recommendation="erhan-kaya"]').evaluate(el => Number.parseFloat(getComputedStyle(el).filter.replace('blur(', '')))).toBeLessThan(0.01)
   const rear = section.locator('[data-recommendation="mojtaba-niknam"]')
   await expect(rear).toHaveCSS('transform', /matrix3d/)
   await expect(rear).not.toHaveCSS('filter', 'blur(0px)')
