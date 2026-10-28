@@ -11,6 +11,14 @@ const initials = (name: string) => name.split(' ').map(part => part[0]).join('')
 function hideAvatar(id: string) {
   failedAvatars.value = new Set([...failedAvatars.value, id])
 }
+// A failed SSR image can finish before Vue attaches its error listener.
+onMounted(() => {
+  section.value?.querySelectorAll<HTMLImageElement>('.recommendation-avatar img').forEach(image => {
+    if (!image.complete || image.naturalWidth > 0) return
+    const id = image.closest<HTMLElement>('[data-recommendation]')?.dataset.recommendation
+    if (id) hideAvatar(id)
+  })
+})
 const dates = recommendations.map(item => new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(item.date)))
 </script>
 

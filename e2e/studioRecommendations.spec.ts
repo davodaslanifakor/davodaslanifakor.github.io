@@ -99,10 +99,16 @@ test('reviewer avatars are local, load correctly and fall back on failure @pages
   // A fresh context avoids WebKit reusing the successfully decoded image.
   const failedContext = await browser.newContext({ reducedMotion: 'reduce' })
   await failedContext.route('**/images/recommendations/*.jpg', route => route.abort())
+  // Force the image to fail before hydration, as on slower publishing runners.
+  let releaseScripts!: () => void
+  const scriptsReady = new Promise<void>(resolve => { releaseScripts = resolve })
+  await failedContext.route('**/_nuxt/*.js', async route => { await scriptsReady; await route.continue() })
   const failedPage = await failedContext.newPage()
-  await failedPage.goto('/studio/')
+  await failedPage.goto('/studio/', { waitUntil: 'commit' })
   const failedCard = failedPage.locator('[data-recommendation="mojtaba-niknam"]')
   await failedCard.scrollIntoViewIfNeeded()
+  await expect.poll(() => failedCard.locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 0)).toBe(true)
+  releaseScripts()
   await expect(failedCard.locator('img')).toHaveCount(0)
   await expect(failedCard.locator('.recommendation-avatar')).toHaveText('MN')
   await expect(failedCard.getByRole('link', { name: 'Mojtaba Niknam' })).toBeVisible()
