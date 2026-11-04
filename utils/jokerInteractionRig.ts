@@ -1,5 +1,5 @@
 import { isMesh } from '~/utils/threeGuards'
-import { BoxGeometry, Mesh, MeshStandardMaterial, Quaternion, Vector3 } from 'three'
+import { Box3, BoxGeometry, Group, Mesh, MeshStandardMaterial, Quaternion, Vector3 } from 'three'
 import type { Object3D } from 'three'
 import type { JokerState } from './jokerAdventure'
 import { jokerEntryPose, jokerPullPose, jokerCarPoint, jokerLiftPose, JOKER_SEAT } from './jokerInteractionPose'
@@ -17,6 +17,28 @@ export function createJokerInteractionRig(root: Object3D) {
     const node = root.getObjectByName(name)
     if (node) node.position.z -= .017
   }
+  // Rotate the rim and spoke together about the tilted steering column.
+  const steering = new Group()
+  steering.name = 'JA_SteeringPivot'
+  if (wheel?.parent) {
+    steering.position.copy(wheel.position)
+    steering.quaternion.copy(wheel.quaternion)
+    wheel.parent.add(steering)
+    root.updateMatrixWorld(true)
+    steering.attach(wheel)
+    const spoke = root.getObjectByName('JA_Steering_spoke')
+    if (spoke) steering.attach(spoke)
+  }
+  const steeringRest = steering.quaternion.clone()
+  const steeringTurn = new Quaternion(), steeringAxis = new Vector3(0, 0, 1)
+  const doorHeight = garageDoor ? new Box3().setFromObject(garageDoor).getSize(new Vector3()).y : 0
+  function retractGarageDoor(lift: number) {
+    if (!garageDoor) return
+    garageDoor.position.y = .012 + lift
+    // Roll the front into the header instead of lifting a rigid panel through the shelf.
+    garageDoor.visible = lift < doorHeight
+    garageDoor.scale.y = doorHeight > 0 ? Math.max(.0001, 1 - lift / doorHeight) : 1
+  }
   const column = root.getObjectByName('JA_Steering_column')
   if (column) {
     const from = new Vector3(0, .040, .023), to = new Vector3(0, .056, -.008)
@@ -33,6 +55,8 @@ export function createJokerInteractionRig(root: Object3D) {
     grip.name = 'JA_BookLatch_grip'; grip.position.set(0, .026, .011); latch.add(grip)
   }
   root.updateMatrixWorld(true)
+  // The rigid arms keep their reach while the rim slides through their grip.
+  const wheelGrips = wheel?.parent ? [-.010, .010].map(x => wheel.parent!.worldToLocal(wheel.localToWorld(new Vector3(x, 0, 0)))) : []
   const arms = (['l', 'r'] as const).flatMap(side => {
     let pivot: Object3D | undefined
     actor.traverse(node => { if (node.name.startsWith(`JA_Joker_shoulder_${side}`) && !isMesh(node)) pivot = node })
@@ -58,15 +82,16 @@ export function createJokerInteractionRig(root: Object3D) {
     arms.forEach(({ pivot, side }) => pivot.rotation.set(side === 'l' ? -stride : stride, 0, 0))
   }
   function handsOnWheel(weight: number) {
-    if (!wheel) return
-    wheel.updateWorldMatrix(true, false)
-    aim('l', wheel.localToWorld(new Vector3(-.010, 0, 0)), weight)
-    aim('r', wheel.localToWorld(new Vector3(.010, 0, 0)), weight)
+    if (!wheel || !steering.parent || !wheelGrips.length) return
+    steering.parent.updateWorldMatrix(true, false)
+    aim('l', steering.parent.localToWorld(wheelGrips[0]!.clone().applyQuaternion(steeringRest).add(steering.position)), weight)
+    aim('r', steering.parent.localToWorld(wheelGrips[1]!.clone().applyQuaternion(steeringRest).add(steering.position)), weight)
   }
   function update(s: JokerState, reduced: boolean) {
     // Persistent prop state is independent of whichever authored clip supplies other movement.
     if (latch) latch.rotation.set(s.garageOpen ? .49 : 0, 0, 0)
-    if (garageDoor) garageDoor.position.y = s.garageOpen ? .294 : .012
+    retractGarageDoor(s.garageOpen ? .282 : 0)
+    steering.quaternion.copy(steeringRest).multiply(steeringTurn.setFromAxisAngle(steeringAxis, -s.steering * .6))
     if (lift) lift.position.y = s.lifted ? .940 : .050
     if (ramp) ramp.rotation.set(0, 0, s.lifted ? 0 : -Math.PI / 2)
     if (s.phase === 'lifting' || s.phase === 'lowering') {
@@ -84,7 +109,7 @@ export function createJokerInteractionRig(root: Object3D) {
       actor.position.copy(p.position); actor.rotation.set(0, p.yaw, 0)
       pose(Math.PI / 2, reduced ? 0 : p.stride)
       if (latch) latch.rotation.x = p.latchAngle
-      if (garageDoor) garageDoor.position.y = .012 + p.doorLift
+      retractGarageDoor(p.doorLift)
       aim('r', p.grip, p.contact)
     } else if (s.phase === 'entering') {
       const p = jokerEntryPose(s)

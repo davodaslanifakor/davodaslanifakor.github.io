@@ -641,6 +641,7 @@ onBeforeUnmount(() => {
     <MonitorMusicSurface
       v-if="musicActive || props.nowPlaying"
       ref="musicSurface"
+      :show-panels="!minionCharacter && !jokerActive"
       :active="musicActive && !isMoving"
       :camera="camera"
       :model="model"
