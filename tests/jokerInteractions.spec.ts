@@ -28,6 +28,45 @@ function hand(root: ReturnType<typeof jokerModel>, side: string) {
 }
 
 describe('Joker physical interactions', () => {
+  it('retracts the garage front below the roof throughout opening', () => {
+    const root = jokerModel(), rig = createJokerInteractionRig(root), s = opening()
+    try {
+      const roof = new Box3().setFromObject(root.getObjectByName('JA_Garage_Roof')!)
+      const door = root.getObjectByName('JA_GarageDoor')!
+      for (let i = 0; i <= 100; i++) {
+        rig.update({ ...s, time: i / 100 * JOKER_PULL_SECONDS }, false)
+        root.updateMatrixWorld(true)
+        if (door.visible) expect(new Box3().setFromObject(door).max.y).toBeLessThanOrEqual(roof.min.y)
+      }
+      expect(door.visible).toBe(false)
+      rig.update(initialJokerState(), false)
+      expect(door.visible).toBe(true)
+      expect(door.scale.y).toBeCloseTo(1)
+    } finally { disposeJokerAsset(root) }
+  })
+  it('turns the steering spoke and keeps both hands on the rotating wheel', () => {
+    const root = jokerModel(), rig = createJokerInteractionRig(root)
+    const s = { ...initialJokerState(), phase: 'driving' as const, inCar: true }
+    const spoke = root.getObjectByName('JA_Steering_spoke')!
+    try {
+      rig.update(s, false); root.updateMatrixWorld(true)
+      const rest = spoke.getWorldQuaternion(spoke.quaternion.clone())
+      rig.update({ ...s, steering: 1 }, false); root.updateMatrixWorld(true)
+      const left = spoke.getWorldQuaternion(rest.clone())
+      expect(rest.angleTo(left)).toBeGreaterThan(.5)
+      const wheel = root.getObjectByName('JA_Steering')!
+      for (const side of ['l', 'r']) {
+        const grip = wheel.worldToLocal(hand(root, side))
+        expect(Math.hypot(grip.x, grip.y)).toBeCloseTo(.01, 3)
+        expect(Math.abs(grip.z)).toBeLessThan(.001)
+      }
+      rig.update({ ...s, steering: -1 }, true); root.updateMatrixWorld(true)
+      expect(rest.angleTo(spoke.getWorldQuaternion(rest.clone()))).toBeGreaterThan(.5)
+      expect(left.angleTo(spoke.getWorldQuaternion(rest.clone()))).toBeGreaterThan(1)
+      rig.update(s, false); root.updateMatrixWorld(true)
+      expect(rest.angleTo(spoke.getWorldQuaternion(rest.clone()))).toBeLessThan(.00001)
+    } finally { disposeJokerAsset(root) }
+  })
   it('preserves the approach and hands off the latch endpoint without a position jump', () => {
     const s = opening()
     expect(jokerPullPose(s).position.distanceTo(new Vector3(s.position.x, s.position.y, s.position.z))).toBe(0)

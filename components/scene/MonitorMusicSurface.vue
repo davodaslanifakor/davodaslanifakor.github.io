@@ -16,6 +16,7 @@ const props = defineProps<{
   model: Object3D | null
   locale: Locale
   selectedId: string | null
+  showPanels?: boolean
 }>()
 const emit = defineEmits<{ select: [id: string | null]; close: []; playback: [state: MusicPlaybackUpdate] }>()
 const host = useTemplateRef<HTMLDivElement>('host')
@@ -81,10 +82,10 @@ function onKeydown(event: KeyboardEvent) {
       <p>{{ localize(ui.musicReturnHint, props.locale) }}</p>
     </div>
     <div class="monitor-panels" :style="{ clipPath: occlusion }">
-      <div class="monitor-panel monitor-panel--library" :class="{ 'monitor-panel--ready': left }" :style="{ transform: left || undefined }">
+      <div class="monitor-panel monitor-panel--library" :class="{ 'monitor-panel--ready': left && props.showPanels !== false }" :style="{ transform: left || undefined }">
         <MusicList :locale="props.locale" :selected-id="props.selectedId" @select="emit('select', $event)" />
       </div>
-      <div class="monitor-panel monitor-panel--preview" :class="{ 'monitor-panel--ready': right }" :style="{ transform: right || undefined }">
+      <div class="monitor-panel monitor-panel--preview" :class="{ 'monitor-panel--ready': right && props.showPanels !== false }" :style="{ transform: right || undefined }">
         <MusicPreview :locale="props.locale" :selected-id="props.selectedId" @clear="clearSelection" @playback="emit('playback', $event)" />
       </div>
     </div>

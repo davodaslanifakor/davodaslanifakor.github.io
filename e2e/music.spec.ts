@@ -67,6 +67,16 @@ for (const mobile of [false, true]) {
     await expect(page.locator('.monitor-panels')).toHaveCSS('clip-path', /path\(evenodd/)
     // Keep the same browsing context and player while exploring room content.
     const player = await preview.locator('iframe').elementHandle()
+    for (const objectId of ['paratrooper', 'bugjar']) {
+      await page.locator(`.object-link[data-object-id="${objectId}"]`).press('Enter')
+      await expect(library).toBeHidden()
+      await expect(preview).toBeHidden()
+      expect(await player!.evaluate(frame => frame.isConnected)).toBe(true)
+      await expect(page.locator('.room-scene')).toHaveAttribute('data-music-playing', 'true')
+      await page.keyboard.press('Escape')
+      await expect(library).toBeVisible()
+      expect(await player!.evaluate(frame => frame.isConnected)).toBe(true)
+    }
     for (const objectId of ['clock', 'library_about', 'screen_right']) {
       await page.locator(`.object-link[data-object-id="${objectId}"]`).press('Enter')
       await expect(page.locator('.modal')).toBeVisible()

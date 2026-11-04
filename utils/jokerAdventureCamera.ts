@@ -12,7 +12,8 @@ export function jokerCameraPose(s: JokerState, actor: JokerPoint, car: JokerPoin
   const target = point(s.inCar ? car : actor), position = new Vector3()
   if (cockpit) {
     const up = new Vector3(0, 1, 0)
-    position.copy(point(car)).add(new Vector3(0, .080, .005).applyAxisAngle(up, s.yaw))
+    // Keep the dashboard and rotating wheel ahead of the eye, above the control panel.
+    position.copy(point(car)).add(new Vector3(0, .075, -.090).applyAxisAngle(up, s.yaw))
     target.copy(point(car)).add(new Vector3(0, .060, .35).applyAxisAngle(up, s.yaw))
     return { position, target, fov: 68, cockpit }
   }

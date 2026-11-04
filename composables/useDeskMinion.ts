@@ -123,8 +123,9 @@ export function useDeskMinion(options: { character: () => MinionId | null; world
   function startTyping() {
     if (!playable() || !state.value.laptopOn) { state.value = { ...state.value, feedback: 'wakeLaptop' }; return }
     const world = options.world(), body = state.value.body
-    if (!world.keyboardBounds || !containsXZ(world.keyboardBounds, body.position.x, body.position.z, 0.003)
-      || Math.abs(body.position.y - world.keyboardBounds.max.y) > 0.035 || !body.grounded) { requestAction('keyboard'); return }
+    // Match the hint's interaction area: E must not start an unexpected approach/climb.
+    if (!world.keyboardBounds || !containsXZ(world.keyboardBounds, body.position.x, body.position.z, 0.025)
+      || Math.abs(body.position.y - world.keyboardBounds.max.y) >= 0.055 || !body.grounded) { requestAction('keyboard'); return }
     if (!Object.keys(world.keyMap).length) { state.value = { ...state.value, feedback: 'keyUnsupported' }; return }
     clearInput(); cancelWalk(); void audio.unlock()
     state.value = { ...state.value, typing: true, phase: 'roaming', action: null, destination: null, feedback: 'keyReady', jumpPrep: -1, body: { ...body, velocity: { x: 0, y: 0, z: 0 } } }

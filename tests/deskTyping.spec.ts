@@ -22,6 +22,23 @@ async function typingSession(reduced = false) {
 }
 
 describe('physical keyboard play', () => {
+  it('starts keyboard play from the advertised nearby area without an automatic walk or climb on E', async () => {
+    const s = await typingSession()
+    try {
+      const bounds = s.world.keyboardBounds!
+      s.game.walkTo({ x: bounds.min.x - .02, y: bounds.max.y, z: s.world.keyboard!.z })
+      s.advance(12)
+      expect(s.game.nearby.value).toBe('keyboard')
+      const position = { ...s.game.state.value.body.position }
+      s.game.interact()
+      s.advance(.8)
+      expect(s.game.state.value.feedback).toBe('keyReady')
+      expect(s.game.state.value.typing).toBe(true)
+      expect(s.game.state.value.destination).toBeNull()
+      expect(s.game.state.value.body.position).toEqual(position)
+      expect(s.game.state.value.body.grounded).toBe(true)
+    } finally { s.dispose() }
+  })
   it('maps actual QWERTY rows and preserves shifted or non-Latin input on the physical key', async () => {
     const s = await typingSession()
     try {

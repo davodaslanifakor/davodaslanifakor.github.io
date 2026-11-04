@@ -3,9 +3,30 @@ import { Box3, PerspectiveCamera, Ray, Vector3 } from 'three'
 import { createJokerCamera, jokerCameraPose } from '../utils/jokerAdventureCamera'
 import { initialJokerState } from '../utils/jokerAdventure'
 import type { JokerState } from '../utils/jokerAdventure'
+import { createJokerInteractionRig } from '../utils/jokerInteractionRig'
+import { disposeJokerAsset } from '../utils/jokerAdventureScene'
+import { jokerModel } from './helpers/jokerModel'
 const car = { x: 1.345, y: .056, z: -.12 }
 const state: JokerState = { ...initialJokerState(), phase: 'driving', inCar: true, garageOpen: true, position: car, carPosition: car }
 describe('gameplay camera', () => {
+  it.each([{ width: 1180, height: 820 }, { width: 390, height: 844 }])('shows the steering wheel above the cockpit controls at $width px', viewport => {
+    const root = jokerModel(), interaction = createJokerInteractionRig(root)
+    const camera = new PerspectiveCamera(46, viewport.width / viewport.height, .003), rig = createJokerCamera([])
+    const s = { ...state, cockpit: true }
+    try {
+      interaction.update(s, false); root.updateMatrixWorld(true)
+      rig.update(s, car, car, camera, 1, true, { ...viewport, top: 150, bottom: 180 })
+      const bounds = new Box3().setFromObject(root.getObjectByName('JA_Steering')!)
+      for (const x of [bounds.min.x, bounds.max.x]) for (const y of [bounds.min.y, bounds.max.y]) for (const z of [bounds.min.z, bounds.max.z]) {
+        const projected = new Vector3(x, y, z).project(camera)
+        expect(projected.z).toBeGreaterThan(-1); expect(projected.z).toBeLessThan(1)
+        expect(Math.abs(projected.x)).toBeLessThan(1)
+        const screenY = (1 - projected.y) * viewport.height / 2
+        expect(screenY).toBeGreaterThan(150)
+        expect(screenY).toBeLessThan(viewport.height - 180)
+      }
+    } finally { rig.dispose(); disposeJokerAsset(root) }
+  })
   it('finds room around the car when reversing against a wall instead of crowding the driver', () => {
     const wall = new Box3(new Vector3(-2, 0, -.48), new Vector3(2, 3, -.42))
     const camera = new PerspectiveCamera(46, .46, .003), rig = createJokerCamera([wall])
