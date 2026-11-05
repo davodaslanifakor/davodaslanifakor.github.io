@@ -5,6 +5,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: 'https://davodaslanifakor.github.io',
+      gtmContainerId: 'GTM-K476LTTM',
+      gaMeasurementId: 'G-0BSYHK9K9J',
     },
   },
   nitro: {

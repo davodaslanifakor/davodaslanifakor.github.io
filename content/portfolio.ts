@@ -54,6 +54,16 @@ const text = (en: string): I18nText => ({
 /** Copy supplied by Davoud Aslani Fakour in both languages. */
 const both = (en: string, fa: string): I18nText => ({ en, fa })
 
+export const analyticsCopy = {
+  title: both('Visitor analytics', 'آمار بازدید'),
+  description: both('May I use Google Analytics cookies to understand visits to this portfolio? Analytics stays off unless you accept. You can change your choice anytime.', 'آیا اجازه می‌دهید برای شناخت بازدیدهای این نمونه‌کار از کوکی‌های گوگل آنالیتیکس استفاده کنم؟ تا زمانی که نپذیرید، آمارگیری خاموش است. هر زمان می‌توانید انتخابتان را تغییر دهید.'),
+  privacy: both('How Google uses data', 'نحوهٔ استفادهٔ گوگل از داده‌ها'),
+  accept: both('Accept analytics', 'پذیرفتن آمارگیری'),
+  reject: both('Reject analytics', 'رد آمارگیری'),
+  settings: both('Analytics settings', 'تنظیمات آمارگیری'),
+  withdrawal: both('Rejecting analytics now will reload this page to stop the running tracker.', 'با رد آمارگیری، این صفحه دوباره بارگذاری می‌شود تا ردیابی فعال متوقف شود.'),
+}
+
 export interface StoryChapter {
   id: string
   marker: I18nText
