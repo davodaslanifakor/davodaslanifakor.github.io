@@ -39,6 +39,21 @@ PORTFOLIO_E2E_STATIC=1 PORTFOLIO_E2E_PORT=3102 pnpm test:e2e --workers=1
 
 `pnpm generate` produces the GitHub Pages site in `.output/public`. It prerenders the homepage and CV; no application server is needed on the host. Static browser tests serve that generated directory locally.
 
+## Visitor analytics
+
+Google Tag Manager (`GTM-K476LTTM`) connects to the portfolio's Google Analytics web stream (`G-0BSYHK9K9J`). The public IDs can be overridden with `NUXT_PUBLIC_GTM_CONTAINER_ID` and `NUXT_PUBLIC_GA_MEASUREMENT_ID` at build time. Tracking runs only in production on the exact `NUXT_PUBLIC_SITE_URL` origin, so development and preview visits stay out of the reports.
+
+Visitors choose Accept or Reject before any Google analytics code loads. The choice lasts 180 days and can be changed through Analytics settings. Rejecting a previously accepted tracker clears its first-party analytics cookies and reloads the page to unload Google's code. The website sends one `portfolio_page_view` data-layer event per completed route change, excluding query strings and fragments; it does not send typed text or form values.
+
+In GTM, the Google Analytics destination uses `send_page_view=false`, `allow_google_signals=false` and `allow_ad_personalization_signals=false`. The GA4 `page_view` event tag listens for the `portfolio_page_view` custom event and maps `page_location`, `page_title` and `page_referrer` from matching data-layer variables. Automatic enhanced measurement and user-provided data detection remain off to avoid duplicate events and collecting form content. Publish the GTM container after changes, then check GA4 Realtime to verify visits.
+
+To exercise both consent choices locally against the production server without sending Google data:
+
+```sh
+pnpm build
+PORTFOLIO_ANALYTICS_E2E=1 PORTFOLIO_E2E_PORT=3118 PORTFOLIO_E2E_PRODUCTION=1 pnpm exec playwright test e2e/analytics.spec.ts --workers=1
+```
+
 ## Publishing
 
 The **Publish portfolio to GitHub Pages** workflow runs manually from GitHub Actions on the default branch of `davodaslanifakor/davodaslanifakor.github.io`. It checks the project, runs the `@pages` browser scenarios in Chromium and WebKit, and deploys only `.output/public`.
