@@ -88,3 +88,36 @@ test('Minion live movement, jump and pause', async ({ page }) => {
   await page.keyboard.press('Escape')
   await expect(controls).toBeHidden()
 })
+
+test('Minion moves and jumps with two fingers on mobile', async ({ browser, browserName }) => {
+  test.skip(browserName !== 'chromium', 'CDP supplies simultaneous native touch contacts')
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, reducedMotion: 'reduce' })
+  const page = await context.newPage()
+  const session = await context.newCDPSession(page)
+  try {
+    await page.goto('/')
+    await expect(page.locator('.room-page')).toHaveAttribute('data-ready', 'true')
+    await page.locator('[data-object-id="paratrooper"]').press('Enter')
+    const controls = page.getByRole('region', { name: 'A little desk mischief' })
+    await expect(controls).toHaveAttribute('data-phase', 'roaming')
+    const right = await controls.getByRole('button', { name: 'Move right', exact: true }).boundingBox()
+    const jump = await controls.getByRole('button', { name: 'Jump', exact: true }).boundingBox()
+    if (!right || !jump) throw new Error('Missing mobile movement buttons')
+    const first = { x: right.x + right.width / 2, y: right.y + right.height / 2, id: 1 }
+    const second = { x: jump.x + jump.width / 2, y: jump.y + jump.height / 2, id: 2 }
+    await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [first] })
+    await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [first, second] })
+    await expect(controls).toHaveAttribute('data-grounded', 'false')
+    const travelled = Number(await controls.getAttribute('data-travelled'))
+    await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [second] })
+    await expect.poll(async () => Number(await controls.getAttribute('data-travelled'))).toBeGreaterThan(travelled + 0.03)
+    await session.send('Input.dispatchTouchEvent', { type: 'touchCancel', touchPoints: [] })
+    await expect(controls).toHaveAttribute('data-grounded', 'true')
+    const stopped = Number(await controls.getAttribute('data-travelled'))
+    await page.waitForTimeout(200)
+    expect(Number(await controls.getAttribute('data-travelled')) - stopped).toBeLessThan(0.01)
+    // Keyboard activation still triggers a native click without a pointer.
+    await controls.getByRole('button', { name: 'Jump', exact: true }).press('Enter')
+    await expect(controls).toHaveAttribute('data-grounded', 'false')
+  } finally { await context.close() }
+})
