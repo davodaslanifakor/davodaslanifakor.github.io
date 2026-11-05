@@ -67,7 +67,7 @@ onBeforeUnmount(() => { clear(); window.removeEventListener('blur', clear) })
 </script>
 
 <template>
-  <section ref="panel" class="desk-minion" tabindex="-1" role="region" :aria-label="localize(copy.title, props.locale)" :dir="props.locale === 'fa' ? 'rtl' : 'ltr'" :data-phase="props.state.phase" :data-typing="props.state.typing" :data-text="props.state.typedText" :data-laptop-on="props.state.laptopOn" :data-monitor-connected="props.state.monitorConnected" :data-grounded="props.state.body.grounded" :data-keystrokes="props.state.keystrokes" :data-mouse-offset="props.state.mouseOffset" @keydown="keyboard($event, true)" @keyup="keyboard($event, false)" @focusout="leave">
+  <section ref="panel" class="desk-minion" tabindex="-1" role="region" :aria-label="localize(copy.title, props.locale)" :dir="props.locale === 'fa' ? 'rtl' : 'ltr'" :data-phase="props.state.phase" :data-typing="props.state.typing" :data-text="props.state.typedText" :data-laptop-on="props.state.laptopOn" :data-monitor-connected="props.state.monitorConnected" :data-grounded="props.state.body.grounded" :data-travelled="props.state.travelled" :data-keystrokes="props.state.keystrokes" :data-mouse-offset="props.state.mouseOffset" @keydown="keyboard($event, true)" @keyup="keyboard($event, false)" @focusout="leave">
     <div class="desk-minion__top">
       <strong>{{ localize(copy.title, props.locale) }}</strong>
       <p role="status" aria-live="polite" aria-atomic="true">{{ status }}</p>
@@ -76,7 +76,8 @@ onBeforeUnmount(() => { clear(); window.removeEventListener('blur', clear) })
     <div class="desk-minion__controls">
       <div class="desk-minion__pad" dir="ltr" role="group" :aria-label="localize(copy.movement, props.locale)">
         <button v-for="direction in directions" :key="direction.key" type="button" :disabled="!enabled" :aria-label="localize(copy[direction.key], props.locale)" @pointerdown="hold($event, direction.key)" @pointerup="release" @pointercancel="release" @lostpointercapture="release" @click="tap($event, direction.key)">{{ direction.symbol }}</button>
-        <button type="button" class="desk-minion__jump" :disabled="!actionEnabled || !props.state.body.grounded || props.state.jumpPrep >= 0" @click="emit('jump')">{{ localize(copy.jump, props.locale) }}</button>
+        <!-- Secondary touch contacts may not click; keep click for keyboard/assistive activation only. -->
+        <button type="button" class="desk-minion__jump" :disabled="!actionEnabled || !props.state.body.grounded || props.state.jumpPrep >= 0" @pointerdown.prevent="emit('jump')" @click="$event.detail === 0 && emit('jump')">{{ localize(copy.jump, props.locale) }}</button>
       </div>
       <DeskTypingInput v-if="props.state.typing" :locale="props.locale" :disabled="!enabled" @type="(key, code) => emit('type', key, code)" @exit="emit('cancel')" />
       <button type="button" :disabled="!enabled || !busy" :aria-label="localize(mischief.stop, props.locale)" @click="emit('cancel')">{{ localize(mischief.stopShort, props.locale) }}</button>

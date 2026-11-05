@@ -7,12 +7,13 @@ const props = defineProps<{ inCar: boolean; disabled: boolean; locale: Locale }>
 const emit = defineEmits<{ move: [input: JokerInput, held: boolean]; jump: [] }>()
 const inputs = computed<JokerInput[]>(() => props.inCar ? ['left', 'forward', 'back', 'right', 'brake', 'boost'] : ['left', 'forward', 'back', 'right', 'boost'])
 const glyphs: Record<JokerInput, string> = { left: '←', forward: '↑', back: '↓', right: '→', brake: 'B', boost: '⇧' }
-function hold(event: PointerEvent, input: JokerInput) { (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId); emit('move', input, true) }
+function hold(event: PointerEvent, input: JokerInput) { event.preventDefault(); (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId); emit('move', input, true) }
 </script>
 <template>
   <div class="joker-pad">
     <button v-for="input in inputs" :key="input" type="button" class="pad-key" :disabled="disabled" :aria-label="localize(input === 'back' ? copy.backMove : input === 'boost' && !inCar ? copy.run : copy[input], locale)" @pointerdown="hold($event, input)" @pointerup="emit('move', input, false)" @lostpointercapture="emit('move', input, false)" @pointercancel="emit('move', input, false)" @keydown.enter.prevent="emit('move', input, true)" @keyup.enter="emit('move', input, false)" @keydown.space.prevent="emit('move', input, true)" @keyup.space.prevent="emit('move', input, false)" @blur="emit('move', input, false)">{{ glyphs[input] }}</button>
-    <button type="button" class="pad-key pad-jump" :aria-label="localize(copy.jump, locale)" :disabled="disabled" @click="emit('jump')">{{ localize(copy.jumpShort, locale) }}</button>
+    <!-- Secondary touch contacts may not click; keep click for keyboard/assistive activation only. -->
+    <button type="button" class="pad-key pad-jump" :aria-label="localize(copy.jump, locale)" :disabled="disabled" @pointerdown.prevent="emit('jump')" @click="$event.detail === 0 && emit('jump')">{{ localize(copy.jumpShort, locale) }}</button>
   </div>
 </template>
 <style scoped>
